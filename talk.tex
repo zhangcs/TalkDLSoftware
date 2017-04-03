@@ -1,0 +1,139 @@
+\documentclass[trans,compress,xcolor=pdftex,dvipsnames,table]{beamer}
+%\documentclass[compress,xcolor=pdftex,dvipsnames,table]{beamer}
+
+\mode<presentation> {
+  \usetheme{CambridgeUS}
+  \usecolortheme{rose}
+  \usecolortheme{dolphin}
+}
+
+\usepackage[english]{babel}
+\usepackage[QX]{fontenc}
+\usepackage{amssymb}
+\usepackage{subfig}
+\usepackage[absolute,overlay]{textpos}
+\usepackage{colortbl}
+\usepackage{multirow}
+\usepackage{booktabs}
+\usepackage{animate,media9,movie15}
+\usepackage[framemethod=TikZ]{mdframed}
+\usepackage{bbding}
+
+\usepackage{tikz}
+\usetikzlibrary{calc}
+
+% tikzmark command, for shading over items
+\newcommand{\tikzmark}[1]{\tikz[overlay,remember picture] \node (#1) {};}
+
+\newtheorem{algorithm}{Algorithm}
+
+\usepackage{setspace}
+\setlength{\TPHorizModule}{1mm}
+\setlength{\TPVertModule}{1mm}
+
+\newcommand{\MyLogo}{
+\begin{textblock}{14}(109.2,5)
+  \includegraphics[width=1.88cm]{figures/ncmis_logo_small}
+ \end{textblock}
+}
+
+\input{mydef}
+
+\mdfdefinestyle{mystyle}{leftmargin=0.2cm, rightmargin=0.2cm, linecolor=blue, backgroundcolor=yellow!50, linecolor=blue, linewidth=1pt, roundcorner=5pt}
+
+\mdfdefinestyle{mystyle1}{leftmargin=0.4cm, rightmargin=0.4cm, linecolor=blue, backgroundcolor=yellow!50, linecolor=blue, linewidth=1pt, roundcorner=5pt}
+
+\mdfdefinestyle{mystyle2}{leftmargin=0.4cm, rightmargin=0.4cm, linecolor=blue, backgroundcolor=green!30, linewidth=1pt}
+
+\mdfdefinestyle{mystyle3}{leftmargin=0.4cm, rightmargin=0.4cm, linecolor=red, topline=false, bottomline=false, linewidth=3pt}
+
+\mdfdefinestyle{mystyle4}{leftmargin=0.2cm, linecolor=red, topline=false, bottomline=false, rightline=false, linewidth=4pt}
+
+\setbeamertemplate{footline}{%
+  \raisebox{5pt}{\makebox[\paperwidth]{\hfill\makebox[18pt]{\large\color{Blue}\insertframenumber}}}}
+  
+%%% frame list %%%
+\newif\ifframeinlbf
+\frameinlbftrue
+
+\makeatletter
+\newcommand\listofframes{\vfill\@starttoc{lbf\thesection}}
+\makeatother
+
+\addtobeamertemplate{frametitle}{}{%
+  \ifframeinlbf
+  \addcontentsline{lbf\thesection}{section}{\protect\makebox[2em][l]{%
+    \protect\usebeamercolor[fg]{structure}\insertframenumber\hfill}%
+  \insertframetitle\vfill}%
+  \else\fi%
+}
+
+\newif\ifframeinlbf
+\frameinlbftrue
+\makeatletter
+\newcommand\listframes{\@starttoc{lbf}}
+\makeatother
+
+\beamertemplatenavigationsymbolsempty
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\title[DL]
+{\LARGE Software Packages for Deep Learning}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\author[Chensong Zhang]{Chensong Zhang}
+
+\institute[LSEC]
+{with {\color{RubineRed}Zheng Li} and  {\color{RubineRed}Ronghong Fan}\\[1.5cm]}
+
+\date{\small {\color{OliveGreen}DL Online Seminar} | {\color{DarkOrchid}April 27, 2017}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document} % Start your content from here ...
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[plain]
+  \titlepage
+\end{frame}
+
+\addtocounter{framenumber}{-1} % first page does not count
+
+%%%
+
+\frameinlbffalse
+
+\setbeamertemplate{section in toc}{\hspace*{1.2em}\inserttocsection}
+
+\begin{frame}[plain]
+  \frametitle{Outline}
+  \setcounter{tocdepth}{1}
+  \tableofcontents
+\end{frame}
+\addtocounter{framenumber}{-1} % this page does not count
+
+\frameinlbftrue
+
+%%%
+
+\input{topics/Introduction}
+\input{topics/TensorFlow}
+\input{topics/MxNet}
+\input{topics/Torch}
+\input{topics/Caffe}
+\input{topics/Comparison}
+
+%%%
+
+\begin{frame}[plain]
+\addtocounter{framenumber}{-1} % this page does not count
+
+\begin{figure}[htbp] %  figure placement: here, top, bottom, or page
+   \centering
+   \includegraphics[width=4in]{figures/ThankYou.jpg} 
+\end{figure}
+
+\end{frame}
+
+%%%
+
+\end{document}
