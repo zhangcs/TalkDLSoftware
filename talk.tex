@@ -19,7 +19,6 @@
 \usepackage[framemethod=TikZ]{mdframed}
 \usepackage{bbding}
 \usepackage{listings}
-%\usepackage{enumitem,cprotect}
 
 \usepackage{tikz}
 \usetikzlibrary{calc}
@@ -54,11 +53,19 @@
 \setbeamertemplate{footline}{%
   \raisebox{5pt}{\makebox[\paperwidth]{\hfill\makebox[18pt]{\large\color{Blue}\insertframenumber}}}}
 
+
 % Define the listings environment
 \usepackage{listings}
 \usepackage{textcomp}
 \definecolor{listinggray}{gray}{0.95}
-\definecolor{lbcolor}{rgb}{0.9,0.9,0.9}
+\definecolor{deepblue}{rgb}{0.1,0,0.7}
+\definecolor{deepred}{rgb}{0.6,0,0}
+\definecolor{deepgreen}{rgb}{0,0.5,0}
+
+\usepackage[utf8]{inputenc}
+\DeclareFixedFont{\ttb}{T1}{txtt}{bx}{n}{9} % for bold
+\DeclareFixedFont{\ttm}{T1}{txtt}{m}{n}{9}  % for normal
+
 \lstset{
         numbers=left,
         numberstyle=\tiny,
@@ -67,7 +74,14 @@
 	tabsize=4,
 	rulecolor=,
 	language=python,
-        basicstyle=\scriptsize,
+	basicstyle=\scriptsize,
+	otherkeywords={self},
+	keywordstyle=\color{deepblue},
+	emph={MyClass,__init__},          
+	emphstyle=\ttb\color{deepred},    
+	stringstyle=\color{red},
+	commentstyle=\color{deepgreen},
+	showstringspaces=false,
 	aboveskip=0pt,
 	belowskip=0pt,
         columns=fixed,
