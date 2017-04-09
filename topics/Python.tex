@@ -43,7 +43,8 @@
 
 \structure{Why Python for scientific computing?}
 \begin{itemize}
-	\item Strong introspection capabilities (???What does even mean???)
+	\item Strong introspection\footnote {Code introspection is the ability to examine classes, functions and keywords to know what they are, what they do and what they know.Python provides several functions and utilities for code introspection, like dir(), help(), type().} capabilities (???What does even mean???)
+	
 	\item Full modularity, supporting hierarchical packages
 	\item Exception-based error handling
 	\item Dynamic data types and automatic memory management
@@ -86,8 +87,32 @@
 
 \begin{itemize}
 	\item If-then-else
+	\begin{lstlisting}[language=python]
+		a = 1
+		if a > 0:
+		print "a is positive"
+		elif a=0:
+		print "a is zero"
+		else:
+		print "a is negative"
+	\end{lstlisting}
+			
 	\item For loop
+	\begin{lstlisting}[language=python]
+		for i in range(10):
+			print i
+	\end{lstlisting}	
+		
 	\item While loop
+	\begin{lstlisting}[language=python]
+		sum = 0
+		i = 0
+		while i < 10:
+			sum += i
+			i += 1
+		print sum
+	\end{lstlisting}
+		
 \end{itemize}
 
 \end{frame}
@@ -101,7 +126,19 @@
 
 \begin{itemize}
 	\item Defining functions
+		\begin{lstlisting}[language=python]
+			def square(x):
+				return x*x
+		\end{lstlisting}
 	\item Using modules
+			There are 3 different ways to use modules. Examples are below.
+			1. import math
+				This will only introduce the name math into the name space in which the import command was issued. The names within the math module will not appear in the enclosing namespace: they must be accessed through the name math. For example: math.sin(3.14).
+			2. from math import *
+				This does not introduce the name math into the current namespace. It does however introduce all public names of the math module into the current namespace, directly using: sin(3.14)
+			3. from math import sin
+				This will only import the sin function from math module and introduce the name sin into the current namespace, but it will not introduce the name math into the current namespace, directly using: sin(3.14)
+		
 \end{itemize}
 
 \end{frame}
