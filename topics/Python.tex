@@ -80,13 +80,13 @@
 
 %%%
 
-\begin{frame}
+\begin{frame}[fragile]
   \MyLogo
   \frametitle{Control Flow}  
 \small
 
 \begin{itemize}
-	\item If-then-else
+	\item[$\bullet$] If-then-else
 	\begin{lstlisting}[language=python]
 		a = 1
 		if a > 0:
@@ -95,42 +95,37 @@
 		print "a is zero"
 		else:
 		print "a is negative"
-	\end{lstlisting}
-			
-	\item For loop
+	\end{lstlisting}			
+	\item[$\bullet$] For loop
 	\begin{lstlisting}[language=python]
 		for i in range(10):
 			print i
 	\end{lstlisting}	
-		
-	\item While loop
+	\item[$\bullet$] While loop
 	\begin{lstlisting}[language=python]
-		sum = 0
-		i = 0
+		sum = 0, i = 0
 		while i < 10:
 			sum += i
 			i += 1
-		print sum
 	\end{lstlisting}
-		
 \end{itemize}
 
 \end{frame}
 
 %%%
 
-\begin{frame}
+\begin{frame}[fragile]
   \MyLogo
   \frametitle{Functions and Modules}  
 \small
 
 \begin{itemize}
-	\item Defining functions
+	\item[$\bullet$] Defining functions 
 		\begin{lstlisting}[language=python]
 			def square(x):
 				return x*x
-		\end{lstlisting}
-	\item Using modules
+		\end{lstlisting}		
+	\item[$\bullet$] Using modules\\
 			There are 3 different ways to use modules. Examples are below.
 			1. import math
 				This will only introduce the name math into the name space in which the import command was issued. The names within the math module will not appear in the enclosing namespace: they must be accessed through the name math. For example: math.sin(3.14).
