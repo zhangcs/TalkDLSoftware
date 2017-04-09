@@ -6,10 +6,77 @@
 \subsection{General comparison}
 %%%
 
+
+
 \begin{frame}
   \MyLogo
   \frametitle{Programming interface}  
+  
+%\renewcommand{\multirowsetup}{\centering} 
+%\begin{table}[htdp]
+%\caption{default}
+%\begin{center}
+%\begin{tabular}{|c|c|c|c|c|c|} \hline
+%Viewpoint &Torch &Theano      &Caffe  & MXNet & TensorFlow \\ \hline
+% Started      & 2002           &2008              &2013               &2015                & 2015                    \\ \hline
+% \multirow{3}{4em}{Main \\ Developers}
+% & Facebook,    &\multirow{3}{4.5em}{Universite \\de Montreal}    &\multirow{3}{*}{BVLC }  &\multirow{3}{*}{DMLC}   &\multirow{3}{3em}{Google}\\ 
+% &Twitter,         &   & &    &    \\
+% &Google, etc   &    &    &  &  \\ \hline 
+%\multirow{2}{4em}{ Core \\ Languages}     
+%& \multirow{2}{3em}{ C/Lua }     
+%&\multirow{2}{4em}{ C/Python} 
+%&\multirow{2}{4em}{ C++}
+%&\multirow{2}{4em}{ C++}
+%&\multirow{2}{6em}{ C++ \\Python}  \\ 
+%&  & &    & &      \\ \hline
+%\multirow{3}{4em} {Supported \\Interface }    
+%& \multirow{3}{3em}{ Lua }     
+%&\multirow{3}{4em}{ Python} 
+%&\multirow{3}{2em}{ C++/Python \\ MATLAB}
+%&\multirow{3}{2em}{ C++/Python \\ R/Julia/Go}
+%&\multirow{3}{6em}{ C++  \\ Python}  \\ 
+%&  & &    & &      \\ 
+%&  & &    & &      \\ \hline           
+%\end{tabular}
+%\end{center}
+%\label{default}
+%\end{table}%
 
+\renewcommand{\multirowsetup}{\centering} 
+\begin{table}[htdp]
+\caption{Framework Comparision: Basic information}
+\begin{center}
+\begin{tabular}{|c|c|c|c|c|c|} \hline
+\rowcolor{green}
+Viewpoint &Torch       &Caffe  & MXNet & TensorFlow \\ \hline
+ Started      & 2002      &2013               &2015                & 2015                    \\ \hline
+ \multirow{3}{4em}{Main \\ Developers}
+ & Facebook,        &\multirow{3}{*}{BVLC }  &\multirow{3}{*}{DMLC}   &\multirow{3}{3em}{Google}\\ 
+ &Twitter,            & &    &    \\
+ &Google, etc       &    &  &  \\ \hline 
+ \multirow{2}{4em}{ Open \\ Source}     
+& \multirow{2}{3em}{ Yes}      
+&\multirow{2}{4em}{ Yes}
+&\multirow{2}{4em}{ Yes}
+&\multirow{2}{6em}{Yes}  \\ 
+&   &    & &      \\ \hline
+\multirow{2}{4em}{ Core \\ Languages}     
+& \multirow{2}{3em}{ C/Lua }      
+&\multirow{2}{4em}{ C++}
+&\multirow{2}{4em}{ C++\\Python}
+&\multirow{2}{6em}{ C++ \\Python}  \\ 
+&   &    & &      \\ \hline
+\multirow{2}{4em} {Supported \\Interface }    
+& \multirow{2}{3em}{ Lua }      
+&\multirow{2}{5.5em}{ C++/Python \\ Matlab}
+&\multirow{2}{5.5em}{ C++/Python \\ R/Julia/Scala}
+&\multirow{2}{5.5em}{ C++/Python}  \\  
+&   &    & &      \\ \hline           
+\end{tabular}
+\end{center}
+\label{default}
+\end{table}%
 \end{frame}
 
 %%%
@@ -20,8 +87,55 @@
   \MyLogo
   \frametitle{Numerical tests}  
 
-\end{frame}
+\renewcommand{\multirowsetup}{\centering} 
+\begin{table}[htdp]
+\caption{Framework Comparision: Performance}
+\begin{center}
+\begin{tabular}{|c|c|c|c|c|c|} \hline
+\rowcolor{green}
+Viewpoint &Torch       &Caffe  & MXNet & TensorFlow \\ \hline
+  \multirow{2}{4em}{Pretrained \\ Model}      
+  &  \multirow{2}{4em} {Yes}      
+  &  \multirow{2}{4em}{Yes}              
+  &  \multirow{2}{4em}{Yes}               
+  &  \multirow{2}{4em}{No}                   \\ 
+  &  &   &   & \\ \hline
+ \multirow{2}{4em}{Low-level \\ Operators}
+ &\multirow{2}{4em}{Good}
+ &\multirow{2}{*}{Good }  
+ &\multirow{2}{*}{Very few}   
+ &\multirow{2}{3em}{Fairly good}\\ 
+ &       &    &  &  \\ \hline 
+\multirow{2}{4.5em}{High-level \\ Support}     
+& \multirow{2}{3em}{Good}      
+&\multirow{2}{4em}{ Good}
+&\multirow{2}{4em}{ Good}
+&\multirow{2}{6em}{ Good}  \\ 
+&   &    & &      \\ \hline
+\multirow{2}{4em} {Speed \\ One-GPU }    
+& \multirow{2}{3em}{ Great }      
+&\multirow{2}{5.5em}{Great}
+&\multirow{2}{5.5em}{ Excellent} 
+&\multirow{2}{5.5em}{Not so good} \\  
+&   &    & &      \\ \hline          
+\multirow{2}{4em} {Memory}    
+& \multirow{2}{3.5em}{ Great }      
+&\multirow{2}{5.5em}{Great}
+&\multirow{2}{5.5em}{ Excellent}  
+&\multirow{2}{5.5em}{Not so good}\\  
+&   &    & &      \\ \hline            
+\multirow{2}{4em} {Parallel Support}    
+& \multirow{2}{3.5em}{Multi-GPU}      
+&\multirow{2}{5.5em}{Multi-GPU}
+&\multirow{2}{5.5em}{Distributed}
+&\multirow{2}{5.5em}{Multi-GPU}  \\  
+&   &    & &      \\ \hline            
+\end{tabular}
+\end{center}
+\label{default}
+\end{table}%
 
+\end{frame}
 %%%
 \subsection{Scalability}
 %%%
