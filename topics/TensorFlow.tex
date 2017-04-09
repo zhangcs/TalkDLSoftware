@@ -63,28 +63,12 @@ is_correct = tf.equal(tf.argmax(Y,1), tf.argmax(Y_,1))
 accuracy = tf.reduce_mean(tf.cast(is_correct,tf.float32))  
 \end{lstlisting}
 }
-%\end{tabular}
-
-%\end{center}
-%\label{default}
-%\end{table}%
 \end{frame}
 
 \begin{frame}[fragile]
   \MyLogo
   \frametitle{Example 1:SoftMax}  
  
- \lstset{
-                %basicstyle=\ttfamily,
-                keywordstyle=\color{blue}\ttfamily,
-                stringstyle=\color{red}\ttfamily,
-                commentstyle=\color{green}\ttfamily,
-                morecomment=[l][\color{magenta}]{\#}
-} 
-% \begin{table}[htdp]
-%%\caption{default}
-%%\begin{center}
-%\begin{tabular}{l|l}
 \scriptsize{
 \begin{lstlisting}[language=python]
 optimizer = tf.train.GradientDescentOptimizer(0.003)
