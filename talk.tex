@@ -19,7 +19,7 @@
 \usepackage[framemethod=TikZ]{mdframed}
 \usepackage{bbding}
 \usepackage{listings}
-\usepackage{enumitem,cprotect}
+%\usepackage{enumitem,cprotect}
 
 \usepackage{tikz}
 \usetikzlibrary{calc}
@@ -53,6 +53,30 @@
 
 \setbeamertemplate{footline}{%
   \raisebox{5pt}{\makebox[\paperwidth]{\hfill\makebox[18pt]{\large\color{Blue}\insertframenumber}}}}
+
+% Define the listings environment
+\usepackage{listings}
+\usepackage{textcomp}
+\definecolor{listinggray}{gray}{0.95}
+\definecolor{lbcolor}{rgb}{0.9,0.9,0.9}
+\lstset{
+        numbers=left,
+        numberstyle=\tiny,
+        stepnumber=1,
+        	backgroundcolor=\color{listinggray},
+	tabsize=4,
+	rulecolor=,
+	language=python,
+        basicstyle=\scriptsize,
+	aboveskip=0pt,
+	belowskip=0pt,
+        columns=fixed,
+        showstringspaces=false,
+        extendedchars=true,
+        frame=single,
+        linewidth=0.97\linewidth,
+        xleftmargin=18pt,
+}
   
 %%% frame list %%%
 \newif\ifframeinlbf

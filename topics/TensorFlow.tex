@@ -40,17 +40,6 @@
   \MyLogo
   \frametitle{Example 1: SoftMax}  
  
- \lstset{
-                %basicstyle=\ttfamily,
-                keywordstyle=\color{blue}\ttfamily,
-                stringstyle=\color{red}\ttfamily,
-                commentstyle=\color{green}\ttfamily,
-                morecomment=[l][\color{magenta}]{\#}
-} 
-% \begin{table}[htdp]
-%%\caption{default}
-%%\begin{center}
-%\begin{tabular}{l|l}
 \scriptsize{
 \begin{lstlisting}[language=python]
 import tensorflow as tf    
@@ -109,7 +98,8 @@ for i in range(10000):
 	batch_X, batch_Y = mnist.train.next_batch(100)
        	train_data={X: batch_X, Y_: batch_Y}
 
-	# train	sess.run(train_step, feed_dict=train_data)
+	# train
+	sess.run(train_step, feed_dict=train_data)
 
 	# success ? add code to print it
 	a,c = sess.run([accuracy, cross_entropy], feed=train_data)
