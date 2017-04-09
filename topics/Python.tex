@@ -65,17 +65,32 @@
 \subsection{Basic language components}
 %%%
 
-\begin{frame}
+\begin{frame}[fragile]
   \MyLogo
   \frametitle{Built-in Data Structures}  
 \small
 
 \begin{itemize}
-	\item Numeric types--int, float, complex, ex: a=1, b=1.0, c=1L, d=0xf, e=010, f=1+2j
-	\item Sequence types--list, tuple, str, dict, ex: g=[3.14, True, 'Yes', [1], (1L,)] + [False] + [None]*3, h=(3.14, True, 'Yes', [1], ()), i='Hello' + "," + '''world!''', j=\{1: 'int', 'pi': 3.14\}
+	\item[$bullet$] Numeric types--int, float, complex
+	\begin{lstlisting}[language=python]
+	For example:
+	a=1 int
+	b=1.0 float
+	c=1L long int
+	d=0xf int(hex format)
+	e=010 int(octal format)
+	f=1+2j complex
+	\end{lstlisting}
 
+	\item[$bullet$] Sequence types--list, tuple, str, dict
+	\begin{lstlisting}[language=python]
+	For example:
+	g=[3.14, True, 'Yes', [1], (1L,)] + [None]*3, list
+	h=(3.14, True, 'Yes', [1], ()), tuple
+	i='Hello' + "," + '''world!''', str
+	j=\{1: 'int', 'pi': 3.14\}, dict
+	\end{lstlisting}
 \end{itemize}
-
 \end{frame}
 
 %%%
@@ -90,11 +105,11 @@
 	\begin{lstlisting}[language=python]
 		a = 1
 		if a > 0:
-		print "a is positive"
+			print "a is positive"
 		elif a=0:
-		print "a is zero"
+			print "a is zero"
 		else:
-		print "a is negative"
+			print "a is negative"
 	\end{lstlisting}			
 	\item[$\bullet$] For loop
 	\begin{lstlisting}[language=python]
@@ -103,7 +118,7 @@
 	\end{lstlisting}	
 	\item[$\bullet$] While loop
 	\begin{lstlisting}[language=python]
-		sum = 0, i = 0
+		sum = 0; i = 0
 		while i < 10:
 			sum += i
 			i += 1
@@ -126,12 +141,12 @@
 				return x*x
 		\end{lstlisting}		
 	\item[$\bullet$] Using modules\\
-			There are 3 different ways to use modules. Examples are below.
-			1. import math
-				This will only introduce the name math into the name space in which the import command was issued. The names within the math module will not appear in the enclosing namespace: they must be accessed through the name math. For example: math.sin(3.14).
-			2. from math import *
-				This does not introduce the name math into the current namespace. It does however introduce all public names of the math module into the current namespace, directly using: sin(3.14)
-			3. from math import sin
+			There are 3 different ways to use modules. Examples are below.\\
+			1. import math\\
+				This will only introduce the name math into the name space in which the import command was issued. The names within the math module will not appear in the enclosing namespace: they must be accessed through the name math. For example: math.sin(3.14).\\
+			2. from math import *\\
+				This does not introduce the name math into the current namespace. It does however introduce all public names of the math module into the current namespace, directly using: sin(3.14)\\
+			3. from math import sin\\
 				This will only import the sin function from math module and introduce the name sin into the current namespace, but it will not introduce the name math into the current namespace, directly using: sin(3.14)
 		
 \end{itemize}
