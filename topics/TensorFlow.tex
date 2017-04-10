@@ -81,25 +81,28 @@ Computation graphs are powerful but complicated
  
 \scriptsize{
 \begin{lstlisting}[language=python]
-import tensorflow as tf    
+import tensorflow as tf
 
-X = tf.placeholder(tf.float32, [None, 28, 28, 1])     
-W = tf.Variable(tf.zeros([784, 10]))    
-b = tf.Variable(tf.zeros([10]))   
-init = tf.initialize_all_variables() 
+# Import the training data (MNIST)
+import tf.examples.tutorials.mnist.input_data as input_data
 
-# model
-Y= tf.nn.softmax(tf.matmul(tf.reshape(X,[-1, 784]), W) + b)  
+# Possibly download and extract the MNIST data set
+# Retrieve the labels as one-hot-encoded vectors
+mnist = input_data.read_data_sets("MNIST_data/", one_hot=True)
 
-# placeholder for correct answers    
-Y_ = tf.placeholder(tf.float32, [None, 10])  
+# Create a new graph
+graph = tf.Graph()
 
-# loss function   
-cross_entropy = -tf.reduce_sum(Y_ * tf.log(Y))  
-
-# % of correct answers found in batch
-is_correct = tf.equal(tf.argmax(Y,1), tf.argmax(Y_,1))  
-accuracy = tf.reduce_mean(tf.cast(is_correct,tf.float32))  
+# Set our graph as the one to add nodes to
+with graph.as_default():
+	# Placeholder for input variables (None = variable dimension)
+	x = tf.placeholder("float", shape=[None, 784])
+	# Placeholder for labels
+	y_ = tf.placeholder("float", shape=[None, 10])
+	
+	# Weights and bias
+	W = tf.Variable(tf.zeros([784, 10]))
+	b = tf.Variable(tf.zeros([10])) 
 \end{lstlisting}
 }
 \end{frame}
@@ -107,29 +110,32 @@ accuracy = tf.reduce_mean(tf.cast(is_correct,tf.float32))
 \begin{frame}[fragile]
   \MyLogo
   \frametitle{Example 1:SoftMax}  
- 
 \scriptsize{
 \begin{lstlisting}[language=python]
-optimizer = tf.train.GradientDescentOptimizer(0.003)
-train_step = optimizer.minimize(cross_entropy)
+	# Apply softmax regression model
+	y = tf.nn.softmax(tf.matmul(x, W) + b)
+	
+	# Compute the cross entropy of y_ and y
+	entropy = -tf.reduce_sum(y_*tf.log(y))
+	# Create a gradient-descent optimizer
+	train_step = 
+		tf.train.GradientDescentOptimizer(0.01).minimize(entropy)
+		
+	# Find the indices where the predictions were correct
+	correct_prediction = tf.equal(tf.argmax(y,1), tf.argmax(y_,1))
+	accuracy = tf.reduce_mean(tf.cast(correct_prediction, "float"))
 
-sess = tf.Session()
-sess.run(init)
-
-for i in range(10000):
-	# load batch of images and correct answers
-	batch_X, batch_Y = mnist.train.next_batch(100)
-       	train_data={X: batch_X, Y_: batch_Y}
-
-	# train
-	sess.run(train_step, feed_dict=train_data)
-
-	# success ? add code to print it
-	a,c = sess.run([accuracy, cross_entropy], feed=train_data)
-
-	# success on test data ?
-	test_data={X:mnist.test.images, Y_:mnist.test.labels}
-	a,c = sess.run([accuracy, cross_entropy], feed=test_data)
+with tf.Session(graph=graph) as session:
+	# Initialize all variables
+	tf.global_variables_initializer().run()
+	
+	# Train the model
+	for step in range(1000):
+		batch_x, batch_y = mnist.train.next_batch(100)
+		train_step.run(feed_dict={x: batch_x, y_: batch_y})
+	# Print the accuracy using the model
+	print accuracy.run(feed_dict={x: mnist.test.images, 
+								y_:mnist.test.labels})
 \end{lstlisting}
 }
 

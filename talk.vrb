@@ -1,28 +1,31 @@
 \MyLogo
   \frametitle{Example 1:SoftMax}
-
 \scriptsize{
 \begin{lstlisting}[language=python]
-optimizer = tf.train.GradientDescentOptimizer(0.003)
-train_step = optimizer.minimize(cross_entropy)
+	# Apply softmax regression model
+	y = tf.nn.softmax(tf.matmul(x, W) + b)
 
-sess = tf.Session()
-sess.run(init)
+	# Compute the cross entropy of y_ and y
+	entropy = -tf.reduce_sum(y_*tf.log(y))
+	# Create a gradient-descent optimizer
+	train_step =
+		tf.train.GradientDescentOptimizer(0.01).minimize(entropy)
 
-for i in range(10000):
-	# load batch of images and correct answers
-	batch_X, batch_Y = mnist.train.next_batch(100)
-       	train_data={X: batch_X, Y_: batch_Y}
+	# Find the indices where the predictions were correct
+	correct_prediction = tf.equal(tf.argmax(y,1), tf.argmax(y_,1))
+	accuracy = tf.reduce_mean(tf.cast(correct_prediction, "float"))
 
-	# train
-	sess.run(train_step, feed_dict=train_data)
+with tf.Session(graph=graph) as session:
+	# Initialize all variables
+	tf.global_variables_initializer().run()
 
-	# success ? add code to print it
-	a,c = sess.run([accuracy, cross_entropy], feed=train_data)
-
-	# success on test data ?
-	test_data={X:mnist.test.images, Y_:mnist.test.labels}
-	a,c = sess.run([accuracy, cross_entropy], feed=test_data)
+	# Train the model
+	for step in range(1000):
+		batch_x, batch_y = mnist.train.next_batch(100)
+		train_step.run(feed_dict={x: batch_x, y_: batch_y})
+	# Print the accuracy using the model
+	print accuracy.run(feed_dict={x: mnist.test.images,
+								y_:mnist.test.labels})
 \end{lstlisting}
 }
 
