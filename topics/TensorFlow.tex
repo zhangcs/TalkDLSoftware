@@ -6,10 +6,31 @@
 \subsection{Computational graph}
 %%%
 
-\begin{frame}
+\begin{frame}[fragile]
   \MyLogo
   \frametitle{Computational graph}  
-
+TensorFlow computations are expressed as stateful dataflow graphs.
+\begin{itemize}
+\item each node corresponds to an operation (eg tensor, add, sub etc)
+\item each edge corresponds to tensor flowing direction
+\end{itemize}
+%  
+\begin{columns}
+\column{.57\textwidth}
+\begin{lstlisting}[language=python]
+node1 = tf.constant(3.0, tf.float32)
+node2 = tf.constant(4.0)
+node3 = tf.add(node1, node2)
+add_and_triple = adder_node * 3
+\end{lstlisting}
+%
+\column{.48\textwidth}
+%
+\begin{figure}[htbp] 
+   \includegraphics[height=1.5in]{figures/compgraph.png} 
+\caption{Computaion graph}
+\end{figure}
+\end{columns}
 \end{frame}
 
 %%%
@@ -28,7 +49,25 @@
 
 \begin{frame}
   \MyLogo
-  \frametitle{Visualization}  
+  \frametitle{Visualization: TensorBoard}  
+
+\begin{columns}
+\column{.48\textwidth}  
+\scriptsize{
+Computation graphs are powerful but complicated
+\begin{itemize}
+\item  thousands of nodes or more 
+\item  network is deep
+\item  graph visualization tool TensorBoard is helpful
+\end{itemize}
+}
+%
+\column{.5\textwidth}
+\begin{figure}[htbp] 
+   \includegraphics[height=2.5in]{figures/graphvisualization.png} 
+\caption{Graph Visualization}
+\end{figure}
+\end{columns}
 
 \end{frame}
 

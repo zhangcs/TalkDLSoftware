@@ -1,0 +1,33 @@
+\MyLogo
+  \frametitle{Example 1:SoftMax}
+
+\scriptsize{
+\begin{lstlisting}[language=python]
+optimizer = tf.train.GradientDescentOptimizer(0.003)
+train_step = optimizer.minimize(cross_entropy)
+
+sess = tf.Session()
+sess.run(init)
+
+for i in range(10000):
+	# load batch of images and correct answers
+	batch_X, batch_Y = mnist.train.next_batch(100)
+       	train_data={X: batch_X, Y_: batch_Y}
+
+	# train
+	sess.run(train_step, feed_dict=train_data)
+
+	# success ? add code to print it
+	a,c = sess.run([accuracy, cross_entropy], feed=train_data)
+
+	# success on test data ?
+	test_data={X:mnist.test.images, Y_:mnist.test.labels}
+	a,c = sess.run([accuracy, cross_entropy], feed=test_data)
+\end{lstlisting}
+}
+
+%\end{tabular}
+
+%\end{center}
+%\label{default}
+%\end{table}%
