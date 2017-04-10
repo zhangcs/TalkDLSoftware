@@ -12,13 +12,13 @@
 
 \begin{itemize}
 
-\item ML gives computers the ability to learn without being explicitly programmed {\footnotesize\color{DarkOrchid}[Samuel 1959]}
+\item Unlike traditional numerical simulation, ``ML gives computers the ability to learn without being explicitly programmed'' {\footnotesize\color{DarkOrchid}[Samuel 1959]}
 
-\item ML explores the study and construction of algorithms that can learn from and make predictions on data
+\item As a research field, ML explores the study and construction of algorithms that can \alert{learn} from and \alert{make predictions} on \alert{data}
 
-\item Data mining, computational statistics, optimization, ...
+\item Related fields: data mining, computational statistics, optimization, ...
 
-\item Fourth paradigm, big data, deep learning, artificial intelligence 
+\item Fourth paradigm, big data, artificial intelligence, Internet of things, deep learning, ...
 
 \end{itemize}
 
@@ -38,7 +38,11 @@
 
 \item Regression: Similar to classification, but the outputs are continuous rather than discrete
 
-\item Other tasks: density estimation, dimensionality reduction, ...
+\item Density estimation
+
+\item Dimensionality reduction 
+
+\item ...
 
 \end{itemize}
 
@@ -83,23 +87,37 @@
   \MyLogo
   \frametitle{Deep Learning: Pros and Cons}  
 
+\small
+
+\begin{mdframed}[style=mystyle2]
+Deep Learning has been introduced with the objective of moving ML closer to one of its original goals---AI. The main motivations includes:
+%
+\begin{itemize}\scriptsize\setlength\itemsep{0.2em}
+\item Insufficient depth can hurt
+\item The brain has a deep architecture
+\item Cognitive processes seem deep
+\end{itemize}
+\end{mdframed}
+
+\medskip
+
 \begin{columns}
 
 \column{.49\textwidth}
 {\color{blue}Pros:}
-\begin{itemize}
+\begin{itemize}\setlength\itemsep{0.2em}
 \item conceptually simple
 \item nonlinear 
 \item highly flexible and configurable
 \item learned features can be extracted
 \item can be fine-tuned with more data
 \item efficient for multi-class problems
-\item world-calss at pattern recongition
+\item world-class at pattern recognition
 \end{itemize}
 
 \column{.51\textwidth}
 {\color{red}Cons:}
-\begin{itemize}
+\begin{itemize}\setlength\itemsep{0.2em}
 \item hard to interpret 
 \item theory not well understood
 \item slow to train and score
@@ -119,45 +137,14 @@
 
 \begin{frame}
   \MyLogo
-  \frametitle{Comparison}  
-  
-%\renewcommand{\multirowsetup}{\centering} 
-%\begin{table}[htdp]
-%\caption{default}
-%\begin{center}
-%\begin{tabular}{|c|c|c|c|c|c|} \hline
-%Viewpoint &Torch &Theano      &Caffe  & MXNet & TensorFlow \\ \hline
-% Started      & 2002           &2008              &2013               &2015                & 2015                    \\ \hline
-% \multirow{3}{4em}{Main \\ Developers}
-% & Facebook,    &\multirow{3}{4.5em}{Universite \\de Montreal}    &\multirow{3}{*}{BVLC }  &\multirow{3}{*}{DMLC}   &\multirow{3}{3em}{Google}\\ 
-% &Twitter,         &   & &    &    \\
-% &Google, etc   &    &    &  &  \\ \hline 
-%\multirow{2}{4em}{ Core \\ Languages}     
-%& \multirow{2}{3em}{ C/Lua }     
-%&\multirow{2}{4em}{ C/Python} 
-%&\multirow{2}{4em}{ C++}
-%&\multirow{2}{4em}{ C++}
-%&\multirow{2}{6em}{ C++ \\Python}  \\ 
-%&  & &    & &      \\ \hline
-%\multirow{3}{4em} {Supported \\Interface }    
-%& \multirow{3}{3em}{ Lua }     
-%&\multirow{3}{4em}{ Python} 
-%&\multirow{3}{2em}{ C++/Python \\ MATLAB}
-%&\multirow{3}{2em}{ C++/Python \\ R/Julia/Go}
-%&\multirow{3}{6em}{ C++  \\ Python}  \\ 
-%&  & &    & &      \\ 
-%&  & &    & &      \\ \hline           
-%\end{tabular}
-%\end{center}
-%\label{default}
-%\end{table}%
+  \frametitle{Comparison: Basic Information}  
 
+\vskip -8pt  
 \renewcommand{\multirowsetup}{\centering} 
 \begin{table}[htdp]
-\caption{Framework Comparison: Basic information}
 \begin{center}
 \begin{tabular}{|c|c|c|c|c|c|} \hline
-\rowcolor{green}
+\rowcolor{GreenYellow}
 Viewpoint &Torch       &Caffe   & TensorFlow  & MXNet \\ \hline
  Started      & 2002      &2013               &2015                & 2015                    \\ \hline
  \multirow{3}{4em}{Main \\ Developers}
@@ -174,7 +161,7 @@ Viewpoint &Torch       &Caffe   & TensorFlow  & MXNet \\ \hline
 & \multirow{2}{3em}{ C/Lua }      
 &\multirow{2}{4em}{ C++}
 &\multirow{2}{4em}{ C++\\Python}
-&\multirow{2}{6em}{ C++ \\Python}  \\ 
+&\multirow{2}{6em}{ C++}  \\ 
 &   &    & &      \\ \hline
 \multirow{2}{4em} {Supported \\Interface }    
 & \multirow{2}{3em}{ Lua }      
@@ -186,20 +173,29 @@ Viewpoint &Torch       &Caffe   & TensorFlow  & MXNet \\ \hline
 \end{center}
 \label{default}
 \end{table}%
+
+{\scriptsize
+\begin{itemize}\setlength\itemsep{0.5em}
+\item BVLC, Berkeley Vision and Learning Center 
+\item DMLC, Distributed (Deep) Machine Learning Community, supported by Amazon, Intel, Microsoft, nVidia, Baidu, ...
+\end{itemize}
+}
+
 \end{frame}
 
 %%%
 
 \begin{frame}
   \MyLogo
-  \frametitle{Comparison}  
+  \frametitle{Comparison: Performance}  
+
+\vskip -8pt  
 
 \renewcommand{\multirowsetup}{\centering} 
 \begin{table}[htdp]
-\caption{Framework Comparision: Performance}
 \begin{center}
 \begin{tabular}{|c|c|c|c|c|c|} \hline
-\rowcolor{green}
+\rowcolor{GreenYellow}
 Viewpoint &Torch       &Caffe  & TensorFlow & MXNet  \\ \hline
   \multirow{2}{4em}{Pretrained \\ Models}      
   &  \multirow{2}{4em} {Yes}      
@@ -207,28 +203,28 @@ Viewpoint &Torch       &Caffe  & TensorFlow & MXNet  \\ \hline
   &  \multirow{2}{4em}{No}                   
   &  \multirow{2}{4em}{Yes}\\ 
   &  &   &   & \\ \hline
- \multirow{2}{4em}{Low-level \\ Operators}
- &\multirow{2}{4em}{Good}
- &\multirow{2}{*}{Good }     
- &\multirow{2}{*}{Fairly good}
- &\multirow{2}{*}{Very few}\\ 
- &       &    &  &  \\ \hline 
 \multirow{2}{4.5em}{High-level \\ Support}     
 & \multirow{2}{*}{Good}      
 &\multirow{2}{*}{ Good}
 &\multirow{2}{*}{ Good}
 &\multirow{2}{*}{ Good}  \\ 
 &   &    & &      \\ \hline
+ \multirow{2}{4em}{Low-level \\ Operators}
+ &\multirow{2}{4em}{Good}
+ &\multirow{2}{*}{Good }     
+ &\multirow{2}{*}{Fairly good}
+ &\multirow{2}{*}{Very few}\\ 
+ &       &    &  &  \\ \hline 
 \multirow{2}{4em} {Speed \\ One-GPU }    
 & \multirow{2}{*}{ Great }      
 &\multirow{2}{*}{Great} 
-&\multirow{2}{*}{Not so good}
+&\multirow{2}{*}{\alert{Not so good}}
 &\multirow{2}{*}{ Excellent} \\  
 &   &    & &      \\ \hline          
 \multirow{2}{5em} {Memory \\ Management}    
 & \multirow{2}{*}{ Great }      
 &\multirow{2}{*}{Great}
-&\multirow{2}{*}{Not so good}
+&\multirow{2}{*}{\alert{Not so good}}
 &\multirow{2}{*}{ Excellent}  \\  
 &   &    & &      \\ \hline            
 \multirow{2}{3.5em} {Parallel Support}    
