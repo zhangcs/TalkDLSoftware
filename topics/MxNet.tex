@@ -16,8 +16,66 @@
 \subsection{Some examples}
 %%%
 
-\begin{frame}
+\begin{frame}[fragile]
   \MyLogo
-  \frametitle{Example 1}  
+  \frametitle{Example 1: SoftMax}  
 
+\scriptsize{
+\begin{lstlisting}[language=python]
+
+import mxnet
+import mxnet.symbol as sym
+import numpy as np
+import numpy.random as random
+import time
+from minpy.core import function
+from minpy.core import grad_and_loss
+
+# define softmax symbol
+x_shape = (num_samples, num_classes)
+label_shape = (num_samplesm,)
+softmax_symbol = sym.SoftmaxOutput(data=sym.Variable('x'), 
+                   name='softmax', grad_scale=1.0/num_samples)
+
+# convert MXNet symbol into a callable function 
+# corresponding gradient function
+softmax = function(softmax_symbol, [('x', x_shape), 
+                 ('softmax_label', label_shape)])
+
+# make softmax_label; 
+# MXNet's softmax operator does not use one-of-many label format
+softmax_label = np.argmax(label, axis=1)
+\end{lstlisting}
+}
+\end{frame}
+
+\begin{frame}[fragile]
+  \MyLogo
+  \frametitle{Example 1: SoftMax}  
+
+\scriptsize{
+\begin{lstlisting}[language=python]
+# Redefine loss function using softmax as one operator
+def train_loss(w, x):
+    y = np.dot(x, w)
+    prob = softmax(x=y, softmax_label=softmax_label)
+    loss = -np.sum(label * np.log(prob)) / num_samples
+    return loss
+
+# Initialize weight matrix (again)
+weight = random.randn(num_features, num_classes)
+
+# Calculate gradient function automatically
+grad_function = grad_and_loss(train_loss)
+
+# Now training it for 100 iterations
+start_time = time.time()
+for i in range(100):
+    dw, loss = grad_function(weight, data)
+    if i % 10 == 0:
+        print 'Iter {}, training loss {}'.format(i, loss)
+    weight -= 0.1 * dw
+print 'Training time: {}s'.format(time.time() - start_time)
+\end{lstlisting}
+}
 \end{frame}
