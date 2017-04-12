@@ -1,36 +1,28 @@
 \MyLogo
-  \frametitle{Example 1:SoftMax}
+  \frametitle{Example 1: SoftMax}
+
 \scriptsize{
 \begin{lstlisting}[language=python]
-	# Apply softmax regression model
-	y = tf.nn.softmax(tf.matmul(x, W) + b)
+# Redefine loss function using softmax as one operator
+def train_loss(w, x):
+    y = np.dot(x, w)
+    prob = softmax(x=y, softmax_label=softmax_label)
+    loss = -np.sum(label * np.log(prob)) / num_samples
+    return loss
 
-	# Compute the cross entropy of y_ and y
-	entropy = -tf.reduce_sum(y_*tf.log(y))
-	# Create a gradient-descent optimizer
-	train_step =
-		tf.train.GradientDescentOptimizer(0.01).minimize(entropy)
+# Initialize weight matrix (again)
+weight = random.randn(num_features, num_classes)
 
-	# Find the indices where the predictions were correct
-	correct_prediction = tf.equal(tf.argmax(y,1), tf.argmax(y_,1))
-	accuracy = tf.reduce_mean(tf.cast(correct_prediction, "float"))
+# Calculate gradient function automatically
+grad_function = grad_and_loss(train_loss)
 
-with tf.Session(graph=graph) as session:
-	# Initialize all variables
-	tf.global_variables_initializer().run()
-
-	# Train the model
-	for step in range(1000):
-		batch_x, batch_y = mnist.train.next_batch(100)
-		train_step.run(feed_dict={x: batch_x, y_: batch_y})
-	# Print the accuracy using the model
-	print accuracy.run(feed_dict={x: mnist.test.images,
-								y_:mnist.test.labels})
+# Now training it for 100 iterations
+start_time = time.time()
+for i in range(100):
+    dw, loss = grad_function(weight, data)
+    if i % 10 == 0:
+        print 'Iter {}, training loss {}'.format(i, loss)
+    weight -= 0.1 * dw
+print 'Training time: {}s'.format(time.time() - start_time)
 \end{lstlisting}
 }
-
-%\end{tabular}
-
-%\end{center}
-%\label{default}
-%\end{table}%
