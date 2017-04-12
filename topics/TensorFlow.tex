@@ -39,7 +39,20 @@ add_and_triple = adder_node * 3
 
 \begin{frame}
   \MyLogo
-  \frametitle{Programming interface}  
+  \frametitle{Programming interface}
+  In this section we provide a discussion of the computational graph architecture underlying the TensorFlow software library.
+  
+  \begin{itemize}
+	  	\item Graph: In TensorFlow, machine learning algorithms are represented as computational graph. A computational or dataflow graph is a form of directed graph where vertices or nodes describe operations, while edges represent data flowing between these operations.
+	  	
+	  	\item Operation: An opreation may represent a mathematical equation, a variable or constant, a control flow directive, a file I/O operation or even a network communication port.
+	  	
+	  	\item Tensor: A tensor is a multi-dimensional collection of homogeneous values with a fixed, static type.
+	  	
+	  	\item Variable: Variables can be described as persistent, mutable handles to in-memory buffers storing tensors.
+	  	
+	  	\item Session: In TensorFlow the execution of operations and evaluation of tensors may only be preformed in a special environment called session.
+  \end{itemize}
 
 \end{frame}
 
