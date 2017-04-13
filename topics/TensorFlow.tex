@@ -16,30 +16,36 @@ TensorFlow computations are expressed as stateful dataflow graphs.
 \end{itemize}
 %  
 \begin{columns}
-\column{.57\textwidth}
+\column{.65\textwidth}
+\tiny{
 \begin{lstlisting}[language=python]
 import tensorflow as tf
 
 graph = tf.Graph()
+
 with graph.as_default():
 	with tf.name_scope('input_var'):
-		a = tf.Variable(tf.random_uniform([1], -1.0, 1.0))
+		a = tf.Variable(tf.random_uniform
+		                ([1], -1.0, 1.0))
 		tf.summary.histogram('a', a)
-		b = tf.Variable(tf.random_uniform([1], -1.0, 1.0))
+		b = tf.Variable(tf.random_uniform
+		               ([1], -1.0, 1.0))
 		tf.summary.histogram('b', b)
 	with tf.name_scope('output_var'):
 		c = tf.multiply(a, b)
 		tf.summary.histogram('c', c)
+	
 	merged = tf.summary.merge_all()
-	writer = tf.summary.FileWriter('/home/fan/board', graph)
+	writer = tf.summary.FileWriter
+	            ('/home/fan/board', graph)
 
 with tf.Session(graph=graph) as sess:
 	tf.global_variables_initializer().run()
 	writer.add_summary(merged.eval())
-
 \end{lstlisting}
+}
 %
-\column{.48\textwidth}
+\column{.4\textwidth}
 %
 \begin{figure}[htbp] 
    \includegraphics[height=1.5in]{figures/compgraph.png} 
