@@ -65,6 +65,7 @@ criterion = nn.MSECriterion()
 \begin{frame}[fragile]
 \MyLogo
 \frametitle{Example 1:Linear-Regression}  
+\ContinueLineNumber
 \scriptsize{
 \begin{lstlisting}[language=python]
 # retrieve its trainable parameters
@@ -94,6 +95,7 @@ feval = function(x_new)
 \begin{frame}[fragile]
 \MyLogo
 \frametitle{Example 1:Linear-Regression}  
+\ContinueLineNumber
 \scriptsize{
 \begin{lstlisting}[language=python]
 # evaluate the loss function and its derivative wrt x
@@ -127,6 +129,7 @@ for i = 1,1e4 do
 \begin{frame}[fragile]
 \MyLogo
 \frametitle{Example 1:Linear-Regression}  
+\ContinueLineNumber
 \scriptsize{
 \begin{lstlisting}[language=python]
       # update loss       
@@ -150,6 +153,63 @@ for i = 1,(#data)[1] do
    local myPrediction = model:forward(data[i][{{2,3}}])
    print(string.format("%2d  %6.2f %6.2f", i, myPrediction[1], text[i]))
 end
+\end{lstlisting}
+}
+\end{frame}
+
+\begin{frame}[fragile]
+\MyLogo
+\frametitle{Example 2:Two-layler network}  
+\scriptsize{
+\begin{lstlisting}[language=python]
+import torch
+from torch.autograd import Variable
+
+# N is batch size; D_in is input dimension;
+# H is hidden dimension; D_out is output dimension.
+N, D_in, H, D_out = 64, 1000, 100, 10
+
+# Create random Tensors to hold inputs and outputs, and wrap them in Variables.
+x = Variable(torch.randn(N, D_in))
+y = Variable(torch.randn(N, D_out), requires_grad=False)
+
+# Use the nn package to define our model as a sequence of layers.
+model = torch.nn.Sequential(
+          torch.nn.Linear(D_in, H),
+          torch.nn.ReLU(),
+          torch.nn.Linear(H, D_out),
+        )
+
+# The nn package also contains definitions of popular loss functions;
+loss_fn = torch.nn.MSELoss(size_average=False)
+\end{lstlisting}
+}
+\end{frame}
+
+\begin{frame}[fragile]
+\MyLogo
+\frametitle{Example 2:Two-layler network}  
+\ContinueLineNumber
+\scriptsize{
+\begin{lstlisting}[language=python]
+learning_rate = 1e-4
+for t in range(500):
+	# Forward pass: compute predicted y by passing x to the model.
+	y_pred = model(x)
+
+        # Compute and print loss.
+        loss = loss_fn(y_pred, y)
+        print(t, loss.data[0])
+        
+        # Zero the gradients before running the backward pass
+         model.zero_grad()
+         
+         # Backward pass: compute gradient of the loss
+         loss.backward()
+         
+         # Update the weights using gradient descent
+         for param in model.parameters():
+                 param.data -= learning_rate * param.grad.data
 \end{lstlisting}
 }
 \end{frame}
