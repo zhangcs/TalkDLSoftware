@@ -26,8 +26,35 @@
 \subsection{Some examples}
 %%%
 
-\begin{frame}
+\begin{frame}[fragile]
   \MyLogo
-  \frametitle{Example 1}  
+  \frametitle{Example 1: SGD Solver for MNIST}  
+\begin{tiny}
+ \begin{lstlisting}[language=python]
+# The train/test net protocol buffer definition
+net: "examples/mnist/lenet_train_test.prototxt"
+# test_iter specifies how many forward passes
+test_iter: 100
+# Carry out testing every 500 training iterations.
+test_interval: 500
+# The base learning rate, momentum and the weight decay of network
+base_lr: 0.01
+momentum: 0.9
+weight_decay: 0.0005
+# The learning rate policy
+lr_policy: "inv"
+gamma: 0.0001
+power: 0.75
+# Display every 100 iterations
+display: 100
+# The maximum number of iterations
+max_iter: 10000
+# snapshot intermediate results
+snapshot: 5000
+snapshot_prefix: "examples/mnist/lenet"
+# solver mode: CPU or GPU
+solver_mode: GPU
+\end{lstlisting}
+\end{tiny}
 
 \end{frame}
