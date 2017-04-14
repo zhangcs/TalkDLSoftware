@@ -67,13 +67,7 @@
 \begin{frame}[fragile]
   \MyLogo
   \frametitle{Functions and Modules}  
-\small
-
-\structure{Defining functions}
-\begin{lstlisting}[language=python]
-def square(x):
-	return x*x
-\end{lstlisting}		
+\small		
 
 \structure{Using modules}
 
@@ -83,6 +77,12 @@ def square(x):
 \item from math import sin: This will only import the sin function from math module and introduce the name sin into the current namespace, but it will not introduce the name math into the current namespace, directly using: sin(3.14)
 		
 \end{enumerate}
+
+\structure{Defining functions}
+\begin{lstlisting}[language=python]
+def square(x):
+	return x*x
+\end{lstlisting}
 
 \end{frame}
 
@@ -105,7 +105,7 @@ f=1+2j	# complex
 
 \structure{Sequence types: list, tuple, str, dict}
 \begin{lstlisting}[language=python]
-t=(3.14, True, 'Yes', [1], ())                    # tuple example
+t=(3.14, True, 'Yes', [1], (0xf,))                    # tuple example
 l=[3.14, True, 'Yes', [1], (1L, 0xf)] + [None]*3  # list example
 s='Hello' + ", " + 'world!'                       # str example 1
 s=("Hello, " "world!")                            # str example 2
@@ -157,4 +157,29 @@ while i < 10:
 
 \centering{\color{Blue}\url{http://www.pythontutor.com}}
 
+\end{frame}
+
+%
+
+\begin{frame}[fragile]
+	\MyLogo
+	\frametitle{Addtions}  
+	\small
+	
+	\begin{enumerate}
+		\item In Python, everythig (including functions, modules and files) is object. A variable is created through assignment:
+		\begin{lstlisting}[language=python]
+		>>> x = y = z = 0.1
+		\end{lstlisting}
+		
+		\item When objects are passed to a function, Python always passes (the value of) the reference to the object to the function.
+		
+		\item $\mathbf{help()}$ is a function which gives information about the object. For example, $\mathbf{help('modules')}$ will generate a list of all modules which can be imported into the current interpreter.
+		
+		\item Some useful and important packages: SymPy(for symbolic mathematics), Numpy(for scientific computing), Matplotlib/Pylab(for visualising data), SciPy(providing lots of numerical algorithms)
+		
+	\end{enumerate}
+
+	\centering{\color{Blue}\url{http://www.pythontutor.com}}
+	
 \end{frame}

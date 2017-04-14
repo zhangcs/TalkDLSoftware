@@ -9,11 +9,6 @@
 \begin{frame}[fragile]
   \MyLogo
   \frametitle{Computational graph}  
-TensorFlow computations are expressed as stateful dataflow graphs.
-\begin{itemize}
-\item each node corresponds to an operation (eg tensor, add, sub etc)
-\item each edge corresponds to tensor flowing direction
-\end{itemize}
 %  
 \begin{columns}
 \column{.65\textwidth}
@@ -24,24 +19,21 @@ import tensorflow as tf
 graph = tf.Graph()
 
 with graph.as_default():
-	with tf.name_scope('input_var'):
-		a = tf.Variable(tf.random_uniform
-		                ([1], -1.0, 1.0))
-		tf.summary.histogram('a', a)
-		b = tf.Variable(tf.random_uniform
-		               ([1], -1.0, 1.0))
-		tf.summary.histogram('b', b)
-	with tf.name_scope('output_var'):
-		c = tf.multiply(a, b)
-		tf.summary.histogram('c', c)
+	a = tf.constant(1.0)
+	tf.summary.scalar('aa', a)
+	b = tf.constant(2.0)
+	tf.summary.scalar('bb', b)
+	c = tf.multiply(a, b)
+	tf.summary.scalar('c', c)
 	
 	merged = tf.summary.merge_all()
-	writer = tf.summary.FileWriter
-	            ('/home/fan/board', graph)
+	writer = tf.summary.FileWriter('./board'
+								, graph)
 
-with tf.Session(graph=graph) as sess:
+with tf.Session(graph=graph):
 	tf.global_variables_initializer().run()
 	writer.add_summary(merged.eval())
+	
 \end{lstlisting}
 }
 %
@@ -61,8 +53,6 @@ with tf.Session(graph=graph) as sess:
 \begin{frame}
   \MyLogo
   \frametitle{Programming interface}
-  In this section we provide a discussion of the computational graph architecture underlying the TensorFlow software library.
-  
   \begin{itemize}
 	  	\item Graph: In TensorFlow, machine learning algorithms are represented as computational graph. A computational or dataflow graph is a form of directed graph where vertices or nodes describe operations, while edges represent data flowing between these operations.
 	  	
