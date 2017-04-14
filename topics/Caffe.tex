@@ -25,36 +25,104 @@
 %%%
 \subsection{Some examples}
 %%%
+\begin{frame}[fragile]
+  \MyLogo
+  \frametitle{Example 1: Image Classification}  
+\begin{tiny}
+\begin{lstlisting}[language=python]
+import caffe
+import matplotlib.pyplot as plt
+
+# paste your image URL here
+my_image_url = "https://wikipedia/Orang_Utan/2C_Malaysia.JPG"
+!wget -O image.jpg $my_image_url
+
+# transform it and copy it into the net
+image = caffe.io.load_image('image.jpg')
+caffe.net.blobs['data'].data[...]=transformer.preprocess('data',image)
+
+# perform classification
+caffe.net.forward()
+
+# obtain the output probabilities
+output_prob = net.blobs['prob'].data[0]
+
+# sort top five predictions from softmax output
+top_inds = output_prob.argsort()[::-1][:5]
+
+plt.imshow(image)
+print 'probabilities and labels:'
+zip(output_prob[top_inds], labels[top_inds])\end{lstlisting}
+\end{tiny}
+\end{frame}
+
 
 \begin{frame}[fragile]
   \MyLogo
-  \frametitle{Example 1: SGD Solver for MNIST}  
+  \frametitle{Example 2: Extend layer in Caffe}  
 \begin{tiny}
- \begin{lstlisting}[language=python]
-# The train/test net protocol buffer definition
-net: "examples/mnist/lenet_train_test.prototxt"
-# test_iter specifies how many forward passes
-test_iter: 100
-# Carry out testing every 500 training iterations.
-test_interval: 500
-# The base learning rate, momentum and the weight decay of network
-base_lr: 0.01
-momentum: 0.9
-weight_decay: 0.0005
-# The learning rate policy
-lr_policy: "inv"
-gamma: 0.0001
-power: 0.75
-# Display every 100 iterations
-display: 100
-# The maximum number of iterations
-max_iter: 10000
-# snapshot intermediate results
-snapshot: 5000
-snapshot_prefix: "examples/mnist/lenet"
-# solver mode: CPU or GPU
-solver_mode: GPU
+\begin{lstlisting}[language=python]
+import caffe
+import numpy as np 
+
+class EuclideanLoss(caffe.layer):
+	def setup(self, bottom, top):
+		#check input pair
+		if len(bottom) != 2:
+			raise Exception("Need two inputs to compute distance")
+			
+	def reshape(self, bottom, top):
+		#check input dimensions match
+		if bottom[0].count != bottom[1].count:
+			raise Exception("Inputs must have the same dimension")
+		#difference in shape of inputs
+		self.diff = np.zeros_like(bottom[0].data, dtype=np.float32)
+		# loss output is scalar
+		top[0].reshape(1)
+		
+	def forward(self, bottom, top):
+		self.diff[...] = bottom[0].data - bottom[1].data
+		top[0].data[...] = np.sum(self.diff**2)/bottom[0].num/2.	
+\end{lstlisting}
+\end{tiny}
+\end{frame}
+
+\begin{frame}[fragile]
+  \MyLogo
+  \frametitle{Example 2: Extend layer in Caffe}  
+\ContinueLineNumber
+\begin{tiny}
+\begin{lstlisting}[language=python]
+	def backward(self, top, propagate_down, bottom):
+		for i in range(2):
+			if not propagate_down[i]:
+				continue
+			if i == 0:
+				sign = 1
+			else:
+				sign = -1
+			bottom[i].diff[...] = sign.self.diff / bottom[1].num
 \end{lstlisting}
 \end{tiny}
 
+
+Define a class in Python to extend Layer
+\begin{tiny}
+\begin{lstlisting}[language=python]
+layer{
+type: "Python"
+python_param {
+	module: "laylers"
+	layer: "EuclideanLoss"
+}
+}
+\end{lstlisting}
+\end{tiny}
+
+\tiny
+\begin{center}
+{
+\color{red}https://docs.google.com/presentation/d/1UeKXVgRvvxg9OUdh\_UiC5G71UMscNPlvArsWER41PsU/edit\#slide=id.gc2fcdcce7\_216\_0
+}
+\end{center}
 \end{frame}
