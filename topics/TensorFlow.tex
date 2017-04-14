@@ -107,26 +107,27 @@ Computation graphs are powerful but complicated
 \begin{lstlisting}[language=python]
 import tensorflow as tf
 
-# Import the training data (MNIST)
-import tf.examples.tutorials.mnist.input_data as input_data
-
-# Possibly download and extract the MNIST data set
-# Retrieve the labels as one-hot-encoded vectors
+import tensorflow.examples.tutorials.mnist.input_data as input_data
 mnist = input_data.read_data_sets("MNIST_data/", one_hot=True)
 
-# Create a new graph
 graph = tf.Graph()
-
-# Set our graph as the one to add nodes to
 with graph.as_default():
-	# Placeholder for input variables (None = variable dimension)
-	x = tf.placeholder("float", shape=[None, 784])
-	# Placeholder for labels
-	y_ = tf.placeholder("float", shape=[None, 10])
-	
-	# Weights and bias
-	W = tf.Variable(tf.zeros([784, 10]))
-	b = tf.Variable(tf.zeros([10])) 
+	with tf.name_scope('input_features'):
+		x = tf.placeholder(tf.float32, shape=[None, 784], 
+							name='input_x')
+							
+	with tf.name_scope('input_labels'):
+		y_ = tf.placeholder(tf.float32, shape=[None, 10], 
+							name='labels')
+							
+	with tf.name_scope('variables'):
+		W = tf.Variable(tf.zeros([784, 10]), name='weights')
+		tf.summary.histogram('WEIGHTS', W)
+		b = tf.Variable(tf.zeros([10]), name='biases')
+		tf.summary.histogram('BIASES', b)
+			
+	with tf.name_scope('use_softmax'):
+		y = tf.nn.softmax(tf.matmul(x, W) + b)
 \end{lstlisting}
 }
 \end{frame}
@@ -137,30 +138,29 @@ with graph.as_default():
 \ContinueLineNumber
 \scriptsize{
 \begin{lstlisting}[language=python]
-	# Apply softmax regression model
-	y = tf.nn.softmax(tf.matmul(x, W) + b)
-	
-	# Compute the cross entropy of y_ and y
-	entropy = -tf.reduce_sum(y_*tf.log(y))
-	# Create a gradient-descent optimizer
-	train_step = 
-		tf.train.GradientDescentOptimizer(0.01).minimize(entropy)
-		
-	# Find the indices where the predictions were correct
-	correct_prediction = tf.equal(tf.argmax(y,1), tf.argmax(y_,1))
-	accuracy = tf.reduce_mean(tf.cast(correct_prediction, "float"))
+	with tf.name_scope('train'):
+		cross_entropy = -tf.reduce_sum(y_*tf.log(y))
+		train_step = tf.train.GradientDescentOptimizer(0.01).minimize(cross_entropy)
 
-with tf.Session(graph=graph) as session:
-	# Initialize all variables
-	tf.global_variables_initializer().run()
+	with tf.name_scope('test'):
+		correct_prediction = tf.equal(tf.argmax(y,1), tf.argmax(y_,1))
+		accuracy = tf.reduce_mean(tf.cast(correct_prediction, "float"))
+		tf.summary.scalar('Accuracy', accuracy)
+	merged = tf.summary.merge_all()
+	writer = tf.summary.FileWriter('./board', graph)
 	
-	# Train the model
+with tf.Session(graph=graph) as sess:
+	tf.global_variables_initializer().run()
 	for step in range(1000):
-		batch_x, batch_y = mnist.train.next_batch(100)
-		train_step.run(feed_dict={x: batch_x, y_: batch_y})
-	# Print the accuracy using the model
-	print accuracy.run(feed_dict={x: mnist.test.images, 
-								y_:mnist.test.labels})
+		if (step%10) == 0:
+			feed = {x: mnist.test.images, y_: mnist.test.labels}
+			_, acc = sess.run([merged, accuracy], feed_dict=feed)
+			print('Accuracy at %s step: %s' % (step, acc))
+		else:
+			batch_x, batch_y = mnist.train.next_batch(100)
+			sess.run(train_step, feed_dict={x: batch_x, y_: batch_y})
+			writer.add_summary(merged.eval(feed_dict={x: batch_x,
+									 y_: batch_y}), global_step=step)
 \end{lstlisting}
 }
 
