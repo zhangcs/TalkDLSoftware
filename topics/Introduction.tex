@@ -3,6 +3,18 @@
 \section{Introduction}\label{sec:intro}
 
 %%%
+
+\frameinlbffalse
+
+\begin{frame}[plain]
+\frametitle{\S\ref{sec:intro}. \insertsection}
+\listofframes
+\end{frame}
+\addtocounter{framenumber}{-1} % this page does not count
+
+\frameinlbftrue
+
+%%%
 \subsection{Background}
 %%%
 
@@ -71,11 +83,13 @@
 \item Performance and scalability
 \end{itemize}
 
-\vskip -5pt
+\vskip -12pt
 \begin{figure}[htbp] %  figure placement: here, top, bottom, or page
    \centering
-   \includegraphics[width=\linewidth]{figures/ML.pdf} 
+   \includegraphics[width=0.9\linewidth]{figures/ML.pdf} 
 \end{figure}
+
+\centering{\color{red}Add Reference!!!!}
 
 \end{frame}
 
@@ -127,11 +141,12 @@ Deep Learning has been introduced with the objective of moving ML closer to one 
 \item data hungry, learns slowly 
 \end{itemize}
 \end{columns}
-{\tiny
+
 \begin{center}
-{\color{red} https://www.slideshare.net/0xdata/transform-your-business-with-ai-deep-learning-and-machine-learning}
+{\color{red} \scriptsize
+https://www.slideshare.net/0xdata/transform-your-business-with-ai-deep-learning-and-machine-learning}
 \end{center}
-}
+
 \end{frame}
 
 %%%
@@ -140,9 +155,8 @@ Deep Learning has been introduced with the objective of moving ML closer to one 
 
 \begin{frame}
   \MyLogo
-  \frametitle{Comparison: Basic Information}  
+  \frametitle{Popular Packages: Basic Information}  
 
-\vskip -8pt  
 \renewcommand{\multirowsetup}{\centering} 
 \begin{table}[htdp]
 \begin{center}
@@ -179,6 +193,7 @@ Viewpoint &Torch       &Caffe   & TensorFlow  & MXNet \\ \hline
 
 {\scriptsize
 \begin{itemize}\setlength\itemsep{0.5em}
+\item Other worth noting packages: CNTK/DMTK (Microsoft), PyTorch (\alert{beta})
 \item BVLC, Berkeley Vision and Learning Center 
 \item DMLC, Distributed (Deep) Machine Learning Community, supported by Amazon, Intel, Microsoft, nVidia, Baidu, ...
 \end{itemize}
@@ -190,9 +205,7 @@ Viewpoint &Torch       &Caffe   & TensorFlow  & MXNet \\ \hline
 
 \begin{frame}
   \MyLogo
-  \frametitle{Comparison: Performance}  
-
-\vskip -8pt  
+  \frametitle{Popular Packages: Performance}  
 
 \renewcommand{\multirowsetup}{\centering} 
 \begin{table}[htdp]
@@ -242,7 +255,7 @@ Viewpoint &Torch       &Caffe  & TensorFlow & MXNet  \\ \hline
 \end{table}%
 
 \begin{center}
-{\color{red}
+{\color{red}\scriptsize
 http://blog.revolutionanalytics.com/2016/08/deep-learning-part-1.html
 }
 \end{center}

@@ -3,6 +3,19 @@
 \section{Python}\label{sec:python}
 
 %%%
+
+\frameinlbffalse
+
+\begin{frame}[plain]
+\frametitle{\S\ref{sec:python}. \insertsection}
+\listofframes
+\end{frame}
+\addtocounter{framenumber}{-1} % this page does not count
+
+\frameinlbftrue
+
+
+%%%
 \subsection{A short introduction on Python}
 %%%
 
@@ -66,23 +79,30 @@
 
 \begin{frame}[fragile]
   \MyLogo
-  \frametitle{Functions and Modules}  
+  \frametitle{Modules}  
 \small		
 
+\medskip
 \structure{Using modules}
 
 \begin{enumerate}
-\item import math: This will only introduce the name math into the name space in which the import command was issued. The names within the math module will not appear in the enclosing namespace: they must be accessed through the name math. For example: math.sin(3.14).
-\item from math import *: This does not introduce the name math into the current namespace. It does however introduce all public names of the math module into the current namespace, directly using: sin(3.14)
-\item from math import sin: This will only import the sin function from math module and introduce the name sin into the current namespace, but it will not introduce the name math into the current namespace, directly using: sin(3.14)
-		
-\end{enumerate}
-
-\structure{Defining functions}
+\item This way will only introduce the name `math' into the name space in which the import command was issued. The names within the math module will not appear in the enclosing namespace: they must be accessed through the name math. For example: math.sin(3.14).
 \begin{lstlisting}[language=python]
-def square(x):
-	return x*x
+import math
 \end{lstlisting}
+
+
+\item This way does not introduce the name math into the current namespace. It does however introduce all public names of the math module into the current namespace, directly using: sin(3.14)
+\begin{lstlisting}[language=python]
+from math import *
+\end{lstlisting}
+
+\item This will only import the sin function from math module and introduce the name sin into the current namespace, but it will not introduce the name math into the current namespace, directly using: sin(3.14)
+\begin{lstlisting}[language=python]
+from math import sin
+\end{lstlisting}
+
+\end{enumerate}
 
 \end{frame}
 
@@ -93,6 +113,7 @@ def square(x):
   \frametitle{Built-in Data Structures}  
 \small
 
+\smallskip
 \structure{Numeric types: int, float, complex}
 \begin{lstlisting}%[language=python]
 a=1	# int
@@ -105,7 +126,7 @@ f=1+2j	# complex
 
 \structure{Sequence types: list, tuple, str, dict}
 \begin{lstlisting}[language=python]
-t=(3.14, True, 'Yes', [1], (0xf,))                    # tuple example
+t=(3.14, True, 'Yes', [1], (0xf,))                # tuple example
 l=[3.14, True, 'Yes', [1], (1L, 0xf)] + [None]*3  # list example
 s='Hello' + ", " + 'world!'                       # str example 1
 s=("Hello, " "world!")                            # str example 2
@@ -115,10 +136,14 @@ s="Python"; s.find('thon')                        # find substring
 
 \structure{Formatted output}
 \begin{lstlisting}[language=python]
-print('%(lang)s has %(num)02d quote types.' 
-...    %{'lang':"Python", "num":3})
+print('%(lang)s has %(num)02d quote types.' %{"lang":"Python", "num":3})
 \end{lstlisting}
 
+\structure{User defined functions}
+\begin{lstlisting}[language=python]
+def square(x):
+	return x*x
+\end{lstlisting}
 
 \end{frame}
 
@@ -155,31 +180,37 @@ while i < 10:
 	i += 1
 \end{lstlisting}
 
-\centering{\color{Blue}\url{http://www.pythontutor.com}}
-
 \end{frame}
 
-%
+%%%
 
 \begin{frame}[fragile]
 	\MyLogo
-	\frametitle{Addtions}  
+	\frametitle{Additional Comments}  
 	\small
 	
-	\begin{enumerate}
-		\item In Python, everythig (including functions, modules and files) is object. A variable is created through assignment:
-		\begin{lstlisting}[language=python]
-		>>> x = y = z = 0.1
-		\end{lstlisting}
-		
-		\item When objects are passed to a function, Python always passes (the value of) the reference to the object to the function.
-		
-		\item $\mathbf{help()}$ is a function which gives information about the object. For example, $\mathbf{help('modules')}$ will generate a list of all modules which can be imported into the current interpreter.
-		
-		\item Some useful and important packages: SymPy(for symbolic mathematics), Numpy(for scientific computing), Matplotlib/Pylab(for visualising data), SciPy(providing lots of numerical algorithms)
-		
-	\end{enumerate}
+\begin{enumerate}
 
-	\centering{\color{Blue}\url{http://www.pythontutor.com}}
-	
+\item In Python, everything (including functions, modules, and files) are objects. A variable is created through assignment:
+\begin{lstlisting}[language=python] 
+x = y = z = 0.1
+\end{lstlisting}
+		
+\item When objects are passed to a function, Python always passes (the value of) the reference to the object to the function.
+		
+\item $\mathbf{help()}$ is a function which gives information about the object. For example, $\mathbf{help('modules')}$ will generate a list of all modules which can be imported into the current interpreter.
+		
+\item Some useful and important packages
+	\begin{itemize}
+	\item NumPy: for scientific computing
+	\item Matplotlib/Pylab: for visualising data
+	\item SciPy: providing lots of numerical algorithms
+	\item SymPy: for symbolic mathematics
+	\end{itemize}
+		
+\end{enumerate}
+
+\centering{\color{red}\scriptsize
+\url{http://www.pythontutor.com}}
+
 \end{frame}

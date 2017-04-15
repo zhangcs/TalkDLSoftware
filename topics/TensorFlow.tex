@@ -3,6 +3,18 @@
 \section{TensorFlow}\label{sec:TF}
 
 %%%
+
+\frameinlbffalse
+
+\begin{frame}[plain]
+\frametitle{\S\ref{sec:TF}. \insertsection}
+\listofframes
+\end{frame}
+\addtocounter{framenumber}{-1} % this page does not count
+
+\frameinlbftrue
+
+%%%
 \subsection{Computational graph}
 %%%
 
@@ -27,8 +39,7 @@ with graph.as_default():
 	tf.summary.scalar('c', c)
 	
 	merged = tf.summary.merge_all()
-	writer = tf.summary.FileWriter('./board'
-								, graph)
+	writer = tf.summary.FileWriter('./board', graph)
 
 with tf.Session(graph=graph):
 	tf.global_variables_initializer().run()

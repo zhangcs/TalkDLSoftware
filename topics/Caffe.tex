@@ -3,6 +3,18 @@
 \section{Caffe}\label{sec:Caffe}
 
 %%%
+
+\frameinlbffalse
+
+\begin{frame}[plain]
+\frametitle{\S\ref{sec:Caffe}. \insertsection}
+\listofframes
+\end{frame}
+\addtocounter{framenumber}{-1} % this page does not count
+
+\frameinlbftrue
+
+%%%
 \subsection{Programming interface}
 %%%
 
@@ -27,8 +39,8 @@
 %%%
 \begin{frame}[fragile]
   \MyLogo
-  \frametitle{Example 1: Image Classification}  
-\begin{tiny}
+  \frametitle{Example: Image Classification}  
+
 \begin{lstlisting}[language=python]
 import caffe
 import matplotlib.pyplot as plt
@@ -53,14 +65,13 @@ top_inds = output_prob.argsort()[::-1][:5]
 plt.imshow(image)
 print 'probabilities and labels:'
 zip(output_prob[top_inds], labels[top_inds])\end{lstlisting}
-\end{tiny}
 \end{frame}
 
+%%%
 
 \begin{frame}[fragile]
   \MyLogo
-  \frametitle{Example 2: Extend layer in Caffe}  
-\begin{tiny}
+  \frametitle{Example: Extend Layers}  
 \begin{lstlisting}[language=python]
 import caffe
 import numpy as np 
@@ -84,14 +95,15 @@ class EuclideanLoss(caffe.layer):
 		self.diff[...] = bottom[0].data - bottom[1].data
 		top[0].data[...] = np.sum(self.diff**2)/bottom[0].num/2.	
 \end{lstlisting}
-\end{tiny}
 \end{frame}
+
+%%%
 
 \begin{frame}[fragile]
   \MyLogo
-  \frametitle{Example 2: Extend layer in Caffe}  
+  \frametitle{Example: Extend Layers}  
+  
 \ContinueLineNumber
-\begin{tiny}
 \begin{lstlisting}[language=python]
 	def backward(self, top, propagate_down, bottom):
 		for i in range(2):
@@ -103,21 +115,17 @@ class EuclideanLoss(caffe.layer):
 				sign = -1
 			bottom[i].diff[...] = sign.self.diff / bottom[1].num
 \end{lstlisting}
-\end{tiny}
-
 
 Define a class in Python to extend Layer
-\begin{tiny}
 \begin{lstlisting}[language=python]
 layer{
-type: "Python"
-python_param {
-	module: "laylers"
-	layer: "EuclideanLoss"
-}
+	type: "Python"
+	python_param {
+		module: "laylers"
+		layer: "EuclideanLoss"
+	}
 }
 \end{lstlisting}
-\end{tiny}
 
 \tiny
 \begin{center}
