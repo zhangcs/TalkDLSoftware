@@ -118,16 +118,20 @@ Computation graphs are powerful but complicated
 \begin{lstlisting}[language=python]
 import tensorflow as tf
 
+# Import training and test data
 import tensorflow.examples.tutorials.mnist.input_data as input_data
 mnist = input_data.read_data_sets("MNIST_data/", one_hot=True)
 
+# Create a new graph
 graph = tf.Graph()
 with graph.as_default():
 	with tf.name_scope('input_features'):
+		# Placeholder for input variables (None = variable dimension)
 		x = tf.placeholder(tf.float32, shape=[None, 784], 
 							name='input_x')
 							
 	with tf.name_scope('input_labels'):
+		# Placeholder for labels
 		y_ = tf.placeholder(tf.float32, shape=[None, 10], 
 							name='labels')
 							
@@ -138,6 +142,7 @@ with graph.as_default():
 		tf.summary.histogram('BIASES', b)
 			
 	with tf.name_scope('use_softmax'):
+		# Apply softmax regression model to the input data and get prediction labels y
 		y = tf.nn.softmax(tf.matmul(x, W) + b)
 \end{lstlisting}
 }
@@ -150,7 +155,9 @@ with graph.as_default():
 \scriptsize{
 \begin{lstlisting}[language=python]
 	with tf.name_scope('train'):
+		# Compute the cross entropy of real label y_ and prediction labe y
 		cross_entropy = -tf.reduce_sum(y_*tf.log(y))
+		# Create a gradient-descent optimizer, minimizing the entropy, learning rate 0.01
 		train_step = tf.train.GradientDescentOptimizer(0.01).minimize(cross_entropy)
 
 	with tf.name_scope('test'):
@@ -161,7 +168,9 @@ with graph.as_default():
 	writer = tf.summary.FileWriter('./board', graph)
 	
 with tf.Session(graph=graph) as sess:
+	# Initialize all variables
 	tf.global_variables_initializer().run()
+	
 	for step in range(1000):
 		if (step%10) == 0:
 			feed = {x: mnist.test.images, y_: mnist.test.labels}
