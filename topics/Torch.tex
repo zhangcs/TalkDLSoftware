@@ -22,7 +22,7 @@
   \MyLogo
   \frametitle{Programming interface}  
 \begin{enumerate}
-\item Wide range applications
+\item Wide range of applications
 \begin{itemize}
 \item Speech, image and video applications
 \item  Large-scale machine-learning applications
@@ -52,8 +52,7 @@ require 'torch'
 require 'optim'
 require 'nn'
 
-# write the loss to a text file and read from there 
-#  to plot the loss as training proceeds
+# write the loss to a text file and read from there to plot it as training proceeds
 logger = optim.Logger('loss_log.txt')
 
 # input data 
@@ -70,6 +69,16 @@ model:add(nn.Linear(ninputs, noutputs))
 
 # Define a loss function
 criterion = nn.MSECriterion()
+
+# retrieve its trainable parameters
+x, dl_dx = model:getParameters()
+
+# compute loss function and its gradient 
+feval = function(x_new)
+   # set x to x_new, if differnt
+   if x ~= x_new then
+      x:copy(x_new)
+   end
 \end{lstlisting}
 }
 \end{frame}
@@ -80,16 +89,6 @@ criterion = nn.MSECriterion()
 \ContinueLineNumber
 \scriptsize{
 \begin{lstlisting}[language=python]
-# retrieve its trainable parameters
-x, dl_dx = model:getParameters()
-
-# compute loss function and its gradient 
-feval = function(x_new)
-   # set x to x_new, if differnt
-   if x ~= x_new then
-      x:copy(x_new)
-   end
-
 # select a new training sample
    _nidx_ = (_nidx_ or 0) + 1
    if _nidx_ > (#data)[1] then _nidx_ = 1 end
@@ -100,16 +99,7 @@ feval = function(x_new)
 
 # reset gradients
    dl_dx:zero()
-\end{lstlisting}
-}
-\end{frame}
-
-\begin{frame}[fragile]
-\MyLogo
-\frametitle{Example: Linear Regression}  
-\ContinueLineNumber
-\scriptsize{
-\begin{lstlisting}[language=python]
+ 
 # evaluate the loss function and its derivative wrt x
    local loss_x = criterion:forward(model:forward(inputs), target)
    model:backward(inputs, criterion:backward(model.output, target))
@@ -125,15 +115,10 @@ sgd_params = {
    weightDecay = 0,
    momentum = 0
 }
-
 # we cycle 1e4 times over our training data
 for i = 1,1e4 do
    #this variable is used to estimate the average loss
    current_loss = 0
-   #an epoch is a full loop over our training data
-   for i = 1,(#data)[1] do
-      # return new x and value of the loss functions
-      _,fs = optim.sgd(feval,x,sgd_params)
 \end{lstlisting}
 }
 \end{frame}
@@ -144,10 +129,14 @@ for i = 1,1e4 do
 \ContinueLineNumber
 \scriptsize{
 \begin{lstlisting}[language=python]
+   #an epoch is a full loop over our training data
+   for i = 1,(#data)[1] do
+      # return new x and value of the loss functions
+      _,fs = optim.sgd(feval,x,sgd_params)
       # update loss       
       current_loss = current_loss + fs[1]
-   end
-
+   end      
+   
    # report average error on epoch
    current_loss = current_loss / (#data)[1]
    print('current loss = ' .. current_loss)
@@ -192,6 +181,17 @@ model = torch.nn.Sequential( torch.nn.Linear(D_in, H),
 
 # The nn package also contains definitions of popular loss functions;
 loss_fn = torch.nn.MSELoss(size_average=False)
+
+learning_rate = 1e-4
+
+for t in range(500):
+	# Forward pass: compute predicted y by passing x to the model.
+	y_pred = model(x)
+	# Compute and print loss.
+	loss = loss_fn(y_pred, y)
+	print(t, loss.data[0])
+	# Zero the gradients before running the backward pass
+	model.zero_grad()
 \end{lstlisting}
 }
 \end{frame}
@@ -201,26 +201,15 @@ loss_fn = torch.nn.MSELoss(size_average=False)
 \frametitle{Example: Two-Layer Network}  
 
 \ContinueLineNumber
-\begin{lstlisting}[language=python]
-learning_rate = 1e-4
-
-for t in range(500):
-	# Forward pass: compute predicted y by passing x to the model.
-	y_pred = model(x)
-
-        # Compute and print loss.
-        loss = loss_fn(y_pred, y)
-        print(t, loss.data[0])
-        
-        # Zero the gradients before running the backward pass
-         model.zero_grad()
+\begin{lstlisting}[language=python]         
+	# Backward pass: compute gradient of the loss
+	loss.backward()
          
-         # Backward pass: compute gradient of the loss
-         loss.backward()
-         
-         # Update the weights using gradient descent
-         for param in model.parameters():
-                 param.data -= learning_rate * param.grad.data
+	# Update the weights using gradient descent
+	for param in model.parameters():
+		param.data -= learning_rate * param.grad.data
+	end
+end
 \end{lstlisting}
 
 \begin{center}

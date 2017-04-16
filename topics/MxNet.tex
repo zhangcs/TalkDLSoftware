@@ -81,6 +81,13 @@ softmax = function(softmax_symbol, [('x', x_shape),
 # make softmax_label; 
 # MXNet's softmax operator does not use one-of-many label format
 softmax_label = np.argmax(label, axis=1)
+
+# Redefine loss function using softmax as one operator
+def train_loss(w, x):
+    y = np.dot(x, w)
+    prob = softmax(x=y, softmax_label=softmax_label)
+    loss = -np.sum(label * np.log(prob)) / num_samples
+    return loss
 \end{lstlisting}
 
 \end{frame}
@@ -92,13 +99,6 @@ softmax_label = np.argmax(label, axis=1)
 \ContinueLineNumber
 \scriptsize{
 \begin{lstlisting}[language=python]
-# Redefine loss function using softmax as one operator
-def train_loss(w, x):
-    y = np.dot(x, w)
-    prob = softmax(x=y, softmax_label=softmax_label)
-    loss = -np.sum(label * np.log(prob)) / num_samples
-    return loss
-
 # Initialize weight matrix (again)
 weight = random.randn(num_features, num_classes)
 
