@@ -89,7 +89,7 @@ feval = function(x_new)
 \ContinueLineNumber
 \scriptsize{
 \begin{lstlisting}[language=python]
-# select a new training sample
+   # select a new training sample
    _nidx_ = (_nidx_ or 0) + 1
    if _nidx_ > (#data)[1] then _nidx_ = 1 end
 
@@ -97,14 +97,14 @@ feval = function(x_new)
    local target = sample[{ {1} }]    
    local inputs = sample[{ {2,3} }] 
 
-# reset gradients
+   # reset gradients
    dl_dx:zero()
  
-# evaluate the loss function and its derivative wrt x
+   # evaluate the loss function and its derivative wrt x
    local loss_x = criterion:forward(model:forward(inputs), target)
    model:backward(inputs, criterion:backward(model.output, target))
 
-# return loss(x) and dloss/dx
+   # return loss(x) and dloss/dx
    return loss_x, dl_dx
 end
 
@@ -115,7 +115,8 @@ sgd_params = {
    weightDecay = 0,
    momentum = 0
 }
-# we cycle 1e4 times over our training data
+
+# we cycle 10,000 times over our training data
 for i = 1,1e4 do
    #this variable is used to estimate the average loss
    current_loss = 0
@@ -147,8 +148,7 @@ for i = 1,1e4 do
 end
 
 # Test the trained model
-text = {40.32, 42.92, 45.33, 48.85, 52.37, 57, 61.82, 69.78, 
-        72.19, 79.42}
+text = {40.32, 42.92, 45.33, 48.85, 52.37, 57, 61.82, 69.78, 72.19, 79.42}
 
 for i = 1,(#data)[1] do
    local myPrediction = model:forward(data[i][{{2,3}}])
@@ -156,6 +156,8 @@ for i = 1,(#data)[1] do
 end
 \end{lstlisting}
 }
+
+\vskip 50pt
 \end{frame}
 
 \begin{frame}[fragile]
@@ -211,6 +213,8 @@ for t in range(500):
 	end
 end
 \end{lstlisting}
+
+\vskip 125pt
 
 \begin{center}
 {\color{red}\scriptsize

@@ -1,6 +1,6 @@
 %!TEX root = ../talk.tex
 
-\section{Numerical Comparisons}\label{sec:numer}
+\section{Comparisons}\label{sec:numer}
 
 %%%
 
@@ -41,7 +41,7 @@
 	
 \begin{center}
 	{\color{red} \scriptsize
-		Benchmarking State-of-the-Art Deep Learning Software Tools, by Shaohuai Shi, Qiang Wang.}
+		Benchmarking State-of-the-Art Deep Learning Software Tools, by Shaohuai Shi, et al., 2017}
 \end{center}
 
 \end{frame}
@@ -83,8 +83,8 @@
 	\MyLogo
 	\frametitle{CPU Scalability: FCN Synthetic}  
 	\begin{figure}[htbp] 
-		\includegraphics[height=2.2in]{figures/FCN-S1.pdf} 
-		\caption{FCN-S performence comparison on CPU platform with a mini-batch size of 64.(The lower the better.)}
+		\includegraphics[width=\linewidth]{figures/FCN-S1.pdf} 
+		\caption{FCN-S performance comparison on CPU platform with a mini-batch size of 64 (The lower the better)}
 	\end{figure}
 \end{frame}
 
@@ -94,8 +94,8 @@
 	\MyLogo
 	\frametitle{CPU Scalability: FCN Real}  
 	\begin{figure}[htbp] 
-		\includegraphics[height=2.2in]{figures/FCN-R1.pdf} 
-		\caption{The FCN-R performance comparison on CPU platform with a mini-batch size of 1024.(The lower the better.)}
+		\includegraphics[width=\linewidth]{figures/FCN-R1.pdf} 
+		\caption{The FCN-R performance comparison on CPU platform with a mini-batch size of 1024 (The lower the better)}
 	\end{figure}
 \end{frame}
 
@@ -106,8 +106,8 @@
 	\frametitle{CPU Scalability: CNN Synthetic}  
 
 	\begin{figure}[htbp] 
-		\includegraphics[height=2.2in]{figures/AlexNet-S1.pdf} 
-		\caption{AlexNet-S performance comparison on CPU platform with a mini-batch size of 16 (The lower the better.)}
+		\includegraphics[width=\linewidth]{figures/AlexNet-S1.pdf} 
+		\caption{AlexNet-S performance comparison on CPU platform with a mini-batch size of 16 (The lower the better)}
 	\end{figure}	
 \end{frame}
 
@@ -117,8 +117,8 @@
 	\MyLogo
 	\frametitle{CPU Scalability: CNN Real}  
 	\begin{figure}[htbp] 
-		\includegraphics[height=2.2in]{figures/AlexNet-R1.pdf} 
-		\caption{AlexNet-R performance comparison on CPU platform with a mini-batch size of 1024.(The lower the better.)}
+		\includegraphics[width=\linewidth]{figures/AlexNet-R1.pdf} 
+		\caption{AlexNet-R performance comparison on CPU platform with a mini-batch size of 1024 (The lower the better)}
 	\end{figure}
 \end{frame}
 
@@ -126,10 +126,10 @@
 
 \begin{frame}
 	\MyLogo
-	\frametitle{CPU Scalability: RNN}  
+	\frametitle{CPU Scalability: LSTM}  
 	\begin{figure}[htbp] 
-		\includegraphics[height=2.2in]{figures/LSTM1.pdf} 
-		\caption{LSTM performance comparison on CPU platform with a mini-batch size of 256.(The lower the better.)}
+		\includegraphics[width=\linewidth]{figures/LSTM1.pdf} 
+		\caption{LSTM performance comparison on CPU platform with a mini-batch size of 256 (The lower the better)}
 	\end{figure}
 \end{frame}
 
@@ -142,8 +142,21 @@
 	\frametitle{GPU Scalability: FCN Synthetic}
 
 	\begin{figure}[htbp] 
-		\includegraphics[height=1.8in]{figures/FCN-S2.pdf} 
+		\includegraphics[width=\linewidth]{figures/FCN-S2.pdf} 
 		\caption{The performance comparison of FCN-S on GPU platforms.}
+	\end{figure}
+
+\end{frame}
+
+%%%
+
+\begin{frame}
+	\MyLogo
+	\frametitle{GPU Scalability: FCN Real}
+	
+	\begin{figure}[htbp] 
+		\includegraphics[width=\linewidth]{figures/FCN-R2.pdf} 
+		\caption{The performance comparison of FCN-R on GPU platforms.}
 	\end{figure}
 
 \end{frame}
@@ -155,7 +168,7 @@
 	\frametitle{GPU Scalability: CNN Synthetic}
 
 	\begin{figure}[htbp] 
-		\includegraphics[height=1.8in]{figures/AlexNet-S2.pdf} 
+		\includegraphics[width=\linewidth]{figures/AlexNet-S2.pdf} 
 		\caption{The performance comparison of AlexNet-S on GPU platforms.}
 	\end{figure}
 
@@ -168,21 +181,8 @@
 	\frametitle{GPU Scalability: CNN Real}
 
 	\begin{figure}[htbp] 
-		\includegraphics[height=1.8in]{figures/AlexNet-R2.pdf} 
+		\includegraphics[width=\linewidth]{figures/AlexNet-R2.pdf} 
 		\caption{The performance comparison of AlexNet-R on GPU platforms.}
-	\end{figure}
-
-\end{frame}
-
-%%%
-
-\begin{frame}
-	\MyLogo
-	\frametitle{GPU Scalability: RNN Real}
-	
-	\begin{figure}[htbp] 
-		\includegraphics[height=1.8in]{figures/FCN-R2.pdf} 
-		\caption{The performance comparison of FCN-R on GPU platforms.}
 	\end{figure}
 
 \end{frame}
@@ -194,7 +194,7 @@
 	\frametitle{GPU Scalability: LSTM}
 	
 	\begin{figure}[htbp] 
-		\includegraphics[height=2.0in]{figures/LSTM2.pdf} 
+		\includegraphics[width=\linewidth]{figures/LSTM2.pdf} 
 		\caption{The performance comparison of LSTM on GPU platforms.}
 	\end{figure}
 	
