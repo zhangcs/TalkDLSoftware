@@ -1,6 +1,6 @@
 %!TEX root = ../talk.tex
 
-\section{MxNET}\label{sec:MxNet}
+\section{MXNet}\label{sec:MxNet}
 
 %%%
 
@@ -56,11 +56,9 @@
 
 \begin{frame}[fragile]
   \MyLogo
-  \frametitle{Example 1: SoftMax}  
+  \frametitle{Example: SoftMax in MXNet}  
 
-\scriptsize{
 \begin{lstlisting}[language=python]
-
 import mxnet
 import mxnet.symbol as sym
 import numpy as np
@@ -84,12 +82,13 @@ softmax = function(softmax_symbol, [('x', x_shape),
 # MXNet's softmax operator does not use one-of-many label format
 softmax_label = np.argmax(label, axis=1)
 \end{lstlisting}
-}
+
 \end{frame}
 
 \begin{frame}[fragile]
   \MyLogo
-  \frametitle{Example 1: SoftMax}  
+  \frametitle{Example: SoftMax in MXNet}  
+
 \ContinueLineNumber
 \scriptsize{
 \begin{lstlisting}[language=python]
