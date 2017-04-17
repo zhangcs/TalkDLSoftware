@@ -6,11 +6,19 @@
 
 \frameinlbffalse
 
+{
+\usebackgroundtemplate{
+\tikz[overlay,remember picture] \node[opacity=0.8, xshift=-3.5cm, at=(current page.east)] {
+\includegraphics[width=0.35\paperwidth]{figures/torch_logo.png}
+};}
+
 \begin{frame}[plain]
 \frametitle{\S\ref{sec:Torch}. \insertsection}
 \listofframes
 \end{frame}
 \addtocounter{framenumber}{-1} % this page does not count
+
+}
 
 \frameinlbftrue
 

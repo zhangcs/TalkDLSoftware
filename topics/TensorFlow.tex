@@ -60,18 +60,21 @@ import tensorflow as tf
 graph = tf.Graph()
 
 with graph.as_default():
+	# Define two constants
 	a = tf.constant(1.0)
-	tf.summary.scalar('aa', a)
 	b = tf.constant(2.0)
-	tf.summary.scalar('bb', b)
+
+	# Define an operation node: c = a * b
 	c = tf.multiply(a, b)
+	# Add scalar summary to operation node
 	tf.summary.scalar('c', c)
 	
+	# Merge all the summaries and write to ./board
 	merged = tf.summary.merge_all()
 	writer = tf.summary.FileWriter('./board', graph)
 
 with tf.Session(graph=graph):
-	tf.global_variables_initializer().run()
+	# Write data to ./board
 	writer.add_summary(merged.eval())
 	
 \end{lstlisting}

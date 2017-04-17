@@ -1,22 +1,29 @@
 \MyLogo
-  \frametitle{Example: SoftMax in MXNet}
+  \frametitle{Example: Extend Layers (Cont)}
 
 \ContinueLineNumber
-\scriptsize{
 \begin{lstlisting}[language=python]
-# Initialize weight matrix (again)
-weight = random.randn(num_features, num_classes)
-
-# Calculate gradient function automatically
-grad_function = grad_and_loss(train_loss)
-
-# Now training it for 100 iterations
-start_time = time.time()
-for i in range(100):
-    dw, loss = grad_function(weight, data)
-    if i % 10 == 0:
-        print 'Iter {}, training loss {}'.format(i, loss)
-    weight -= 0.1 * dw
-print 'Training time: {}s'.format(time.time() - start_time)
+			bottom[i].diff[...] = sign.self.diff / bottom[1].num
 \end{lstlisting}
+
+\medskip
+
+\structure{Define a class in Python to extend Layer}
+\begin{lstlisting}[language=python]
+layer{
+	type: "Python"
+	python_param {
+		module: "laylers"
+		layer: "EuclideanLoss"
+	}
 }
+\end{lstlisting}
+
+\vskip 110pt
+
+\tiny
+\begin{center}
+{
+\color{red}https://docs.google.com/presentation/d/1UeKXVgRvvxg9OUdh\_UiC5G71UMscNPlvArsWER41PsU/edit\#slide=id.gc2fcdcce7\_216\_0
+}
+\end{center}
