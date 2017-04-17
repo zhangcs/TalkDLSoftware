@@ -182,14 +182,16 @@ with tf.Session(graph=graph) as sess:
 	
 	for step in range(1000):
 		if (step%10) == 0:
+			# Feed test data to compute accuarcy
 			feed = {x: mnist.test.images, y_: mnist.test.labels}
 			_, acc = sess.run([merged, accuracy], feed_dict=feed)
 			print('Accuracy at %s step: %s' % (step, acc))
 		else:
+			# Feed training data to train the model
 			batch_x, batch_y = mnist.train.next_batch(100)
 			sess.run(train_step, feed_dict={x: batch_x, y_: batch_y})
-			writer.add_summary(merged.eval(feed_dict={x: batch_x,
-									 y_: batch_y}), global_step=step)
+			writer.add_summary(merged.eval(feed_dict={x:batch_x, y_:batch}),
+							   global_step=step)
 \end{lstlisting}
 }
 
