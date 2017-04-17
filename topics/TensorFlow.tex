@@ -173,8 +173,9 @@ with graph.as_default():
 		correct_prediction = tf.equal(tf.argmax(y,1), tf.argmax(y_,1))
 		accuracy = tf.reduce_mean(tf.cast(correct_prediction, "float"))
 		tf.summary.scalar('Accuracy', accuracy)
-	merged = tf.summary.merge_all() ###???
-	writer = tf.summary.FileWriter('./board', graph)  ###???
+	# Merge all the summaries and write to ./board
+	merged = tf.summary.merge_all()
+	writer = tf.summary.FileWriter('./board', graph)
 	
 with tf.Session(graph=graph) as sess:
 	# Initialize all variables
