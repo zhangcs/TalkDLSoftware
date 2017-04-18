@@ -6,11 +6,19 @@
 
 \frameinlbffalse
 
+{
+\usebackgroundtemplate{
+\tikz[overlay,remember picture] \node[opacity=0.4, at=(current page.center)] {
+\includegraphics[width=1.15\paperwidth,height=0.675\paperwidth]{figures/tpu.jpg}
+};}
+
 \begin{frame}[plain]
 \frametitle{\S\ref{sec:numer}. \insertsection}
 \listofframes
 \end{frame}
 \addtocounter{framenumber}{-1} % this page does not count
+
+}
 
 \frameinlbftrue
 

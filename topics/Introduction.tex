@@ -6,11 +6,19 @@
 
 \frameinlbffalse
 
+{
+\usebackgroundtemplate{
+\tikz[overlay,remember picture] \node[opacity=0.5, xshift=2.5cm, at=(current page.center)] {
+\includegraphics[width=0.65\paperwidth]{figures/deep-learning-brain.png}
+};}
+
 \begin{frame}[plain]
 \frametitle{\S\ref{sec:intro}. \insertsection}
 \listofframes
 \end{frame}
 \addtocounter{framenumber}{-1} % this page does not count
+
+}
 
 \frameinlbftrue
 
@@ -265,7 +273,7 @@ Viewpoint &Torch       &Caffe  & TensorFlow & MXNet  \\ \hline
 &\multirow{2}{5em}{Declarative \\ Imperative} \\  
 &   &    & &      \\ \hline
 \multirow{2}{3.5em} {GitHub \\ Watching}    
-& \multirow{2}{5.em}{649}      
+& \multirow{2}{5.em}{649/268}      
 &\multirow{2}{5.em}{1856}
 &\multirow{2}{5.em}{4939} 
 &\multirow{2}{5em}{887} \\  
