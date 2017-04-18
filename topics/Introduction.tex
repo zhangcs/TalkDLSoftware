@@ -8,8 +8,8 @@
 
 {
 \usebackgroundtemplate{
-\tikz[overlay,remember picture] \node[opacity=0.5, xshift=2.5cm, at=(current page.center)] {
-\includegraphics[width=0.65\paperwidth]{figures/deep-learning-brain.png}
+\tikz[overlay,remember picture] \node[opacity=0.25, xshift=2.3cm, at=(current page.center)] {
+\includegraphics[width=0.65\paperwidth]{figures/genericDNN.png}
 };}
 
 \begin{frame}[plain]
@@ -165,24 +165,17 @@ https://www.slideshare.net/0xdata/transform-your-business-with-ai-deep-learning-
   \frametitle{Popular Packages: Basic Information}  
 \small
 
-\vskip -5pt
 \renewcommand{\multirowsetup}{\centering} 
 \begin{table}[htdp]
 \begin{center}
 \begin{tabular}{|c|c|c|c|c|c|} \hline
 \rowcolor{GreenYellow}
 Viewpoint &Torch       &Caffe   & TensorFlow  & MXNet \\ \hline
- Started      & 2002      &2013               &2015                & 2015                    \\ \hline
+Released      & 2002      &2013               &2015                & 2015                    \\ \hline
  \multirow{3}{4em}{Main \\ Developers}
  & Facebook,        &\multirow{3}{5em}{BAIR}  &\multirow{3}{3em}{Google} &\multirow{3}{*}{DMLC}   \\ 
  &Twitter,            & & &    \\
  &Google, ...       & & &  \\ \hline 
- \multirow{2}{4em}{ License }     
-& \multirow{2}{3em}{BSD}      
-&\multirow{2}{4em}{BSD}
-&\multirow{2}{4em}{Apache}
-&\multirow{2}{6em}{Apache}  \\ 
-&   &    & &      \\ \hline
 \multirow{2}{4em}{ Core \\ Languages}     
 & \multirow{2}{3em}{ C/Lua }      
 &\multirow{2}{4em}{ C++}
@@ -195,6 +188,12 @@ Viewpoint &Torch       &Caffe   & TensorFlow  & MXNet \\ \hline
 &\multirow{2}{5.5em}{ C++/\alert{Python} \\ \alert{R}/Java/Go}  
 &\multirow{2}{5.5em}{ C++/\alert{Python} \\ \alert{R}/Julia/Matlab}\\  
 &   &    & &      \\ \hline           
+ \multirow{2}{4em}{ License }     
+& \multirow{2}{3em}{BSD}      
+&\multirow{2}{4em}{BSD}
+&\multirow{2}{4em}{Apache}
+&\multirow{2}{6em}{Apache}  \\ 
+&   &    & &      \\ \hline
 \end{tabular}
 \end{center}
 \label{default}
@@ -223,7 +222,6 @@ http://blog.revolutionanalytics.com/2016/08/deep-learning-part-1.html
   \frametitle{Popular Packages: Performance}  
 \small
 
-\vskip -5pt
 \renewcommand{\multirowsetup}{\centering} 
 \begin{table}[htdp]
 \begin{center}
