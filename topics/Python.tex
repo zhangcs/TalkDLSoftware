@@ -1,0 +1,220 @@
+%!TEX root = ../talk.tex
+
+\section{Python}\label{sec:python}
+
+%%%
+
+\frameinlbffalse
+
+{
+\usebackgroundtemplate{
+\tikz[overlay,remember picture] \node[opacity=0.8, xshift=-3cm, at=(current page.east)] {
+\includegraphics[width=0.25\paperwidth]{figures/python_logo.jpg}
+};}
+
+\begin{frame}[plain]
+\frametitle{\S\ref{sec:python}. \insertsection}
+\listofframes
+\end{frame}
+\addtocounter{framenumber}{-1} % this page does not count
+
+}
+
+\frameinlbftrue
+
+
+%%%
+\subsection{A short introduction on Python}
+%%%
+
+\begin{frame}
+  \MyLogo
+  \frametitle{Python: A general-purpose programming language}  
+
+\small 
+
+\begin{itemize}
+
+\item Created by Guido van Rossum in 1989 and first released in 1991
+
+\item Named after ``the Monty Python'' (British comedy group)
+
+\item An interpreted language---simple, clear, and readable 
+
+\item Python has many excellent packages for machine learning
+
+\item The language of choice in introductory programming courses
+
+\end{itemize}
+
+\begin{figure}[htbp] %  figure placement: here, top, bottom, or page
+   \includegraphics[height=1.7in]{figures/ComputerLanguagesDemand.jpg} 
+   \includegraphics[height=1.7in]{figures/ComputerLanguagesShare.jpg} 
+\end{figure}
+
+\end{frame}
+
+%%%
+
+\begin{frame}
+  \MyLogo
+  \frametitle{Python for Scientific Computing}  
+
+\small
+\smallskip
+\structure{Why Python for scientific computing?}
+\begin{itemize}
+	\item Dynamic data types and automatic memory management
+	\item Full modularity, supporting hierarchical packages
+	\item Strong introspection capabilities\footnote[frame]{\scriptsize\color{PineGreen}Code introspection is the ability to examine classes, functions and keywords to know what they are, what they do and what they know. Python provides several functions and utilities for code introspection, like dir(), help(), type().}
+	\item Exception-based error handling
+\end{itemize}
+
+\structure{Why consider such a slow language for simulation?}
+\begin{itemize}
+	\item Good for proof-of-concept prototyping
+	\item Implementation time versus execution time
+	\item Code readability and maintenance --- short code, fewer bugs
+	\item Well-written Python code is ``fast enough'' for most computational tasks
+	\item Time critical parts executed through compiled language or \alert{available packages}
+\end{itemize}
+
+\end{frame}
+
+%%%
+\subsection{Basic language components}
+%%%
+
+\begin{frame}[fragile]
+  \MyLogo
+  \frametitle{Built-in Data Structures}  
+\small
+
+\smallskip
+\structure{Numeric types: int, float, complex}
+\begin{lstlisting}%[language=python]
+a=1	# int
+b=1L 	# long int
+c=0xf	# int (hex format)
+d=010	# int (octal format)
+e=1.0	# float
+f=1+2j	# complex
+\end{lstlisting}
+
+\structure{Sequence types: list, tuple, str, dict}
+\begin{lstlisting}[language=python]
+t=(3.14, True, 'Yes', [1], (0xf,))                # tuple example
+l=[3.14, True, 'Yes', [1], (1L, 0xf)] + [None]*3  # list example
+s='Hello' + ", " + 'world!'                       # str example 1
+s=("Hello, " "world!")                            # str example 2
+d={1: 'int', 'pi': 3.14}                          # dict example
+s="Python"; s.find('thon')                        # find substring
+\end{lstlisting}
+
+\structure{Formatted output}
+\begin{lstlisting}[language=python]
+print('%(lang)s has %(num)02d quote types.' %{"lang":"Python", "num":3})
+\end{lstlisting}
+
+\structure{User defined functions}
+\begin{lstlisting}[language=python]
+def square(x):
+	return x*x
+\end{lstlisting}
+
+\end{frame}
+
+%%%
+
+\begin{frame}[fragile]
+  \MyLogo
+  \frametitle{Control Flow}  
+\small
+
+\medskip
+\structure{If-then-else}
+\begin{lstlisting}[language=python]
+a = 1
+if a > 0:
+	print "a is positive"
+elif a=0:
+	print "a is zero"
+else:
+	print "a is negative"
+\end{lstlisting}			
+
+\structure{For loop}
+\begin{lstlisting}[language=python]
+for i in range(10):
+	print i
+\end{lstlisting}	
+	
+\structure{While loop}
+\begin{lstlisting}[language=python]
+sum = 0; i = 0
+while i < 10:
+	sum += i
+	i += 1
+\end{lstlisting}
+
+\end{frame}
+
+%%%
+
+\begin{frame}[fragile]
+  \MyLogo
+  \frametitle{Modules}  
+\small		
+
+\begin{enumerate}
+\item This way will only introduce the name `math' into the name space in which the import command was issued. The names within the math module will not appear in the enclosing namespace: they must be accessed through the name math. For example: math.sin(3.14).
+\begin{lstlisting}[language=python]
+import math
+\end{lstlisting}
+
+\item This way does not introduce the name math into the current namespace. It does however introduce all public names of the math module into the current namespace, directly using: sin(3.14)
+\begin{lstlisting}[language=python]
+from math import *
+\end{lstlisting}
+
+\item This will only import the sin function from math module and introduce the name sin into the current namespace, but it will not introduce the name math into the current namespace, directly using: sin(3.14)
+\begin{lstlisting}[language=python]
+from math import sin
+\end{lstlisting}
+
+\end{enumerate}
+
+\end{frame}
+
+%%%
+
+\begin{frame}[fragile]
+	\MyLogo
+	\frametitle{Additional Comments}  
+	\small
+	
+\begin{enumerate}
+
+\item In Python, everything (including functions, modules, and files) are objects. A variable is created through assignment:
+\begin{lstlisting}[language=python] 
+x = y = z = 0.1
+\end{lstlisting}
+		
+\item When objects are passed to a function, Python always passes (the value of) the reference to the object to the function.
+		
+\item $\mathbf{help()}$ is a function which gives information about the object. For example, $\mathbf{help('modules')}$ will generate a list of all modules which can be imported into the current interpreter.
+		
+\item Some useful and important packages
+	\begin{itemize}
+	\item NumPy: for scientific computing
+	\item Matplotlib/Pylab: for visualising data
+	\item SciPy: providing lots of numerical algorithms
+	\item SymPy: for symbolic mathematics
+	\end{itemize}
+		
+\end{enumerate}
+
+\centering{\color{red}\scriptsize
+\url{http://www.pythontutor.com}}
+
+\end{frame}
