@@ -87,37 +87,6 @@
 
 \begin{frame}[fragile]
   \MyLogo
-  \frametitle{Modules}  
-\small		
-
-\medskip
-\structure{Using modules}
-
-\begin{enumerate}
-\item This way will only introduce the name `math' into the name space in which the import command was issued. The names within the math module will not appear in the enclosing namespace: they must be accessed through the name math. For example: math.sin(3.14).
-\begin{lstlisting}[language=python]
-import math
-\end{lstlisting}
-
-
-\item This way does not introduce the name math into the current namespace. It does however introduce all public names of the math module into the current namespace, directly using: sin(3.14)
-\begin{lstlisting}[language=python]
-from math import *
-\end{lstlisting}
-
-\item This will only import the sin function from math module and introduce the name sin into the current namespace, but it will not introduce the name math into the current namespace, directly using: sin(3.14)
-\begin{lstlisting}[language=python]
-from math import sin
-\end{lstlisting}
-
-\end{enumerate}
-
-\end{frame}
-
-%%%
-
-\begin{frame}[fragile]
-  \MyLogo
   \frametitle{Built-in Data Structures}  
 \small
 
@@ -187,6 +156,33 @@ while i < 10:
 	sum += i
 	i += 1
 \end{lstlisting}
+
+\end{frame}
+
+%%%
+
+\begin{frame}[fragile]
+  \MyLogo
+  \frametitle{Modules}  
+\small		
+
+\begin{enumerate}
+\item This way will only introduce the name `math' into the name space in which the import command was issued. The names within the math module will not appear in the enclosing namespace: they must be accessed through the name math. For example: math.sin(3.14).
+\begin{lstlisting}[language=python]
+import math
+\end{lstlisting}
+
+\item This way does not introduce the name math into the current namespace. It does however introduce all public names of the math module into the current namespace, directly using: sin(3.14)
+\begin{lstlisting}[language=python]
+from math import *
+\end{lstlisting}
+
+\item This will only import the sin function from math module and introduce the name sin into the current namespace, but it will not introduce the name math into the current namespace, directly using: sin(3.14)
+\begin{lstlisting}[language=python]
+from math import sin
+\end{lstlisting}
+
+\end{enumerate}
 
 \end{frame}
 
