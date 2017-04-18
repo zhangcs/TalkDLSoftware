@@ -1,0 +1,29 @@
+\MyLogo
+  \frametitle{Example: Extend Layers (Cont)}
+
+\ContinueLineNumber
+\begin{lstlisting}[language=python]
+			bottom[i].diff[...] = sign.self.diff / bottom[1].num
+\end{lstlisting}
+
+\medskip
+
+\structure{Define a class in Python to extend Layer}
+\begin{lstlisting}[language=python]
+layer{
+	type: "Python"
+	python_param {
+		module: "laylers"
+		layer: "EuclideanLoss"
+	}
+}
+\end{lstlisting}
+
+\vskip 110pt
+
+\tiny
+\begin{center}
+{
+\color{red}https://docs.google.com/presentation/d/1UeKXVgRvvxg9OUdh\_UiC5G71UMscNPlvArsWER41PsU/edit\#slide=id.gc2fcdcce7\_216\_0
+}
+\end{center}
