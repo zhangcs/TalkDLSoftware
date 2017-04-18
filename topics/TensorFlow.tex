@@ -135,6 +135,7 @@ mnist = input_data.read_data_sets("MNIST_data/", one_hot=True)
 # Create a new TensorFlow graph
 graph = tf.Graph()
 with graph.as_default():
+	# Nodes or entire subgraphs can be grouped into one visual block for tensorboard
 	with tf.name_scope('input_features'):
 		# Placeholder for input variables (None = variable dimension)
 		x = tf.placeholder(tf.float32, shape=[None, 784], name='input_x')
@@ -145,6 +146,7 @@ with graph.as_default():
 							
 	with tf.name_scope('variables'):
 		W = tf.Variable(tf.zeros([784, 10]), name='weights')
+		# Track tensor distributions over time for tensorboard
 		tf.summary.histogram('WEIGHTS', W)
 		b = tf.Variable(tf.zeros([10]), name='biases')
 		tf.summary.histogram('BIASES', b)
@@ -172,6 +174,7 @@ with graph.as_default():
 	with tf.name_scope('test'):
 		correct_prediction = tf.equal(tf.argmax(y,1), tf.argmax(y_,1))
 		accuracy = tf.reduce_mean(tf.cast(correct_prediction, "float"))
+		# Track tensor values over time for tensorboard
 		tf.summary.scalar('Accuracy', accuracy)
 	
 	# Merge all the summaries and write to ./board
