@@ -106,7 +106,7 @@ Computation graphs are powerful but complicated
 \end{frame}
 
 %%%
-\subsection{Some examples}
+\subsection{Simple examples}
 %%%
 
 \begin{frame}[fragile]
@@ -141,7 +141,7 @@ with graph.as_default():
 		tf.summary.histogram('BIASES', b)
 			
 	with tf.name_scope('use_softmax'):
-		# Apply softmax regression model to the input data and get prediction labels y
+		# Apply softmax regression model to the input data and get prediction y
 		y = tf.nn.softmax(tf.matmul(x, W) + b)
 \end{lstlisting}
 }
@@ -149,7 +149,7 @@ with graph.as_default():
 
 \begin{frame}[fragile]
   \MyLogo
-  \frametitle{Example: SoftMax in TF}  
+  \frametitle{Example: SoftMax in TF (Cont)}  
 
 \ContinueLineNumber
 \scriptsize{
@@ -157,7 +157,7 @@ with graph.as_default():
 	with tf.name_scope('train'):
 		# Compute the cross entropy of real label y_ and prediction labe y
 		cross_entropy = -tf.reduce_sum(y_*tf.log(y))
-		# Create a gradient-descent optimizer, minimizing the entropy, learning rate 0.01
+		# Create a gradient-descent optimizer with learning rate = 0.01
 		train_step = tf.train.GradientDescentOptimizer(0.01).minimize(cross_entropy)
 
 	with tf.name_scope('test'):
@@ -184,9 +184,4 @@ with tf.Session(graph=graph) as sess:
 \end{lstlisting}
 }
 
-%\end{tabular}
-
-%\end{center}
-%\label{default}
-%\end{table}%
 \end{frame}

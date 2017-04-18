@@ -21,7 +21,10 @@
 \begin{frame}
   \MyLogo
   \frametitle{Machine Learning}  
+\small
+\smallskip
 
+\structure{Why ML now?}
 \begin{itemize}
 
 \item Unlike traditional numerical simulation, ``ML gives computers the ability to learn without being explicitly programmed'' {\footnotesize\color{DarkOrchid}[Samuel 1959]}
@@ -30,17 +33,11 @@
 
 \item Related fields: data mining, computational statistics, optimization, ...
 
-\item Fourth paradigm, big data, artificial intelligence, Internet of things, deep learning, ...
+\item Fourth paradigm, big data, artificial intelligence, Internet of things, ...
 
 \end{itemize}
 
-\end{frame}
-
-%%%
-
-\begin{frame}
-  \MyLogo
-  \frametitle{General Tasks of ML}
+\structure{General Tasks of ML:}
 
 \begin{itemize}
 
@@ -48,13 +45,9 @@
 
 \item Clustering: Inputs are divided into groups. Unlike in classification, the groups are not known beforehand, making this typically an unsupervised task
 
-\item Regression: Similar to classification, but the outputs are continuous rather than discrete
+\item Regression: Similar to classification, but the outputs are continuous
 
-\item Density estimation
-
-\item Dimensionality reduction 
-
-\item ...
+\item Density estimation, dimensionality reduction, ...
 
 \end{itemize}
 
@@ -90,8 +83,8 @@
 \end{figure}
 
 \begin{center}
-	{\color{red} \scriptsize
-		A Tour of TensorFlow, by Peter Goldsborough, 2016.}
+{\color{red} \scriptsize
+Tour of TensorFlow, by Peter Goldsborough, arXiv, 2016}
 \end{center}
 
 
@@ -161,6 +154,7 @@ https://www.slideshare.net/0xdata/transform-your-business-with-ai-deep-learning-
   \MyLogo
   \frametitle{Popular Packages: Basic Information}  
 
+\vskip -5pt
 \renewcommand{\multirowsetup}{\centering} 
 \begin{table}[htdp]
 \begin{center}
@@ -187,8 +181,8 @@ Viewpoint &Torch       &Caffe   & TensorFlow  & MXNet \\ \hline
 \multirow{2}{4em} {Supported \\Interface }    
 & \multirow{2}{3em}{ Lua }      
 &\multirow{2}{5.5em}{ C++/Python \\ Matlab}
-&\multirow{2}{5.5em}{ C++/Python \\ R/Java/Go}  
-&\multirow{2}{5.5em}{ C++/Python \\ R/Julia/Scala}\\  
+&\multirow{2}{5.5em}{ C++/\alert{Python} \\ \alert{R}/Java/Go}  
+&\multirow{2}{5.5em}{ C++/\alert{Python} \\ \alert{R}/Julia/Matlab}\\  
 &   &    & &      \\ \hline           
 \end{tabular}
 \end{center}
@@ -202,6 +196,12 @@ Viewpoint &Torch       &Caffe   & TensorFlow  & MXNet \\ \hline
 \item DMLC, Distributed (Deep) Machine Learning Community, supported by Amazon, Intel, Microsoft, nVidia, Baidu, ...
 \end{itemize}
 }
+
+\begin{center}
+{\color{red}\scriptsize
+http://blog.revolutionanalytics.com/2016/08/deep-learning-part-1.html
+}
+\end{center}
 
 \end{frame}
 
@@ -253,15 +253,15 @@ Viewpoint &Torch       &Caffe  & TensorFlow & MXNet  \\ \hline
 &\multirow{2}{5.em}{Multi-GPU} 
 &\multirow{2}{5em}{Distributed} \\  
 &   &    & &      \\ \hline            
+\multirow{2}{3.5em} {Coding Style}    
+& \multirow{2}{5.em}{Declarative}      
+&\multirow{2}{5.em}{Declarative}
+&\multirow{2}{5.em}{Declarative} 
+&\multirow{2}{5em}{Declarative \\ Implicative} \\  
+&   &    & &      \\ \hline            
 \end{tabular}
 \end{center}
 \label{default}
 \end{table}%
-
-\begin{center}
-{\color{red}\scriptsize
-http://blog.revolutionanalytics.com/2016/08/deep-learning-part-1.html
-}
-\end{center}
 
 \end{frame}

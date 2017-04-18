@@ -40,125 +40,8 @@
 \end{frame}
 
 %%%
-\subsection{Some examples}
+\subsection{Simple examples}
 %%%
-
-\begin{frame}[fragile]
-\MyLogo
-\frametitle{Example: Linear Regression}  
-\scriptsize{
-\begin{lstlisting}[language=python]
-require 'torch'
-require 'optim'
-require 'nn'
-
-# write the loss to a text file and read from there to plot it as training proceeds
-logger = optim.Logger('loss_log.txt')
-
-# input data 
-data = torch.Tensor{{40,  6,  4},{44, 10,  4},{46, 12,  5},
-{48, 14,  7},{52, 16,  9},{58, 18, 12},{60, 22, 14},
-{68, 24, 20},{74, 26, 21},{80, 32, 24}}
-
-# define the container
-model = nn.Sequential()                 
-ninputs = 2; noutputs = 1
-
-# define the only module
-model:add(nn.Linear(ninputs, noutputs)) 
-
-# Define a loss function
-criterion = nn.MSECriterion()
-
-# retrieve its trainable parameters
-x, dl_dx = model:getParameters()
-
-# compute loss function and its gradient 
-feval = function(x_new)
-   # set x to x_new, if differnt
-   if x ~= x_new then
-      x:copy(x_new)
-   end
-\end{lstlisting}
-}
-\end{frame}
-
-\begin{frame}[fragile]
-\MyLogo
-\frametitle{Example: Linear Regression}  
-\ContinueLineNumber
-\scriptsize{
-\begin{lstlisting}[language=python]
-   # select a new training sample
-   _nidx_ = (_nidx_ or 0) + 1
-   if _nidx_ > (#data)[1] then _nidx_ = 1 end
-
-   local sample = data[_nidx_]
-   local target = sample[{ {1} }]    
-   local inputs = sample[{ {2,3} }] 
-
-   # reset gradients
-   dl_dx:zero()
- 
-   # evaluate the loss function and its derivative wrt x
-   local loss_x = criterion:forward(model:forward(inputs), target)
-   model:backward(inputs, criterion:backward(model.output, target))
-
-   # return loss(x) and dloss/dx
-   return loss_x, dl_dx
-end
-
-# define SGD 
-sgd_params = {
-   learningRate = 1e-3,
-   learningRateDecay = 1e-4,
-   weightDecay = 0,
-   momentum = 0
-}
-
-# we cycle 10,000 times over our training data
-for i = 1,1e4 do
-   #this variable is used to estimate the average loss
-   current_loss = 0
-\end{lstlisting}
-}
-\end{frame}
-
-\begin{frame}[fragile]
-\MyLogo
-\frametitle{Example: Linear Regression}  
-\ContinueLineNumber
-\scriptsize{
-\begin{lstlisting}[language=python]
-   #an epoch is a full loop over our training data
-   for i = 1,(#data)[1] do
-      # return new x and value of the loss functions
-      _,fs = optim.sgd(feval,x,sgd_params)
-      # update loss       
-      current_loss = current_loss + fs[1]
-   end      
-   
-   # report average error on epoch
-   current_loss = current_loss / (#data)[1]
-   print('current loss = ' .. current_loss)
-   
-   logger:add{['training error'] = current_loss}
-   logger:style{['training error'] = '-'}
-   logger:plot()  
-end
-
-# Test the trained model
-text = {40.32, 42.92, 45.33, 48.85, 52.37, 57, 61.82, 69.78, 72.19, 79.42}
-
-for i = 1,(#data)[1] do
-   local myPrediction = model:forward(data[i][{{2,3}}])
-   print(string.format("%2d %6.2f %6.2f", i, myPrediction[1], text[i]))
-end
-\end{lstlisting}
-}
-
-\vskip 50pt
-\end{frame}
 
 \begin{frame}[fragile]
 \MyLogo
@@ -200,7 +83,7 @@ for t in range(500):
 
 \begin{frame}[fragile]
 \MyLogo
-\frametitle{Example: Two-Layer Network}  
+\frametitle{Example: Two-Layer Network (Cont)}  
 
 \ContinueLineNumber
 \begin{lstlisting}[language=python]         
@@ -222,4 +105,123 @@ https://github.com/jcjohnson/pytorch-examples
 }
 \end{center}
 
+\end{frame}
+
+%%%
+
+\begin{frame}[fragile]
+\MyLogo
+\frametitle{Example: Linear Regression in Lua}  
+\scriptsize{
+\begin{lstlisting}[language=python]
+require 'torch'
+require 'optim'
+require 'nn'
+
+# write the loss to a text file and read from there to plot it as training proceeds
+logger = optim.Logger('loss_log.txt')
+
+# input data 
+data = torch.Tensor{{40,  6,  4},{44, 10,  4},{46, 12,  5},
+{48, 14,  7},{52, 16,  9},{58, 18, 12},{60, 22, 14},
+{68, 24, 20},{74, 26, 21},{80, 32, 24}}
+
+# define the container
+model = nn.Sequential()                 
+ninputs = 2; noutputs = 1
+
+# define the only module
+model:add(nn.Linear(ninputs, noutputs)) 
+
+# Define a loss function
+criterion = nn.MSECriterion()
+
+# retrieve its trainable parameters
+x, dl_dx = model:getParameters()
+
+# compute loss function and its gradient 
+feval = function(x_new)
+   # set x to x_new, if differnt
+   if x ~= x_new then
+      x:copy(x_new)
+   end
+\end{lstlisting}
+}
+\end{frame}
+
+\begin{frame}[fragile]
+\MyLogo
+\frametitle{Example: Linear Regression in Lua (Cont)}  
+\ContinueLineNumber
+\scriptsize{
+\begin{lstlisting}[language=python]
+   # select a new training sample
+   _nidx_ = (_nidx_ or 0) + 1
+   if _nidx_ > (#data)[1] then _nidx_ = 1 end
+
+   local sample = data[_nidx_]
+   local target = sample[{ {1} }]    
+   local inputs = sample[{ {2,3} }] 
+
+   # reset gradients
+   dl_dx:zero()
+ 
+   # evaluate the loss function and its derivative wrt x
+   local loss_x = criterion:forward(model:forward(inputs), target)
+   model:backward(inputs, criterion:backward(model.output, target))
+
+   # return loss(x) and dloss/dx
+   return loss_x, dl_dx
+end
+
+# define SGD 
+sgd_params = {
+   learningRate = 1e-3,
+   learningRateDecay = 1e-4,
+   weightDecay = 0,
+   momentum = 0
+}
+
+# we cycle 10,000 times over our training data
+for i = 1,1e4 do
+   #this variable is used to estimate the average loss
+   current_loss = 0
+\end{lstlisting}
+}
+\end{frame}
+
+\begin{frame}[fragile]
+\MyLogo
+\frametitle{Example: Linear Regression in Lua (Cont)}  
+\ContinueLineNumber
+\scriptsize{
+\begin{lstlisting}[language=python]
+   #an epoch is a full loop over our training data
+   for i = 1,(#data)[1] do
+      # return new x and value of the loss functions
+      _,fs = optim.sgd(feval,x,sgd_params)
+      # update loss       
+      current_loss = current_loss + fs[1]
+   end      
+   
+   # report average error on epoch
+   current_loss = current_loss / (#data)[1]
+   print('current loss = ' .. current_loss)
+   
+   logger:add{['training error'] = current_loss}
+   logger:style{['training error'] = '-'}
+   logger:plot()  
+end
+
+# Test the trained model
+text = {40.32, 42.92, 45.33, 48.85, 52.37, 57, 61.82, 69.78, 72.19, 79.42}
+
+for i = 1,(#data)[1] do
+   local myPrediction = model:forward(data[i][{{2,3}}])
+   print(string.format("%2d %6.2f %6.2f", i, myPrediction[1], text[i]))
+end
+\end{lstlisting}
+}
+
+\vskip 50pt
 \end{frame}

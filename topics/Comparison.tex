@@ -1,6 +1,6 @@
 %!TEX root = ../talk.tex
 
-\section{Comparisons}\label{sec:numer}
+\section{Comparison}\label{sec:numer}
 
 %%%
 
@@ -23,6 +23,8 @@
 	\MyLogo
 	\frametitle{Hardware Platforms}  
 
+\smallskip 
+
 \begin{itemize}
 
 \item Use one quad-core desktop CPU (i.e., Intel i7-3820 CPU
@@ -35,13 +37,13 @@
 	\end{itemize}
 	
 \begin{figure}[htbp] 
-	\includegraphics[height=1.2in]{figures/platforms.pdf} 
-	\caption{The experimental hardware setting for data parallelization}
+	\includegraphics[height=1.1in]{figures/platforms.pdf} 
+	\caption{The experimental hardware settings for numerical tests}
 \end{figure}
 	
 \begin{center}
-	{\color{red} \scriptsize
-		Benchmarking State-of-the-Art Deep Learning Software Tools, by Shaohuai Shi, et al., 2017}
+{\color{red} \scriptsize
+Benchmarking State-of-the-Art Deep Learning Software Tools, by S.-H. Shi, et al., arXiv, 2017}
 \end{center}
 
 \end{frame}
@@ -126,7 +128,7 @@
 
 \begin{frame}
 	\MyLogo
-	\frametitle{CPU Scalability: LSTM}  
+	\frametitle{CPU Scalability: RNN LSTM}  
 	\begin{figure}[htbp] 
 		\includegraphics[width=\linewidth]{figures/LSTM1.pdf} 
 		\caption{LSTM performance comparison on CPU platform with a mini-batch size of 256 (The lower the better)}
@@ -143,7 +145,7 @@
 
 	\begin{figure}[htbp] 
 		\includegraphics[width=\linewidth]{figures/FCN-S2.pdf} 
-		\caption{The performance comparison of FCN-S on GPU platforms.}
+		\caption{The performance comparison of FCN-S on GPU platforms}
 	\end{figure}
 
 \end{frame}
@@ -156,7 +158,7 @@
 	
 	\begin{figure}[htbp] 
 		\includegraphics[width=\linewidth]{figures/FCN-R2.pdf} 
-		\caption{The performance comparison of FCN-R on GPU platforms.}
+		\caption{The performance comparison of FCN-R on GPU platforms}
 	\end{figure}
 
 \end{frame}
@@ -169,7 +171,7 @@
 
 	\begin{figure}[htbp] 
 		\includegraphics[width=\linewidth]{figures/AlexNet-S2.pdf} 
-		\caption{The performance comparison of AlexNet-S on GPU platforms.}
+		\caption{The performance comparison of AlexNet-S on GPU platforms}
 	\end{figure}
 
 \end{frame}
@@ -182,7 +184,7 @@
 
 	\begin{figure}[htbp] 
 		\includegraphics[width=\linewidth]{figures/AlexNet-R2.pdf} 
-		\caption{The performance comparison of AlexNet-R on GPU platforms.}
+		\caption{The performance comparison of AlexNet-R on GPU platforms}
 	\end{figure}
 
 \end{frame}
@@ -191,11 +193,11 @@
 
 \begin{frame}
 	\MyLogo
-	\frametitle{GPU Scalability: LSTM}
+	\frametitle{GPU Scalability: RNN LSTM}
 	
 	\begin{figure}[htbp] 
 		\includegraphics[width=\linewidth]{figures/LSTM2.pdf} 
-		\caption{The performance comparison of LSTM on GPU platforms.}
+		\caption{The performance comparison of LSTM on GPU platforms}
 	\end{figure}
 	
 \end{frame}

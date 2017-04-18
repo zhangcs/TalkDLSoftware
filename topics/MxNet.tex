@@ -51,7 +51,7 @@
 \end{frame}
 
 %%%
-\subsection{Some examples}
+\subsection{Simple examples}
 %%%
 
 \begin{frame}[fragile]
@@ -71,12 +71,11 @@ from minpy.core import grad_and_loss
 x_shape = (num_samples, num_classes)
 label_shape = (num_samplesm,)
 softmax_symbol = sym.SoftmaxOutput(data=sym.Variable('x'), 
-                   name='softmax', grad_scale=1.0/num_samples)
+                                   name='softmax', grad_scale=1.0/num_samples)
 
 # convert MXNet symbol into a callable function 
 # corresponding gradient function
-softmax = function(softmax_symbol, [('x', x_shape), 
-                 ('softmax_label', label_shape)])
+softmax = function(softmax_symbol, [('x', x_shape), ('softmax_label', label_shape)])
 
 # make softmax_label; 
 # MXNet's softmax operator does not use one-of-many label format
@@ -94,7 +93,7 @@ def train_loss(w, x):
 
 \begin{frame}[fragile]
   \MyLogo
-  \frametitle{Example: SoftMax in MXNet}  
+  \frametitle{Example: SoftMax in MXNet (Cont)}  
 
 \ContinueLineNumber
 \scriptsize{
