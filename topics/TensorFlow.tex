@@ -124,7 +124,6 @@ Computation graphs are powerful but complicated
   \MyLogo
   \frametitle{Example: SoftMax in TF}  
  
-\scriptsize{
 \begin{lstlisting}[language=python]
 import tensorflow as tf
 
@@ -155,7 +154,7 @@ with graph.as_default():
 		# Apply softmax regression model to the input data and get prediction y
 		y = tf.nn.softmax(tf.matmul(x, W) + b)
 \end{lstlisting}
-}
+
 \end{frame}
 
 \begin{frame}[fragile]
@@ -163,7 +162,6 @@ with graph.as_default():
   \frametitle{Example: SoftMax in TF (Cont)}  
 
 \ContinueLineNumber
-\scriptsize{
 \begin{lstlisting}[language=python]
 	with tf.name_scope('train'):
 		# Compute the cross entropy of real label y_ and prediction labe y
@@ -198,6 +196,5 @@ with tf.Session(graph=graph) as sess:
 			writer.add_summary(merged.eval(feed_dict={x:batch_x, y_:batch}),
 							   global_step=step)
 \end{lstlisting}
-}
 
 \end{frame}
