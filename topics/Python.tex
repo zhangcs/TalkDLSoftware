@@ -116,7 +116,8 @@ s="Python"; s.find('thon')                        # find substring
 print('%(lang)s has %(num)02d quote types.' %{"lang":"Python", "num":3})
 \end{lstlisting}
 
-\structure{User defined functions}
+\structure{User defined functions}\footnote[frame]{\scriptsize\color{PineGreen}Function overhead is high. Not to call a function repeatedly; Using aggregation instead.}\footnote[frame]{\scriptsize\color{PineGreen}Python always passes (the value of) the reference to the object to the function.}
+
 \begin{lstlisting}[language=python]
 def square(x):
 	return x*x
@@ -145,8 +146,12 @@ else:
 
 \structure{For loop}
 \begin{lstlisting}[language=python]
+# loop from 0 to 9
 for i in range(10):
 	print i
+	
+# loop over the list named by oldlist
+newlist = [s.upper() for s in oldlist]
 \end{lstlisting}	
 	
 \structure{While loop}
@@ -166,23 +171,26 @@ while i < 10:
   \frametitle{Modules}  
 \small		
 
-\begin{enumerate}
-\item This way will only introduce the name `math' into the name space in which the import command was issued. The names within the math module will not appear in the enclosing namespace: they must be accessed through the name math. For example: math.sin(3.14).
-\begin{lstlisting}[language=python]
+\begin{itemize}
+\item This way will only introduce the name `math' into the name space in which the import command was issued. The names within the math module will not appear in the enclosing namespace: they must be accessed through the name math.
+\begin{lstlisting}[language=python,numbers=none] 
 import math
+math.sin(3.14)
 \end{lstlisting}
 
-\item This way does not introduce the name math into the current namespace. It does however introduce all public names of the math module into the current namespace, directly using: sin(3.14)
-\begin{lstlisting}[language=python]
+\item This way does not introduce the name math into the current namespace. It does  introduce all public names of the math module into the current namespace.\begin{lstlisting}[language=python,numbers=none] 
 from math import *
+sin(3.14)
 \end{lstlisting}
 
-\item This will only import the sin function from math module and introduce the name sin into the current namespace, but it will not introduce the name math into the current namespace, directly using: sin(3.14)
-\begin{lstlisting}[language=python]
+\item This will only import the sin function from math module and introduce the name sin into the current namespace, but it will not introduce the name math into the current namespace, directly use
+\begin{lstlisting}[language=python,numbers=none] 
 from math import sin
+sin(3.14)
 \end{lstlisting}
 
-\end{enumerate}
+\item Make it as local as possible to avoid import overhead; But avoid calling it repeatedly; If possible, avoid it!
+\end{itemize}
 
 \end{frame}
 
@@ -196,14 +204,22 @@ from math import sin
 \begin{enumerate}
 
 \item In Python, everything (including functions, modules, and files) are objects. A variable is created through assignment:
-\begin{lstlisting}[language=python] 
+\begin{lstlisting}[language=python,numbers=none] 
 x = y = z = 0.1
 \end{lstlisting}
+				
+\item help() is a function which gives information about the object. For example, 
+\begin{lstlisting}[language=python,numbers=none] 
+help('modules')       # generate a list of all modules that can be imported
+help('modules time')  # generate a list of modules with 'time' in description
+\end{lstlisting}
 		
-\item When objects are passed to a function, Python always passes (the value of) the reference to the object to the function.
-		
-\item $\mathbf{help()}$ is a function which gives information about the object. For example, $\mathbf{help('modules')}$ will generate a list of all modules which can be imported into the current interpreter.
-		
+\item Use a profiler to find optimization possibilities
+\begin{lstlisting}[language=python,numbers=none] 
+import profile        # cProfile is now recommended
+profile.run('main()')
+\end{lstlisting}
+
 \item Some useful and important packages
 	\begin{itemize}
 	\item NumPy: for scientific computing
