@@ -62,66 +62,126 @@
 
 \begin{frame}[fragile]
   \MyLogo
-  \frametitle{Example: SoftMax in MXNet}  
+  \frametitle{Example: SVM in MXNet}  
 
 \begin{lstlisting}[language=python]
-import mxnet
-import mxnet.symbol as sym
+from __future__ import print_function
+import mxnet as mx
 import numpy as np
-import numpy.random as random
-import time
-from minpy.core import function
-from minpy.core import grad_and_loss
+from sklearn.datasets import fetch_mldata
+from sklearn.decomposition import PCA
+# import matplotlib.pyplot as plt
+import logging
 
-# define softmax symbol
-x_shape = (num_samples, num_classes)
-label_shape = (num_samplesm,)
-softmax_symbol = sym.SoftmaxOutput(data=sym.Variable('x'), 
-                                   name='softmax', grad_scale=1.0/num_samples)
+logger = logging.getLogger()
+logger.setLevel(logging.DEBUG)
 
-# convert MXNet symbol into a callable function 
-# corresponding gradient function
-softmax = function(softmax_symbol, [('x', x_shape), ('softmax_label', label_shape)])
+# Network declaration as symbols. The following pattern was based
+# on the article, but feel free to play with the number of nodes
+# and with the activation function
+data = mx.symbol.Variable('data')
+fc1  = mx.symbol.FullyConnected(data = data, name='fc1', num_hidden=512)
+act1 = mx.symbol.Activation(data = fc1, name='relu1', act_type="relu")
+fc2  = mx.symbol.FullyConnected(data = act1, name = 'fc2', num_hidden = 512)
+act2 = mx.symbol.Activation(data = fc2, name='relu2', act_type="relu")
+fc3  = mx.symbol.FullyConnected(data = act2, name='fc3', num_hidden=10)
 
-# make softmax_label; 
-# MXNet's softmax operator does not use one-of-many label format
-softmax_label = np.argmax(label, axis=1)
+# Here we add the ultimate layer based on L2-SVM objective
+mlp = mx.symbol.SVMOutput(data=fc3, name='svm')
 
-# Redefine loss function using softmax as one operator
-def train_loss(w, x):
-    y = np.dot(x, w)
-    prob = softmax(x=y, softmax_label=softmax_label)
-    loss = -np.sum(label * np.log(prob)) / num_samples
-    return loss
+# To use L1-SVM objective, comment the line above and uncomment the line below
+# mlp = mx.symbol.SVMOutput(data=fc3, name='svm', use_linear=True)
+
+# Now we fetch MNIST dataset, add some noise, as the article suggests,
+# permutate and assign the examples to be used on our network
+mnist = fetch_mldata('MNIST original')
 \end{lstlisting}
 
 \end{frame}
 
 \begin{frame}[fragile]
   \MyLogo
-  \frametitle{Example: SoftMax in MXNet (Cont)}  
+  \frametitle{Example: SVM in MXNet (Cont)}  
 
 \ContinueLineNumber
 \scriptsize{
 \begin{lstlisting}[language=python]
-# Initialize weight matrix (again)
-weight = random.randn(num_features, num_classes)
+mnist_pca = PCA(n_components=70).fit_transform(mnist.data)
+noise = np.random.normal(size=mnist_pca.shape)
+mnist_pca += noise
 
-# Calculate gradient function automatically
-grad_function = grad_and_loss(train_loss)
+# set seed for deterministic ordering
+np.random.seed(1234) 
+p = np.random.permutation(mnist_pca.shape[0])
+X = mnist_pca[p]
+Y = mnist.target[p]
+X_show = mnist.data[p]
 
-# Now training it for 100 iterations
-start_time = time.time()
-for i in range(100):
-    dw, loss = grad_function(weight, data)
-    if i % 10 == 0:
-        print 'Iter {}, training loss {}'.format(i, loss)
-    weight -= 0.1 * dw
-    
-print 'Training time: {}s'.format(time.time() - start_time)
+# This is just to normalize the input to a value inside [0,1],
+# and separate train set and test set
+X = X.astype(np.float32)/255
+X_train = X[:60000]
+X_test = X[60000:]
+X_show = X_show[60000:]
+Y_train = Y[:60000]
+Y_test = Y[60000:]
+
+# Article's suggestion on batch size
+batch_size = 200
+train_iter = mx.io.NDArrayIter(X_train, Y_train, batch_size=batch_size)
+test_iter = mx.io.NDArrayIter(X_test, Y_test, batch_size=batch_size)
+
+# A quick work around to prevent mxnet complaining the lack of a softmax_label
+train_iter.label= mx.io._init_data(Y_train,allow_empty=True,default_name='svm_label')
+test_iter.label= mx.io._init_data(Y_test,allow_empty=True,default_name='svm_label')
+
 \end{lstlisting}
 }
-
 \vskip 100pt
+
+\end{frame}
+
+\begin{frame}[fragile]
+  \MyLogo
+  \frametitle{Example: SVM in MXNet (Cont)}  
+
+\ContinueLineNumber
+\scriptsize{
+\begin{lstlisting}[language=python]
+# Here we instatiate and fit the model for our data
+# The article actually suggests using 400 epochs,
+# But I reduced to 10, for convinience
+model = mx.model.FeedForward(
+    ctx = mx.cpu(0),      # Run on CPU 0
+    symbol = mlp,         # Use the network we just defined
+    num_epoch = 10,       # Train for 10 epochs
+    learning_rate = 0.1,  # Learning rate
+    momentum = 0.9,       # Momentum for SGD with momentum
+    wd = 0.00001,         # Weight decay for regularization
+    )
+    
+model.fit(
+    # Training data set
+    X=train_iter,  
+    # Testing data set. MXNet computes scores on test set every epoch
+    eval_data=test_iter,  
+    # Logging module to print out progress
+    batch_end_callback = mx.callback.Speedometer(batch_size, 200)
+    )  
+
+# Uncomment to view an example
+# plt.imshow((X_show[0].reshape((28,28))*255).astype(np.uint8), cmap='Greys_r')
+# plt.show()
+# print 'Result:', model.predict(X_test[0:1])[0].argmax()
+
+# Now it prints how good did the network did for this configuration
+print('Accuracy:', model.score(test_iter)*100, '%')\end{lstlisting}
+}
+%\vskip 100pt
+\begin{center}
+{\color{red}\scriptsize
+https://github.com/dmlc/mxnet/blob/master/example/svm\_mnist/svm\_mnist.py
+}
+\end{center}
 
 \end{frame}
