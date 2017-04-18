@@ -6,13 +6,42 @@
 
 \frameinlbffalse
 
+{
+\usebackgroundtemplate{
+\tikz[overlay,remember picture] \node[opacity=0.8, xshift=-3.5cm, at=(current page.east)] {
+\includegraphics[width=0.35\paperwidth]{figures/TF_logo.png}
+};}
+
 \begin{frame}[plain]
 \frametitle{\S\ref{sec:TF}. \insertsection}
 \listofframes
 \end{frame}
 \addtocounter{framenumber}{-1} % this page does not count
 
+}
+
 \frameinlbftrue
+
+%%%
+\subsection{Programming interface}
+%%%
+
+\begin{frame}
+  \MyLogo
+  \frametitle{Programming Interface}
+  \begin{itemize}
+	  	\item Graph: In TensorFlow, machine learning algorithms are represented as computational graph. A computational or data flow graph is a form of directed graph where vertices or nodes describe operations, while edges represent data flowing between these operations.
+	  	
+	  	\item Operation: An operation may represent a mathematical equation, a variable or constant, a control flow directive, a file I/O operation or even a network communication port.
+	  	
+	  	\item Tensor: A tensor is a multi-dimensional collection of homogeneous values with a fixed, static type.
+	  	
+	  	\item Variable: Variables can be described as persistent, mutable handles to in-memory buffers storing tensors.
+	  	
+	  	\item Session: In TensorFlow the execution of operations and evaluation of tensors may only be preformed in a special environment called session.
+  \end{itemize}
+
+\end{frame}
 
 %%%
 \subsection{Computational graph}
@@ -20,7 +49,7 @@
 
 \begin{frame}[fragile]
   \MyLogo
-  \frametitle{Computational graph}  
+  \frametitle{Computational Graph}  
 %  
 \begin{columns}
 \column{.65\textwidth}
@@ -54,27 +83,6 @@ with tf.Session(graph=graph):
 \end{figure}
 %
 \end{columns}
-\end{frame}
-
-%%%
-\subsection{Programming interface}
-%%%
-
-\begin{frame}
-  \MyLogo
-  \frametitle{Programming interface}
-  \begin{itemize}
-	  	\item Graph: In TensorFlow, machine learning algorithms are represented as computational graph. A computational or dataflow graph is a form of directed graph where vertices or nodes describe operations, while edges represent data flowing between these operations.
-	  	
-	  	\item Operation: An opreation may represent a mathematical equation, a variable or constant, a control flow directive, a file I/O operation or even a network communication port.
-	  	
-	  	\item Tensor: A tensor is a multi-dimensional collection of homogeneous values with a fixed, static type.
-	  	
-	  	\item Variable: Variables can be described as persistent, mutable handles to in-memory buffers storing tensors.
-	  	
-	  	\item Session: In TensorFlow the execution of operations and evaluation of tensors may only be preformed in a special environment called session.
-  \end{itemize}
-
 \end{frame}
 
 %%%
@@ -126,13 +134,11 @@ graph = tf.Graph()
 with graph.as_default():
 	with tf.name_scope('input_features'):
 		# Placeholder for input variables (None = variable dimension)
-		x = tf.placeholder(tf.float32, shape=[None, 784], 
-							name='input_x')
+		x = tf.placeholder(tf.float32, shape=[None, 784], name='input_x')
 							
 	with tf.name_scope('input_labels'):
 		# Placeholder for labels
-		y_ = tf.placeholder(tf.float32, shape=[None, 10], 
-							name='labels')
+		y_ = tf.placeholder(tf.float32, shape=[None, 10], name='labels')
 							
 	with tf.name_scope('variables'):
 		W = tf.Variable(tf.zeros([784, 10]), name='weights')
@@ -164,8 +170,8 @@ with graph.as_default():
 		correct_prediction = tf.equal(tf.argmax(y,1), tf.argmax(y_,1))
 		accuracy = tf.reduce_mean(tf.cast(correct_prediction, "float"))
 		tf.summary.scalar('Accuracy', accuracy)
-	merged = tf.summary.merge_all()
-	writer = tf.summary.FileWriter('./board', graph)
+	merged = tf.summary.merge_all() ###???
+	writer = tf.summary.FileWriter('./board', graph)  ###???
 	
 with tf.Session(graph=graph) as sess:
 	# Initialize all variables

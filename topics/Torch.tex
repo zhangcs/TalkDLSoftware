@@ -62,7 +62,7 @@ y = Variable(torch.randn(N, D_out), requires_grad=False)
 # Use the nn package to define our model as a sequence of layers.
 model = torch.nn.Sequential( torch.nn.Linear(D_in, H),
                              torch.nn.ReLU(),
-                             torch.nn.Linear(H, D_out), )
+                             torch.nn.Linear(H, D_out) )
 
 # The nn package also contains definitions of popular loss functions;
 loss_fn = torch.nn.MSELoss(size_average=False)

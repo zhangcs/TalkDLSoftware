@@ -6,11 +6,19 @@
 
 \frameinlbffalse
 
+{
+\usebackgroundtemplate{
+\tikz[overlay,remember picture] \node[opacity=0.8, xshift=-3cm, at=(current page.east)] {
+\includegraphics[width=0.3\paperwidth]{figures/Caffe_logo.png}
+};}
+
 \begin{frame}[plain]
 \frametitle{\S\ref{sec:Caffe}. \insertsection}
 \listofframes
 \end{frame}
 \addtocounter{framenumber}{-1} % this page does not count
+
+}
 
 \frameinlbftrue
 
@@ -23,14 +31,13 @@
   \frametitle{Programming interface}  
 
 \begin{enumerate}
+\item Mainly focus on (and well suited for) CNN and image recognition 
+\item Not well documented
 \item Expressive architecture 
 \begin{itemize}
 \item Define models and optimization by configuration without hard-coding
 \item With protocol tool to define parameters for nets and solvers $\ldots$
 \end{itemize}
-\item Support GPUs 
-\item Mainly focus CNN for images
-\item Not well documented
 \end{enumerate}
 \end{frame}
 
@@ -62,7 +69,10 @@ output_prob = net.blobs['prob'].data[0]
 # sort top five predictions from softmax output
 top_inds = output_prob.argsort()[::-1][:5]
 
+# 
 plt.imshow(image)
+
+#
 print 'probabilities and labels:'
 zip(output_prob[top_inds], labels[top_inds])
 \end{lstlisting}
@@ -121,7 +131,9 @@ class EuclideanLoss(caffe.layer):
 			bottom[i].diff[...] = sign.self.diff / bottom[1].num
 \end{lstlisting}
 
-Define a class in Python to extend Layer
+\medskip
+
+\structure{Define a class in Python to extend Layer}
 \begin{lstlisting}[language=python]
 layer{
 	type: "Python"
