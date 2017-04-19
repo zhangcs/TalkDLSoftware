@@ -35,17 +35,17 @@
 
 \begin{itemize}
 
-\item Use one quad-core desktop CPU (i.e., Intel i7-3820 CPU
-		@ 3.60GHz) and two 8-core server-grade CPUs (i.e., Intel
-		Xeon CPU E5-2630 v3 @ 2.40GHz)
+\item CPU: one quad-core desktop CPU (Intel i7-3820 CPU
+		@3.60GHz) and two 8-core server-grade CPUs (Intel
+		Xeon CPU E5-2630 v3 @2.40GHz)
 		
-\item Use two generations of GPU cards, GTX 1080 @ 1607MHz with
-		Pascal architecture, and Telsa K80 @ 562MHz with Kepler
+\item GPU: GTX 1080 @1607MHz with
+		Pascal architecture, and Telsa K80 @562MHz with Kepler
 		architecture 
 	\end{itemize}
 	
 \begin{figure}[htbp] 
-	\includegraphics[height=1.1in]{figures/platforms.pdf} 
+	\includegraphics[height=1.3in]{figures/platforms.pdf} 
 	\caption{The experimental hardware settings for numerical tests}
 \end{figure}
 	
@@ -60,7 +60,7 @@ Benchmarking State-of-the-Art Deep Learning Software Tools, by S.-H. Shi, et al.
 
 \begin{frame}
   \MyLogo
-  \frametitle{Neural Networks and Data Sets}  
+  \frametitle{Neural Networks and Test Data Sets}  
 
 \medskip
 
@@ -74,13 +74,13 @@ Benchmarking State-of-the-Art Deep Learning Software Tools, by S.-H. Shi, et al.
 
 \item An AlexNet (\alert{AlexNet-R}) architecture is used for Cifar10 data set
 
-\item For RNNs, considering that the main computation complexity is related to the length of input sequence, 2 LSTM layers are selected for testing, with input length of 32.
+\item For RNNs, considering that the main computation complexity is related to the length of input sequence, 2 LSTM layers with input length of 32.
 
 \end{itemize}
 
 \begin{figure}[htbp] 
 \includegraphics[height=1in]{figures/models.png} 
-\caption{The experimental setup of neural networks for synthetic data and real data}
+\caption{The experimental setup of neural networks for synthetic and real data}
 \end{figure}
 	
 \end{frame}

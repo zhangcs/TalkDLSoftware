@@ -9,7 +9,7 @@
 {
 \usebackgroundtemplate{
 \tikz[overlay,remember picture] \node[opacity=0.25, xshift=2.3cm, at=(current page.center)] {
-\includegraphics[width=0.65\paperwidth]{figures/genericDNN.png}
+\includegraphics[width=0.65\paperwidth,height=0.5\paperwidth]{figures/genericDNN.png}
 };}
 
 \begin{frame}[plain]
@@ -30,16 +30,17 @@
   \MyLogo
   \frametitle{Machine Learning}  
 \small
-\smallskip
 
-\structure{Why ML now?}
+\medskip
+
+\structure{What is ML?}
 \begin{itemize}
 
 \item Unlike traditional numerical simulation, ``ML gives computers the ability to learn without being explicitly programmed'' {\footnotesize\color{DarkOrchid}[Samuel 1959]}
 
-\item As a research field, ML explores the study and construction of algorithms that can \alert{learn} from and \alert{make predictions} on \alert{data}
+\item As a research field, ML explores the study and construction of algorithms that can {learn} from and {make predictions} on \alert{data}
 
-\item Fourth paradigm, big data, artificial intelligence, Internet of things, ...
+\item Fourth paradigm, big data, Internet of things, artificial intelligence, ...
 
 \end{itemize}
 
@@ -47,9 +48,9 @@
 
 \begin{itemize}
 
-\item Classification: Inputs are divided into two or more classes, and the learner must produce a model that assigns unseen inputs to one or more (multi-label classification) of these classes
+\item Classification: Inputs are divided into two or more classes, and the learner must produce a model that assigns unseen inputs to one or more of these classes
 
-\item Clustering: Inputs are divided into groups. Unlike in classification, the groups are not known beforehand, making this typically an unsupervised task
+\item Clustering: Inputs are divided into several groups. Unlike in classification, the groups are not known beforehand, making this an unsupervised task
 
 \item Regression: Similar to classification, but the outputs are continuous
 
@@ -57,6 +58,7 @@
 
 \end{itemize}
 
+\vfill
 \begin{center}
 {\color{red} \scriptsize
 I. Goodfellow, Y. Bengio, and A. Courville,
@@ -69,22 +71,7 @@ https://github.com/exacity/deeplearningbook-chinese
 
 \begin{frame}
   \MyLogo
-  \frametitle{Software Packages for Machine Learning}  
-\small
-
-\structure{What is the purpose?}
-\begin{itemize}
-\item Solving problems from practical applications (user interface)
-\item Developing algorithms and optimizing implementation (development)
-\item Theoretical analysis for machine learning
-\end{itemize}
-
-\structure{What do we want for a ML package?}
-\begin{itemize}
-\item Easy for new tasks and new network structures (less steep learning curve)
-\item Easy for debugging (with good support and large community)
-\item Performance and scalability
-\end{itemize}
+  \frametitle{ML Software Packages}  
 
 \vskip -12pt
 \begin{figure}[htbp] %  figure placement: here, top, bottom, or page
@@ -92,11 +79,20 @@ https://github.com/exacity/deeplearningbook-chinese
    \includegraphics[width=0.9\linewidth]{figures/ML.pdf} 
 \end{figure}
 
+\begin{itemize}
+\item[\raisebox{-0.4ex}{\alert{\HandRight}}] Other worth-noting's: 
+	\begin{itemize}
+	\item CNTK/DMTK (Microsoft)
+	\item Neon (Nervana \& Intel)
+	\item PyTorch (\alert{beta})
+	\item Caffe2
+	\end{itemize}
+\end{itemize}
+
 \begin{center}
 {\color{red} \scriptsize
 Tour of TensorFlow, by Peter Goldsborough, arXiv, 2016}
 \end{center}
-
 
 \end{frame}
 
@@ -160,6 +156,43 @@ https://www.slideshare.net/0xdata/transform-your-business-with-ai-deep-learning-
 \subsection{General comparison}
 %%%
 
+%%%
+
+\begin{frame}
+  \MyLogo
+  \frametitle{Goal of This Study}  
+\small
+
+\medskip
+\structure{What is our purpose?}
+\begin{itemize}
+\item Solving practical problems from various applications (user interface)
+\item Developing algorithms and optimizing implementation (development)
+\item Theoretical analysis for machine learning, ...
+\end{itemize}
+
+\structure{How to use a ML package?}
+\begin{itemize}
+\item Train models on large data set on high-performance computing platforms
+\item Deploy applications on various computing platforms
+\end{itemize}
+
+\structure{What we want for a ML package?}
+\begin{itemize}
+\item Easy to build new tasks and new network structures (less steep learning curve)
+\item Easy for debugging (with good documentation, support, and large community)
+\item Good performance and scalability
+	\begin{itemize}
+	\item Multicore CPU
+	\item Single or multiple GPU(s)
+	\item Cluster
+	\end{itemize}
+\end{itemize}
+
+\end{frame}
+
+%%%
+
 \begin{frame}
   \MyLogo
   \frametitle{DL Engines: Basic Information}  
@@ -202,13 +235,13 @@ Released      & 2002      &2013               &2015                & 2015       
 \vskip -10pt
 {\scriptsize
 \begin{itemize}\setlength\itemsep{0.5em}
-\item[\raisebox{-0.4ex}{\alert{\HandRight}}] Other worth-noting's: CNTK/DMTK (Microsoft), Neon (Nervana \& Intel), PyTorch (\alert{beta})
 \item BAIR, Berkeley Artificial Intelligence Research Lab 
 \item BVLC, Berkeley Vision and Learning Center
 \item DMLC, Distributed (Deep) Machine Learning Community, supported by Amazon, Intel, Microsoft, nVidia, Baidu, ...
 \end{itemize}
 }
 
+\vfill
 \begin{center}
 {\color{red}\scriptsize
 http://blog.revolutionanalytics.com/2016/08/deep-learning-part-1.html
@@ -229,7 +262,7 @@ http://blog.revolutionanalytics.com/2016/08/deep-learning-part-1.html
 \begin{center}
 \begin{tabular}{|c|c|c|c|c|c|} \hline
 \rowcolor{GreenYellow}
-Viewpoint &Torch       &Caffe  & TensorFlow & MXNet  \\ \hline
+Viewpoint &Torch7       &Caffe  & TensorFlow & MXNet  \\ \hline
   \multirow{2}{4em}{Pretrained \\ Models}      
   &  \multirow{2}{4em} {Yes}      
   &  \multirow{2}{4em}{Yes}                             
@@ -251,8 +284,8 @@ Viewpoint &Torch       &Caffe  & TensorFlow & MXNet  \\ \hline
 \multirow{2}{4em} {Speed \\ One-GPU }    
 & \multirow{2}{*}{ Great }      
 &\multirow{2}{*}{Great} 
-&\multirow{2}{*}{\alert{Not so good}}
-&\multirow{2}{*}{ Excellent} \\  
+&\multirow{2}{*}{Good}
+&\multirow{2}{*}{Good} \\  
 &   &    & &      \\ \hline          
 \multirow{2}{5em} {Memory \\ Management}    
 & \multirow{2}{*}{ Great }      
@@ -268,9 +301,9 @@ Viewpoint &Torch       &Caffe  & TensorFlow & MXNet  \\ \hline
 &   &    & &      \\ \hline            
 \multirow{2}{3.5em} {Coding \\ Style}    
 & \multirow{2}{5.em}{Imperative}      
-&\multirow{2}{5.em}{Imperative}
+&\multirow{2}{5.em}{Declarative}
 &\multirow{2}{5.em}{Declarative} 
-&\multirow{2}{5em}{Declarative \\ Imperative} \\  
+&\multirow{2}{5em}{Mixed} \\  
 &   &    & &      \\ \hline
 \multirow{2}{3.5em} {GitHub \\ Watching}    
 & \multirow{2}{5.em}{649/268}      
