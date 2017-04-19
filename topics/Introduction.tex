@@ -73,22 +73,26 @@ https://github.com/exacity/deeplearningbook-chinese
   \MyLogo
   \frametitle{ML Software Packages}  
 
-\vskip -12pt
 \begin{figure}[htbp] %  figure placement: here, top, bottom, or page
    \centering
-   \includegraphics[width=0.9\linewidth]{figures/ML.pdf} 
+   \includegraphics[width=1.0\linewidth]{figures/ML.pdf} 
 \end{figure}
 
 \begin{itemize}
-\item[\raisebox{-0.4ex}{\alert{\HandRight}}] Other worth-noting's: 
+\item[\raisebox{-0.4ex}{\alert{\HandRight}}] Other worth-noting packages: 
 	\begin{itemize}
-	\item CNTK/DMTK (Microsoft)
+	\item CNTK/DMTK (Microsoft): 
+		\begin{itemize}
+		\item[-] Support Windows/Linux, no official OS X support
+		\item[-] Provide C++/Python frontend
+		\end{itemize}
 	\item Neon (Nervana \& Intel)
+	\item Caffe2 (Facebook)
 	\item PyTorch (\alert{beta})
-	\item Caffe2
 	\end{itemize}
 \end{itemize}
 
+\vfill
 \begin{center}
 {\color{red} \scriptsize
 Tour of TensorFlow, by Peter Goldsborough, arXiv, 2016}
@@ -317,3 +321,66 @@ Viewpoint &Torch7       &Caffe  & TensorFlow & MXNet  \\ \hline
 \end{table}%
 
 \end{frame}
+
+%%%
+\subsection{Test setting}
+%%%
+
+\begin{frame}
+	\MyLogo
+	\frametitle{Hardware Platforms}  
+
+\smallskip 
+
+\begin{itemize}
+
+\item CPU: one quad-core desktop CPU (Intel i7-3820 CPU
+		@3.60GHz) and two 8-core server-grade CPUs (Intel
+		Xeon CPU E5-2630 v3 @2.40GHz)
+		
+\item GPU: GTX 1080 @1607MHz with
+		Pascal architecture, and Telsa K80 @562MHz with Kepler
+		architecture 
+	\end{itemize}
+	
+\begin{figure}[htbp] 
+	\includegraphics[height=1.3in]{figures/platforms.pdf} 
+	\caption{The experimental hardware settings for numerical tests}
+\end{figure}
+	
+\begin{center}
+{\color{red} \scriptsize
+Benchmarking State-of-the-Art Deep Learning Software Tools, by S.-H. Shi, et al., arXiv, 2017}
+\end{center}
+
+\end{frame}
+
+%%%
+
+\begin{frame}
+  \MyLogo
+  \frametitle{Neural Networks and Test Data Sets}  
+
+\medskip
+
+\begin{itemize}
+
+\item A large fully-connected neural network (\alert{FCN-S}) with around 55 million parameters is used to evaluate the performance of FCN
+
+\item The classical AlexNet (\alert{AlexNet-S}) is used as an representative of CNN
+
+\item A smaller FCN (\alert{FCN-R}) is constructed for MNIST data set
+
+\item An AlexNet (\alert{AlexNet-R}) architecture is used for Cifar10 data set
+
+\item For RNNs, considering that the main computation complexity is related to the length of input sequence, 2 LSTM layers with input length of 32.
+
+\end{itemize}
+
+\begin{figure}[htbp] 
+\includegraphics[height=1in]{figures/models.png} 
+\caption{The experimental setup of neural networks for synthetic and real data}
+\end{figure}
+	
+\end{frame}
+
