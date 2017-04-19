@@ -9,7 +9,7 @@
 {
 \usebackgroundtemplate{
 \tikz[overlay,remember picture] \node[opacity=0.4, at=(current page.center)] {
-\includegraphics[width=1.15\paperwidth,height=0.675\paperwidth]{figures/tpu.jpg}
+\includegraphics[width=1.15\paperwidth,height=0.68\paperwidth]{figures/tpu.jpg}
 };}
 
 \begin{frame}[plain]
@@ -22,69 +22,6 @@
 
 \frameinlbftrue
 
-
-%%%
-\subsection{Test setting}
-%%%
-
-\begin{frame}
-	\MyLogo
-	\frametitle{Hardware Platforms}  
-
-\smallskip 
-
-\begin{itemize}
-
-\item CPU: one quad-core desktop CPU (Intel i7-3820 CPU
-		@3.60GHz) and two 8-core server-grade CPUs (Intel
-		Xeon CPU E5-2630 v3 @2.40GHz)
-		
-\item GPU: GTX 1080 @1607MHz with
-		Pascal architecture, and Telsa K80 @562MHz with Kepler
-		architecture 
-	\end{itemize}
-	
-\begin{figure}[htbp] 
-	\includegraphics[height=1.3in]{figures/platforms.pdf} 
-	\caption{The experimental hardware settings for numerical tests}
-\end{figure}
-	
-\begin{center}
-{\color{red} \scriptsize
-Benchmarking State-of-the-Art Deep Learning Software Tools, by S.-H. Shi, et al., arXiv, 2017}
-\end{center}
-
-\end{frame}
-
-%%%
-
-\begin{frame}
-  \MyLogo
-  \frametitle{Neural Networks and Test Data Sets}  
-
-\medskip
-
-\begin{itemize}
-
-\item A large fully-connected neural network (\alert{FCN-S}) with around 55 million parameters is used to evaluate the performance of FCN
-
-\item The classical AlexNet (\alert{AlexNet-S}) is used as an representative of CNN
-
-\item A smaller FCN (\alert{FCN-R}) is constructed for MNIST data set
-
-\item An AlexNet (\alert{AlexNet-R}) architecture is used for Cifar10 data set
-
-\item For RNNs, considering that the main computation complexity is related to the length of input sequence, 2 LSTM layers with input length of 32.
-
-\end{itemize}
-
-\begin{figure}[htbp] 
-\includegraphics[height=1in]{figures/models.png} 
-\caption{The experimental setup of neural networks for synthetic and real data}
-\end{figure}
-	
-\end{frame}
-
 %%%
 \subsection{CPU tests}
 %%%
@@ -92,10 +29,20 @@ Benchmarking State-of-the-Art Deep Learning Software Tools, by S.-H. Shi, et al.
 \begin{frame}
 	\MyLogo
 	\frametitle{CPU Scalability: FCN Synthetic}  
-	\begin{figure}[htbp] 
-		\includegraphics[width=\linewidth]{figures/FCN-S1.pdf} 
-		\caption{FCN-S performance comparison on CPU platform with a mini-batch size of 64 (The lower the better)}
-	\end{figure}
+
+\begin{figure}[htbp] 
+	\includegraphics[width=\linewidth]{figures/FCN-S1.pdf} 
+	\caption{FCN-S performance on CPU platform with a mini-batch size of 64}
+\end{figure}
+	
+\vskip -10pt
+\begin{mdframed}[style=mystyle1]
+\begin{itemize}
+\item CNTK/Torch/Caffe have similar CPU performance
+\item TensorFlow has excellent scalability
+\end{itemize}
+\end{mdframed}
+
 \end{frame}
 
 %%%
@@ -105,8 +52,17 @@ Benchmarking State-of-the-Art Deep Learning Software Tools, by S.-H. Shi, et al.
 	\frametitle{CPU Scalability: FCN Real}  
 	\begin{figure}[htbp] 
 		\includegraphics[width=\linewidth]{figures/FCN-R1.pdf} 
-		\caption{The FCN-R performance comparison on CPU platform with a mini-batch size of 1024 (The lower the better)}
+		\caption{The FCN-R performance on CPU platform with a mini-batch size of 1024}
 	\end{figure}
+	
+\vskip -10pt
+\begin{mdframed}[style=mystyle1]
+\begin{itemize}
+\item All engines have good CPU performance
+\item TensorFlow has good scalability but considerably slower
+\end{itemize}
+\end{mdframed}
+
 \end{frame}
 
 %%%
@@ -117,8 +73,17 @@ Benchmarking State-of-the-Art Deep Learning Software Tools, by S.-H. Shi, et al.
 
 	\begin{figure}[htbp] 
 		\includegraphics[width=\linewidth]{figures/AlexNet-S1.pdf} 
-		\caption{AlexNet-S performance comparison on CPU platform with a mini-batch size of 16 (The lower the better)}
-	\end{figure}	
+		\caption{AlexNet-S performance on CPU platform with a mini-batch size of 16}
+	\end{figure}
+	
+\vskip -10pt
+\begin{mdframed}[style=mystyle1]
+\begin{itemize}
+\item Caffe has best CNN performance as promised
+\item MXNet does not scale well for this test
+\end{itemize}
+\end{mdframed}
+	
 \end{frame}
 
 %%%
@@ -128,8 +93,17 @@ Benchmarking State-of-the-Art Deep Learning Software Tools, by S.-H. Shi, et al.
 	\frametitle{CPU Scalability: CNN Real}  
 	\begin{figure}[htbp] 
 		\includegraphics[width=\linewidth]{figures/AlexNet-R1.pdf} 
-		\caption{AlexNet-R performance comparison on CPU platform with a mini-batch size of 1024 (The lower the better)}
+		\caption{AlexNet-R performance on CPU platform with a mini-batch size of 1024}
 	\end{figure}
+	
+\vskip -10pt
+\begin{mdframed}[style=mystyle1]
+\begin{itemize}
+\item Good scalability of TensorFlow kicks in 
+\item Caffe does not scale well on multicore CPUs
+\end{itemize}
+\end{mdframed}
+
 \end{frame}
 
 %%%
@@ -139,8 +113,17 @@ Benchmarking State-of-the-Art Deep Learning Software Tools, by S.-H. Shi, et al.
 	\frametitle{CPU Scalability: RNN LSTM}  
 	\begin{figure}[htbp] 
 		\includegraphics[width=\linewidth]{figures/LSTM1.pdf} 
-		\caption{LSTM performance comparison on CPU platform with a mini-batch size of 256 (The lower the better)}
+		\caption{LSTM performance on CPU platform with a mini-batch size of 256}
 	\end{figure}
+	
+\vskip -10pt
+\begin{mdframed}[style=mystyle1]
+\begin{itemize}
+\item Pay more attention to CNTK in the future
+\item Caffe/MXNet does not support LSTM on CPUs
+\end{itemize}
+\end{mdframed}
+
 \end{frame}
 
 %%%
@@ -156,6 +139,13 @@ Benchmarking State-of-the-Art Deep Learning Software Tools, by S.-H. Shi, et al.
 		\caption{The performance comparison of FCN-S on GPU platforms}
 	\end{figure}
 
+\vskip -10pt
+\begin{mdframed}[style=mystyle1]
+\begin{itemize}
+\item CNTK/Torch/Caffe out-perform the others
+\end{itemize}
+\end{mdframed}
+
 \end{frame}
 
 %%%
@@ -168,6 +158,13 @@ Benchmarking State-of-the-Art Deep Learning Software Tools, by S.-H. Shi, et al.
 		\includegraphics[width=\linewidth]{figures/FCN-R2.pdf} 
 		\caption{The performance comparison of FCN-R on GPU platforms}
 	\end{figure}
+
+\vskip -10pt
+\begin{mdframed}[style=mystyle1]
+\begin{itemize}
+\item All packages have similar performance
+\end{itemize}
+\end{mdframed}
 
 \end{frame}
 
@@ -182,6 +179,13 @@ Benchmarking State-of-the-Art Deep Learning Software Tools, by S.-H. Shi, et al.
 		\caption{The performance comparison of AlexNet-S on GPU platforms}
 	\end{figure}
 
+\vskip -10pt
+\begin{mdframed}[style=mystyle1]
+\begin{itemize}
+\item MXNet out-perform the others for CNN on GPUs
+\end{itemize}
+\end{mdframed}
+
 \end{frame}
 
 %%%
@@ -195,6 +199,13 @@ Benchmarking State-of-the-Art Deep Learning Software Tools, by S.-H. Shi, et al.
 		\caption{The performance comparison of AlexNet-R on GPU platforms}
 	\end{figure}
 
+\vskip -10pt
+\begin{mdframed}[style=mystyle1]
+\begin{itemize}
+\item TensorFlow does not have good GPU performance in general
+\end{itemize}
+\end{mdframed}
+
 \end{frame}
 
 %%%
@@ -207,5 +218,12 @@ Benchmarking State-of-the-Art Deep Learning Software Tools, by S.-H. Shi, et al.
 		\includegraphics[width=\linewidth]{figures/LSTM2.pdf} 
 		\caption{The performance comparison of LSTM on GPU platforms}
 	\end{figure}
+
+\vskip -10pt
+\begin{mdframed}[style=mystyle1]
+\begin{itemize}
+\item CNTK has excellent RNN performance both on CPU and GPU
+\end{itemize}
+\end{mdframed}
 	
 \end{frame}

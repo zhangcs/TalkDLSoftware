@@ -147,9 +147,8 @@ with graph.as_default():
 		# Track tensor values over time for tensorboard
 		tf.summary.scalar('Accuracy', accuracy)
 	
-	# Merge all the summaries and write to ./board
-	merged = tf.summary.merge_all()
-	writer = tf.summary.FileWriter('./board', graph)
+	merged = tf.summary.merge_all()   # Merge all the summaries
+	writer = tf.summary.FileWriter('./board', graph)  # Write summary file to ./board
 	
 with tf.Session(graph=graph) as sess:
 	# Initialize all variables
@@ -182,11 +181,21 @@ with tf.Session(graph=graph) as sess:
 \begin{columns}
 \column{.48\textwidth}  
 \scriptsize{
-Computation graphs are powerful but complicated
+\structure{Declarative style}
 \begin{itemize}
-\item  thousands of nodes or more 
-\item  network is deep
-\item  graph visualization tool TensorBoard is helpful
+\item  Same style as Teano
+\item  Easy to understand
+\item  Possible for graph optimization
+\item  More difficult for debugging
+\end{itemize}
+
+\medskip
+
+\structure{Computation graphs are powerful but complicated}
+\begin{itemize}
+\item  Thousands of nodes or more 
+\item  Network is deep
+\item  Visualization is helpful for debugging 
 \end{itemize}
 }
 %
