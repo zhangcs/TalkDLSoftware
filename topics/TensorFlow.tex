@@ -28,13 +28,13 @@
 
 \begin{frame}
   \MyLogo
-  \frametitle{Programming Interface}
+  \frametitle{Basic Concepts}
   \begin{itemize}
-	  	\item Graph: In TensorFlow, machine learning algorithms are represented as computational graph. A computational or data flow graph is a form of directed graph where vertices or nodes describe operations, while edges represent data flowing between these operations.
+	  	\item Graph: In TensorFlow, ML algorithms are represented as computational graph. A computational graph (data flow graph) is a form of directed graph where vertices (nodes) describe operations, while edges represent data flowing between these operations.
 	  	
-	  	\item Operation: An operation may represent a mathematical equation, a variable or constant, a control flow directive, a file I/O operation or even a network communication port.
+	  	\item Operation: An operation may represent a variable or constant, a control flow directive, a mathematical function, a file I/O, or a network communication port.
 	  	
-	  	\item Tensor: A tensor is a multi-dimensional collection of homogeneous values with a fixed, static type.
+	  	\item Tensor: A tensor is a multi-dimensional collection of homogeneous values with a fixed static type.
 	  	
 	  	\item Variable: Variables can be described as persistent, mutable handles to in-memory buffers storing tensors.
 	  	
@@ -87,88 +87,6 @@ with tf.Session(graph=graph):
 %
 \end{columns}
 \end{frame}
-
-%%%
-\subsection{Visualization}
-%%%
-
-\begin{frame}
-  \MyLogo
-  \frametitle{Visualization: TensorBoard}  
-
-\begin{columns}
-\column{.48\textwidth}  
-\scriptsize{
-Computation graphs are powerful but complicated
-\begin{itemize}
-\item  thousands of nodes or more 
-\item  network is deep
-\item  graph visualization tool TensorBoard is helpful
-\end{itemize}
-}
-%
-\column{.5\textwidth}
-\begin{figure}[htbp] 
-   \includegraphics[height=2.5in]{figures/graphvisualization.png} 
-%\caption{Graph Visualization}
-\end{figure}
-\end{columns}
-
-\end{frame}
-
-%
-
-\begin{frame}
-	\MyLogo
-	\frametitle{Visualization: TensorBoard}  
-
-\begin{figure}[htbp] 
-\includegraphics[width=\textwidth, height=\textheight]{figures/scalar.pdf} 
-\end{figure}
-
-	
-\end{frame}
-
-%
-
-\begin{frame}
-	\MyLogo
-	\frametitle{Visualization: TensorBoard}  
-	
-	\begin{figure}[htbp] 
-		\includegraphics[width=\textwidth, height=\textheight]{figures/main_graph.pdf} 
-	\end{figure}
-	
-	
-\end{frame}
-
-%
-
-\begin{frame}
-	\MyLogo
-	\frametitle{Visualization: TensorBoard}  
-	
-	\begin{figure}[htbp] 
-		\includegraphics[width=\textwidth, height=\textheight]{figures/distributions.pdf} 
-	\end{figure}
-	
-	
-\end{frame}
-
-%
-
-\begin{frame}
-	\MyLogo
-	\frametitle{Visualization: TensorBoard}  
-	
-	\begin{figure}[htbp] 
-		\includegraphics[width=\textwidth, height=\textheight]{figures/histograms.pdf} 
-	\end{figure}
-	
-	
-\end{frame}
-
-%
 
 %%%
 \subsection{Simple examples}
@@ -251,4 +169,72 @@ with tf.Session(graph=graph) as sess:
 							   global_step=step)
 \end{lstlisting}
 
+\end{frame}
+
+%%%
+\subsection{Visualization}
+%%%
+
+\begin{frame}
+  \MyLogo
+  \frametitle{Visualization: TensorBoard}  
+
+\begin{columns}
+\column{.48\textwidth}  
+\scriptsize{
+Computation graphs are powerful but complicated
+\begin{itemize}
+\item  thousands of nodes or more 
+\item  network is deep
+\item  graph visualization tool TensorBoard is helpful
+\end{itemize}
+}
+%
+\column{.5\textwidth}
+\begin{figure}[htbp] 
+   \includegraphics[height=2.5in]{figures/graphvisualization.png} 
+%\caption{Graph Visualization}
+\end{figure}
+\end{columns}
+
+\end{frame}
+
+%
+
+\begin{frame}
+	\MyLogo
+	\frametitle{TensorBoard: Scalars}  
+
+\centering\includegraphics[width=0.95\paperwidth]{figures/scalar.pdf} 
+	
+\end{frame}
+
+%
+
+\begin{frame}
+	\MyLogo
+	\frametitle{TensorBoard: Graphs}  
+	
+\centering\includegraphics[width=0.95\paperwidth]{figures/main_graph.pdf} 
+	
+\end{frame}
+
+%
+
+\begin{frame}
+	\MyLogo
+	\frametitle{TensorBoard: Distributions}  
+	
+\centering\includegraphics[width=0.95\paperwidth]{figures/distributions.pdf} 
+	
+\end{frame}
+
+%
+
+\begin{frame}
+	\MyLogo
+	\frametitle{TensorBoard: Histograms}  
+	
+\centering\includegraphics[width=0.95\paperwidth]{figures/histograms.pdf} 
+	
 \end{frame}
