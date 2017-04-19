@@ -39,6 +39,8 @@
 	  	\item Variable: Variables can be described as persistent, mutable handles to in-memory buffers storing tensors.
 	  	
 	  	\item Session: In TensorFlow the execution of operations and evaluation of tensors may only be preformed in a special environment called session.
+	  	
+	  	\item Tensorboard: To run TensorBoard, use the following command: tensorboard --logdir=path/to/log-directory. Once TensorBoard is running, navigate your web browser to localhost:6006 to view the TensorBoard.
   \end{itemize}
 
 \end{frame}
@@ -115,7 +117,7 @@ with graph.as_default():
 		# Placeholder for labels
 		y_ = tf.placeholder(tf.float32, shape=[None, 10], name='labels')
 							
-	with tf.name_scope('variables'):
+	with tf.name_scope('parameters'):
 		W = tf.Variable(tf.zeros([784, 10]), name='weights')
 		# Track tensor distributions over time for tensorboard
 		tf.summary.histogram('WEIGHTS', W)
