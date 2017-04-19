@@ -40,8 +40,7 @@
 	  	
 	  	\item Session: In TensorFlow the execution of operations and evaluation of tensors may only be preformed in a special environment called session.
 	  	
-	  	\item Tensorboard: To run TensorBoard, use the following command: tensorboard --logdir=path/to/log-directory. Once TensorBoard is running, navigate your web browser to localhost:6006 to view the TensorBoard.
-  \end{itemize}
+\end{itemize}
 
 \end{frame}
 
@@ -176,10 +175,11 @@ with tf.Session(graph=graph) as sess:
 \subsection{Visualization}
 %%%
 
-\begin{frame}
+\begin{frame}[fragile]
   \MyLogo
   \frametitle{Visualization: TensorBoard}  
 
+\vskip -25pt
 \begin{columns}
 \column{.48\textwidth}  
 \scriptsize{
@@ -201,12 +201,17 @@ with tf.Session(graph=graph) as sess:
 \end{itemize}
 }
 %
-\column{.5\textwidth}
+\column{.48\textwidth}
 \begin{figure}[htbp] 
-   \includegraphics[height=2.5in]{figures/graphvisualization.png} 
-%\caption{Graph Visualization}
+   \includegraphics[height=2.2in]{figures/graphvisualization.png} 
 \end{figure}
 \end{columns}
+
+To run TensorBoard, use the following command: 
+\begin{lstlisting}[language=sh,numbers=none] 
+$ tensorboard --logdir=path/to/log-directory
+\end{lstlisting}
+Then navigate your web browser to localhost:6006 to view the TensorBoard.
 
 \end{frame}
 
