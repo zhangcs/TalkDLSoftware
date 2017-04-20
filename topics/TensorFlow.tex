@@ -58,10 +58,12 @@
 \begin{lstlisting}[language=python]
 import tensorflow as tf
 
+# Define a computational graph
 graph = tf.Graph()
 
+# Define operation nodes in the above graph
 with graph.as_default():
-	# Define two constants
+	# Define two constants(two nodes)
 	a = tf.constant(1.0)
 	b = tf.constant(2.0)
 
