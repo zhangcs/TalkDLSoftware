@@ -28,16 +28,17 @@
 
 \begin{frame}
   \MyLogo
-  \frametitle{Programming Interface}  
+  \frametitle{General Comments}  
 
 \begin{enumerate}
 %
-\item Support many scope applications (e.g. computer vision, natural language processing,  speech recognition, unsupervised machine learning, support embedded APIs, visualization)
+\item Support many different applications (e.g. computer vision, natural language processing,  speech recognition, unsupervised machine learning, support embedded APIs, visualization)
 %
 \item Mixed programming style: imperative and declarative
 \begin{itemize}
 \item Data parallelism with multi-devices: Better scalability than TensorFlow, reportedly
-\item Support many different front-end, including JavaScript (so it be run on web browsers as well)
+\item Support many different front-end, including JavaScript (so it can run on web browsers)
+\item Light-weighted (around 50K lines of core code)
 \item Provide intermediate-level and high-level interface modules
 \item Provide abundant IO functions 
 %
@@ -50,7 +51,7 @@
 \item Call mx.viz.plot\_network( )
 \end{itemize}
 %
-\item Not well documented
+\item Not well documented, not easy to read
 %
 \end{enumerate}
 

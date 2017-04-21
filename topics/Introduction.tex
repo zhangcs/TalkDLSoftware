@@ -48,13 +48,13 @@
 
 \begin{itemize}
 
-\item Classification: Inputs are divided into two or more classes, and the learner must produce a model that assigns unseen inputs to one or more of these classes
+\item[\raisebox{-0.4ex}{\alert{\HandRight}}] Classification: Inputs are divided into two or more classes, and the learner must produce a model that assigns unseen inputs to one or more of these classes
+
+\item[\raisebox{-0.4ex}{\alert{\HandRight}}] Regression: Similar to classification, but the outputs are continuous
 
 \item Clustering: Inputs are divided into several groups. Unlike in classification, the groups are not known beforehand, making this an unsupervised task
 
-\item Regression: Similar to classification, but the outputs are continuous
-
-\item Density estimation, dimensionality reduction, ...
+\item Density estimation, dimension reduction, ...
 
 \end{itemize}
 
@@ -74,30 +74,30 @@ https://github.com/exacity/deeplearningbook-chinese
   \MyLogo
   \frametitle{ML Software Packages}  
 
+\vskip -10pt
 \begin{figure}[htbp] %  figure placement: here, top, bottom, or page
    \centering
-   \includegraphics[width=1.0\linewidth]{figures/ML.pdf} 
+   \includegraphics[width=0.9\linewidth]{figures/ML.pdf} 
 \end{figure}
-
-\begin{itemize}
-\item[\raisebox{-0.4ex}{\alert{\HandRight}}] Other worth-noting packages: 
-	\begin{itemize}
-	\item CNTK/DMTK (Microsoft): 
-		\begin{itemize}
-		\item[-] Support Windows/Linux, no official OS X support
-		\item[-] Provide C++/Python frontend
-		\end{itemize}
-	\item Neon (Nervana \& Intel)
-	\item Caffe2 (Facebook)
-	\item PyTorch (\alert{beta})
-	\end{itemize}
-\end{itemize}
-
-\vfill
 \begin{center}
+\vskip -8pt
 {\color{red} \scriptsize
 Tour of TensorFlow, by Peter Goldsborough, arXiv, 2016}
 \end{center}
+
+\structure{Other worth-noting ML(DL) packages:}
+	\begin{itemize}\setlength\itemsep{0.25em}\small
+	\item PyTorch (still in \alert{beta} stage)
+	\item CNTK/DMTK (Microsoft): First released on April 2015
+		\begin{itemize}
+		\item[-] Windows/Linux, no official OS X support
+		\item[-] Provide C++/Python frontend
+		\end{itemize}
+	\item Neon (Nervana \& Intel): First released on May 2015
+	\item MXNet (DMLC): First released on Jan 2015
+	\item Caffe2 (Google, Facebook, ...): Release on late 2016
+	\item Digits (Nvidia, powered by Caffe): web interface
+	\end{itemize}
 
 \end{frame}
 
@@ -112,12 +112,12 @@ Tour of TensorFlow, by Peter Goldsborough, arXiv, 2016}
 \small
 
 \begin{mdframed}[style=mystyle2]
-Deep Learning has been introduced with the objective of moving ML closer to one of its original goals---AI. The main motivations includes:
+Deep Learning has been introduced with the objective of moving ML closer to one of its original goals---Artificial \alert{Intelligence}. Main motivations:
 %
 \begin{itemize}\scriptsize\setlength\itemsep{0.2em}
-\item Insufficient depth can hurt
 \item The brain has a deep architecture
 \item Cognitive processes seem deep
+\item Insufficient depth can hurt in practice
 \end{itemize}
 \end{mdframed}
 
@@ -134,7 +134,7 @@ Deep Learning has been introduced with the objective of moving ML closer to one 
 \item learned features can be extracted
 \item can be fine-tuned with more data
 \item efficient for multi-class problems
-\item world-class at pattern recognition
+\item good at pattern recognition
 \end{itemize}
 
 \column{.51\textwidth}
@@ -142,9 +142,9 @@ Deep Learning has been introduced with the objective of moving ML closer to one 
 \begin{itemize}\setlength\itemsep{0.2em}
 \item hard to interpret 
 \item theory not well understood
-\item slow to train and score
-\item overfits, needs regularization
 \item more parameters
+\item slow to train and score
+\item overfits (needs regularization)
 \item inefficient for categorical variables
 \item data hungry, learns slowly 
 \end{itemize}
@@ -171,21 +171,21 @@ https://www.slideshare.net/0xdata/transform-your-business-with-ai-deep-learning-
 \medskip
 \structure{What is our purpose?}
 \begin{itemize}
-\item Solving practical problems from various applications (user interface)
-\item Developing algorithms and optimizing implementation (development)
 \item Theoretical analysis for machine learning, ...
+\item[\raisebox{-0.4ex}{\alert{\HandRight}}] Developing algorithms and optimizing implementation (development)
+\item Solving practical problems from various applications (user interface)
 \end{itemize}
 
 \structure{How to use a ML package?}
 \begin{itemize}
 \item Train models on large data set on high-performance computing platforms
-\item Deploy applications on various computing platforms
+\item Deploy applications on various (computing) platforms, like smart phones
 \end{itemize}
 
 \structure{What we want for a ML package?}
 \begin{itemize}
-\item Easy to build new tasks and new network structures (less steep learning curve)
-\item Easy for debugging (with good documentation, support, and large community)
+\item Easy for new tasks and new network structures (less steep learning curve)
+\item Easy for debugging (with good \alert{documentation}, \alert{support}, and active community)
 \item Good performance and scalability
 	\begin{itemize}
 	\item[-] Multicore CPU
@@ -223,7 +223,7 @@ Released      & 2002      &2013               &2015                & 2015       
 \multirow{2}{4em} {Supported \\Interface }    
 & \multirow{2}{3em}{ Lua }      
 &\multirow{2}{5.5em}{ C++/Python \\ Matlab}
-&\multirow{2}{6.2em}{ \alert{Python}/C++/\alert{R} \\ Java/Go/...}  
+&\multirow{2}{6.2em}{ \alert{Python}/C++/{R} \\ Java/Go/...}  
 &\multirow{2}{6.2em}{ C++/\alert{Python}/\alert{R} \\ Matlab/Julia/...}\\  
 &   &    & &      \\ \hline           
  \multirow{2}{4em}{ License }     
@@ -301,7 +301,7 @@ Viewpoint &Torch7       &Caffe  & TensorFlow & MXNet  \\ \hline
 \multirow{2}{3.5em} {Parallel \\ Support}    
 & \multirow{2}{5.em}{Multi-GPU}      
 &\multirow{2}{5.em}{Multi-GPU}
-&\multirow{2}{5.em}{Multi-GPU} 
+&\multirow{2}{5.em}{\alert{Multi-GPU}}
 &\multirow{2}{5em}{Distributed} \\  
 &   &    & &      \\ \hline            
 \multirow{2}{3.5em} {Coding \\ Style}    

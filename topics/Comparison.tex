@@ -111,12 +111,13 @@
 \begin{frame}
 	\MyLogo
 	\frametitle{CPU Scalability: RNN LSTM}  
+\vskip -5pt
 	\begin{figure}[htbp] 
 		\includegraphics[width=\linewidth]{figures/LSTM1.pdf} 
 		\caption{LSTM performance on CPU platform with a mini-batch size of 256}
 	\end{figure}
 	
-\vskip -10pt
+\vskip -12pt
 \begin{mdframed}[style=mystyle1]
 \begin{itemize}
 \item Pay more attention to CNTK in the future
@@ -152,7 +153,7 @@
 
 \begin{frame}
 	\MyLogo
-	\frametitle{GPU Scalability: FCN Real}
+	\frametitle{GPU Speed: FCN Real}
 	
 	\begin{figure}[htbp] 
 		\includegraphics[width=\linewidth]{figures/FCN-R2.pdf} 
@@ -172,7 +173,7 @@
 
 \begin{frame}
 	\MyLogo
-	\frametitle{GPU Scalability: CNN Synthetic}
+	\frametitle{GPU Speed: CNN Synthetic}
 
 	\begin{figure}[htbp] 
 		\includegraphics[width=\linewidth]{figures/AlexNet-S2.pdf} 
@@ -192,7 +193,7 @@
 
 \begin{frame}
 	\MyLogo
-	\frametitle{GPU Scalability: CNN Real}
+	\frametitle{GPU Speed: CNN Real}
 
 	\begin{figure}[htbp] 
 		\includegraphics[width=\linewidth]{figures/AlexNet-R2.pdf} 
@@ -212,7 +213,7 @@
 
 \begin{frame}
 	\MyLogo
-	\frametitle{GPU Scalability: RNN LSTM}
+	\frametitle{GPU Speed: RNN LSTM}
 	
 	\begin{figure}[htbp] 
 		\includegraphics[width=\linewidth]{figures/LSTM2.pdf} 
@@ -233,17 +234,16 @@
 	\MyLogo
 	\frametitle{Multi-GPU Scalability}
 	
+\vskip -10pt
 \begin{figure}[!htbp]%[H]
 \centering
 \subfloat[Subfigure 1 list of figures text][FCN-R]{
-\includegraphics[width=0.33\textwidth]{figures/16a.pdf}
+\includegraphics[width=0.48\textwidth]{figures/16a.pdf}
 }
-\subfloat[Subfigure 2 list of figures text][AlexNet-R]{
-\includegraphics[width=0.33\textwidth]{figures/17a.pdf}
+\subfloat[Subfigure 2 list of figures text][CNN-R]{
+\includegraphics[width=0.48\textwidth]{figures/17a.pdf}
 }
-\subfloat[Subfigure 2 list of figures text][ResNet-56]{
-\includegraphics[width=0.33\textwidth]{figures/18a.pdf}
-}
+\caption{The scalability on a multi-GPU platform (2 $\times$ K80)}
 \end{figure}
 
 \vskip -10pt
@@ -251,6 +251,7 @@
 \begin{itemize}
 \item Multi-GPU can greatly boost the training process of network
 \item MXNet shows overwhelming advantage over the others
+\item TensorFlow does not scale well on multi-GPU platform
 \end{itemize}
 \end{mdframed}
 \end{frame}
