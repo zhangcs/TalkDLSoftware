@@ -66,7 +66,7 @@
 \begin{itemize}
 	\item Dynamic data types and automatic memory management
 	\item Full modularity, supporting hierarchical packages
-	\item Strong introspection capabilities\footnote[frame]{\scriptsize\color{PineGreen}Code introspection is the ability to examine objects to know what they are, what they do and what they know. Python provides several functions and utilities for code introspection, like dir(), help(), type().}
+	\item Strong introspection capabilities\footnote[frame]{\scriptsize\color{PineGreen}Code introspection is the ability to examine objects to know what they are, what they do and what they know. Python provides several utilities for code introspection, e.g. dir(), help(), type().}
 	\item Exception-based error handling
 \end{itemize}
 
@@ -176,7 +176,7 @@ while i < 10:
 \small		
 
 \begin{itemize}
-\item This way will only introduce the name `math' into the name space in which the import command was issued. The names within the math module will not appear in the enclosing namespace: they must be accessed through the name math.
+\item This way will only introduce the module name into the name space in which the import command was issued. The names within the module will not appear in the enclosing namespace: they must be accessed through the module name.
 \begin{lstlisting}[language=python,numbers=none] 
 import math
 math.sin(3.14)
@@ -225,7 +225,7 @@ profile.run('main()')
 \end{lstlisting}
 
 \item Some useful and important packages
-	\begin{itemize}
+	\begin{itemize}\setlength\itemsep{0.25em}
 	\item NumPy: for scientific computing
 	\item Matplotlib/Pylab: for visualising data
 	\item SciPy: providing lots of numerical algorithms

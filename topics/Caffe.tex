@@ -30,17 +30,27 @@
   \MyLogo
   \frametitle{General Comments}  
 
-\begin{enumerate}
+\begin{enumerate}\setlength\itemsep{0.6em}
+%
 \item Mainly focus on (and well suited for) CNN and image recognition 
-\item Using an expressive architecture 
 \begin{itemize}
+\item Use an expressive architecture
+\item Provide simple command line tools for training and prediction
 \item Allow defining models and optimization by configuration
-\item With protocol tool to define parameters for nets and solvers $\ldots$
+\item Use Google protocol tool to define parameters for nets and solvers
 \end{itemize}
+%
+\item Not so convenient to extend 
+\begin{itemize}
+\item Write layers in C++ or Python, handwritten CUDA code
 \item Not well documented
-\item Lots of dependencies; can be tricky to install
 \item No automatic differentiation
-\item Not so convenient to extend (write layers in C++ or Python, handwritten CUDA code)
+\item Not as flexible as other engines
+\item Python interface not transparent
+\end{itemize}
+%
+\item Lots of dependencies; can be tricky to install
+%
 \end{enumerate}
 
 \end{frame}
@@ -96,8 +106,7 @@ import numpy as np
 
 class EuclideanLoss(caffe.layer):
 	def setup(self, bottom, top):
-		#check input pair
-		if len(bottom) != 2:
+		if len(bottom) != 2: #check number of input data
 			raise Exception("Need two inputs to compute distance")
 			
 	def reshape(self, bottom, top):
@@ -121,6 +130,7 @@ class EuclideanLoss(caffe.layer):
 				sign = 1
 			else:
 				sign = -1
+			bottom[i].diff[...] = sign.self.diff / bottom[1].num
 \end{lstlisting}
 \end{frame}
 
@@ -131,12 +141,6 @@ class EuclideanLoss(caffe.layer):
   \frametitle{Example: Extend Layers (Cont)}  
   
 \ContinueLineNumber
-\begin{lstlisting}[language=python]
-			bottom[i].diff[...] = sign.self.diff / bottom[1].num
-\end{lstlisting}
-
-\medskip
-
 \structure{Define a class in Python to extend Layer}
 \begin{lstlisting}[language=python]
 layer{
