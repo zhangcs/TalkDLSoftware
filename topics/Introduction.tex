@@ -77,7 +77,7 @@ https://github.com/exacity/deeplearningbook-chinese
 \vskip -10pt
 \begin{figure}[htbp] %  figure placement: here, top, bottom, or page
    \centering
-   \includegraphics[width=0.9\linewidth]{figures/ML.pdf} 
+   \includegraphics[width=0.8\linewidth]{figures/ML.pdf} 
 \end{figure}
 \begin{center}
 \vskip -8pt
@@ -86,15 +86,16 @@ Tour of TensorFlow, by Peter Goldsborough, arXiv, 2016}
 \end{center}
 
 \structure{Other worth-noting ML(DL) packages:}
-	\begin{itemize}\setlength\itemsep{0.25em}\small
+	\begin{itemize}\setlength\itemsep{0.25em}\footnotesize
 	\item PyTorch (still in \alert{beta} stage)
+	\item Theano (Lasagne/Keras): Slow in graph compilation
 	\item CNTK/DMTK (Microsoft): First released on April 2015
 		\begin{itemize}
 		\item[-] Windows/Linux, no official OS X support
 		\item[-] C++/Python frontend
 		\end{itemize}
-	\item Neon (Nervana \& Intel): First released on May 2015
-	\item MXNet (DMLC): First released on Jan 2015
+	\item Neon (Nervana \& Intel): First released on May 2015, professional support
+	\item MXNet (DMLC): First released on Jan 2015, scalable distributed computing
 	\item Caffe2 (Google, Facebook, ...): Release on late 2016
 	\item Digits (Nvidia, powered by Caffe): web interface
 	\end{itemize}
@@ -186,10 +187,11 @@ https://www.slideshare.net/0xdata/transform-your-business-with-ai-deep-learning-
 \begin{itemize}
 \item Easy for new tasks and new network structures (less steep learning curve)
 \item Easy for debugging (with good \alert{documentation}, \alert{support}, and active community)
+\item Good flexibility
 \item Good performance and scalability
-	\begin{itemize}
+	\begin{itemize}\scriptsize
 	\item[-] Multicore CPU
-	\item[-] Single or multiple GPU(s)
+	\item[-] \alert{Single} or \alert{multiple} GPU(s)
 	\item[-] Cluster
 	\end{itemize}
 \end{itemize}
@@ -209,15 +211,15 @@ https://www.slideshare.net/0xdata/transform-your-business-with-ai-deep-learning-
 \begin{tabular}{|c|c|c|c|c|c|} \hline
 \rowcolor{GreenYellow}
 Viewpoint &Torch       &Caffe   & TensorFlow  & MXNet \\ \hline
-Released      & 2002      &2013               &2015                & 2015                    \\ \hline
- \multirow{3}{4em}{Main \\ Developers}
+First \\Released      & 2002      &2013               &2015                & 2015                    \\ \hline
+ \multirow{3}{4em}{Main \\Developers}
  & Facebook,        &\multirow{3}{5em}{BAIR \\ BVLC}  &\multirow{3}{3em}{Google} &\multirow{3}{*}{DMLC}   \\ 
  &Twitter,            & & &    \\
  &Google, ...       & & &  \\ \hline 
-\multirow{2}{4em}{ Core \\ Languages}     
+\multirow{2}{4em}{ Core \\Languages}     
 & \multirow{2}{3em}{ C/Lua }      
 &\multirow{2}{4em}{ C++}
-&\multirow{2}{4em}{ C++\\Python}
+&\multirow{2}{4em}{ C++ \\Python}
 &\multirow{2}{6em}{ C++}  \\ 
 &   &    & &      \\ \hline
 \multirow{2}{4em} {Supported \\Interface }    
@@ -246,7 +248,6 @@ Released      & 2002      &2013               &2015                & 2015       
 \end{itemize}
 }
 
-\vfill
 \begin{center}
 {\color{red}\scriptsize
 http://blog.revolutionanalytics.com/2016/08/deep-learning-part-1.html
@@ -333,7 +334,8 @@ Viewpoint &Torch7       &Caffe  & TensorFlow & MXNet  \\ \hline
 
 \smallskip 
 
-\begin{itemize}
+\structure{Four test platforms were used in the following tests}
+\begin{itemize}\setlength\itemsep{0.5em}
 
 \item CPU: one quad-core desktop CPU (Intel i7-3820 CPU
 		@3.60GHz) and two 8-core server-grade CPUs (Intel
@@ -345,7 +347,7 @@ Viewpoint &Torch7       &Caffe  & TensorFlow & MXNet  \\ \hline
 	\end{itemize}
 	
 \begin{figure}[htbp] 
-	\includegraphics[width=0.9\paperwidth]{figures/platforms.pdf} 
+	\includegraphics[width=0.925\paperwidth]{figures/platforms.pdf} 
 	\caption{The experimental hardware settings for numerical tests}
 \end{figure}
 	

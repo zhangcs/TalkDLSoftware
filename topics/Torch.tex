@@ -28,23 +28,25 @@
 
 \begin{frame}
   \MyLogo
-  \frametitle{Programming Interface}  
-\begin{enumerate}
-\item Wide range of applications
+  \frametitle{Programming Interface}
+  
+\begin{enumerate}\setlength\itemsep{0.6em}
+%
+\item Very fast: Fastest scripting language LuaJIT is used
+%
+\item Flexible with wide range of applications
 \begin{itemize}
-\item Speech, image and video applications
-\item  Large-scale machine-learning applications
+\item Speech, image, and video applications
+\item Large-scale machine-learning applications
+\item Used by Facebook, Twitter, Deepmind
+\item Easy extensibility: integrate any library into Torch
 \end{itemize}
-\item Fastest scripting language Lua is used
 \item Portable to any platform
 \begin{itemize}
 \item Torch can run on iPhone with no modification to scripts
 \item Embeddable, with ports to iOS, Android and FPGA backends
 \end{itemize}
-\item Easy extensibility
-\begin{itemize}
-\item Easy to integrate any library into Torch
-\end{itemize}
+\item No automatic differentiation 
 \end{enumerate}
 \end{frame}
 
