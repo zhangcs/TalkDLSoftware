@@ -227,7 +227,7 @@ profile.run('main()')
 \item Some useful and important packages
 	\begin{itemize}\setlength\itemsep{0.25em}
 	\item NumPy: for scientific computing
-	\item Matplotlib/Pylab: for visualising data
+	\item Matplotlib: for visualising data
 	\item SciPy: providing lots of numerical algorithms
 	\item SymPy: for symbolic mathematics
 	\end{itemize}
@@ -236,5 +236,72 @@ profile.run('main()')
 
 \centering{\color{red}\scriptsize
 \url{http://www.pythontutor.com}}
+
+\end{frame}
+
+%%%
+
+\begin{frame}[fragile]
+	\MyLogo
+	\frametitle{Visualization}  
+	\small
+
+\vskip -12pt
+\begin{columns}
+\column{.5\textwidth}
+\tiny{
+\begin{lstlisting}[language=python]
+# import pyplot module for visualization
+import matplotlib.pyplot as plt
+import numpy as np
+
+# generate points (x,y)
+dx = 0.001
+x = np.arange(0, 2*np.pi, dx)
+y = 0.1*np.sin(2*np.pi*x)
+
+# plot (x,y) curve
+plt.plot(x, y)
+plt.show()	
+\end{lstlisting}
+}
+\column{.45\textwidth}
+%
+\begin{figure}[htbp] 
+   \includegraphics[width=0.95\textwidth]{figures/sin.png} 
+\end{figure}
+%
+\end{columns}
+
+\vskip -15pt
+\begin{columns}
+\column{.5\textwidth}
+\tiny{
+\begin{lstlisting}[language=python]
+from mpl_toolkits.mplot3d import Axes3D
+import matplotlib.pyplot as plt
+from matplotlib import cm
+import numpy as np
+
+X = np.arange(-5, 5, 0.01)
+Y = np.arange(-5, 5, 0.01)
+X, Y = np.meshgrid(X, Y)
+R = np.sqrt(X**2 + Y**2)
+Z = np.sin(R)
+
+# Plot the surface
+fig = plt.figure()
+ax = fig.gca(projection='3d')
+surf = ax.plot_surface(X, Y, Z, 
+                       cmap=cm.coolwarm)
+plt.show()\end{lstlisting}
+}
+\column{.45\textwidth}
+%
+\begin{figure}[htbp] 
+   \includegraphics[width=0.95\textwidth]{figures/sin3D.png} 
+\end{figure}
+%
+\end{columns}
 
 \end{frame}

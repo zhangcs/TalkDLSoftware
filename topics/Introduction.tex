@@ -8,7 +8,7 @@
 
 {
 \usebackgroundtemplate{
-\tikz[overlay,remember picture] \node[opacity=0.25, xshift=2.3cm, at=(current page.center)] {
+\tikz[overlay,remember picture] \node[opacity=0.25, xshift=2.3cm, yshift=-0.4cm, at=(current page.center)] {
 \includegraphics[width=0.65\paperwidth,height=0.5\paperwidth]{figures/genericDNN.png}
 };}
 
@@ -80,7 +80,7 @@ https://github.com/exacity/deeplearningbook-chinese
    \includegraphics[width=0.8\linewidth]{figures/ML.pdf} 
 \end{figure}
 \begin{center}
-\vskip -8pt
+\vskip -12pt
 {\color{red} \scriptsize
 Tour of TensorFlow, by Peter Goldsborough, arXiv, 2016}
 \end{center}
@@ -89,15 +89,15 @@ Tour of TensorFlow, by Peter Goldsborough, arXiv, 2016}
 	\begin{itemize}\setlength\itemsep{0.25em}\footnotesize
 	\item PyTorch (still in \alert{beta} stage)
 	\item Theano (Lasagne/Keras): Slow in graph compilation
-	\item CNTK/DMTK (Microsoft): First released on April 2015
+	\item[\raisebox{-0.4ex}{\alert{\HandRight}}] CNTK/DMTK (Microsoft): First released on April 2015
 		\begin{itemize}
 		\item[-] Windows/Linux, no official OS X support
 		\item[-] C++/Python frontend
 		\end{itemize}
 	\item Neon (Nervana \& Intel): First released on May 2015, professional support
-	\item MXNet (DMLC): First released on Jan 2015, scalable distributed computing
+	\item[\raisebox{-0.4ex}{\alert{\HandRight}}] MXNet (DMLC): First released on Jan 2015, scalable distributed computing
 	\item Caffe2 (Google, Facebook, ...): Release on late 2016
-	\item Digits (Nvidia, powered by Caffe): web interface
+	\item Digits (Nvidia, powered by Caffe): Web interface
 	\end{itemize}
 
 \end{frame}
