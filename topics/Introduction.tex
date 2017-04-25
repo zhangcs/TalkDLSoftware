@@ -52,9 +52,9 @@
 
 \item[\raisebox{-0.4ex}{\alert{\HandRight}}] Regression: Similar to classification, but the outputs are continuous
 
-\item Clustering: Inputs are divided into several groups. Unlike in classification, the groups are not known beforehand, making this an unsupervised task
+\item[\raisebox{-0.4ex}{\PencilRight}] Clustering: Inputs are divided into several groups (Unlike in classification, the groups are not known beforehand, making this an unsupervised task)
 
-\item Density estimation, dimension reduction, ...
+\item[\raisebox{-0.4ex}{\PencilRight}] Density estimation, dimension reduction, ...
 
 \end{itemize}
 
@@ -89,13 +89,13 @@ Tour of TensorFlow, by Peter Goldsborough, arXiv, 2016}
 	\begin{itemize}\setlength\itemsep{0.25em}\footnotesize
 	\item PyTorch (still in \alert{beta} stage)
 	\item Theano (Lasagne/Keras): Slow in graph compilation
+	\item[\raisebox{-0.4ex}{\alert{\HandRight}}] MXNet (DMLC): First released on Jan 2015, scalable distributed computing
 	\item[\raisebox{-0.4ex}{\alert{\HandRight}}] CNTK/DMTK (Microsoft): First released on April 2015
 		\begin{itemize}
-		\item[-] Windows/Linux, no official OS X support
-		\item[-] C++/Python frontend
+		\item[-] Windows/Linux, no official OS X support thought
+		\item[-] C++/Python front-end
 		\end{itemize}
 	\item Neon (Nervana \& Intel): First released on May 2015, professional support
-	\item[\raisebox{-0.4ex}{\alert{\HandRight}}] MXNet (DMLC): First released on Jan 2015, scalable distributed computing
 	\item Caffe2 (Google, Facebook, ...): Release on late 2016
 	\item Digits (Nvidia, powered by Caffe): Web interface
 	\end{itemize}
@@ -113,7 +113,7 @@ Tour of TensorFlow, by Peter Goldsborough, arXiv, 2016}
 \small
 
 \begin{mdframed}[style=mystyle2]
-Deep Learning has been introduced with the objective of moving ML closer to one of its original goals---Artificial \alert{Intelligence}. Main motivations:
+Deep Learning has been introduced with the objective of moving ML closer to one of its original goals---\alert{Artificial Intelligence}. Main motivations:
 %
 \begin{itemize}\scriptsize\setlength\itemsep{0.1em}
 \item The brain has a deep architecture
@@ -128,7 +128,7 @@ Deep Learning has been introduced with the objective of moving ML closer to one 
 
 \column{.49\textwidth}
 {\color{blue}Pros:}
-\begin{itemize}\setlength\itemsep{0.2em}
+\begin{itemize}\setlength\itemsep{0.15em}
 \item conceptually simple
 \item nonlinear 
 \item highly flexible and configurable
@@ -140,7 +140,7 @@ Deep Learning has been introduced with the objective of moving ML closer to one 
 
 \column{.51\textwidth}
 {\color{red}Cons:}
-\begin{itemize}\setlength\itemsep{0.2em}
+\begin{itemize}\setlength\itemsep{0.15em}
 \item hard to interpret 
 \item theory not well understood
 \item more parameters
@@ -179,15 +179,18 @@ https://www.slideshare.net/0xdata/transform-your-business-with-ai-deep-learning-
 
 \structure{How to use a ML package?}
 \begin{itemize}
-\item Train models on large data set on high-performance computing platforms
+\item Train models with large data set on high-performance computing platforms
 \item Deploy applications on various (computing) platforms, like smart phones
 \end{itemize}
 
 \structure{What we want for a ML package?}
 \begin{itemize}
-\item Easy for new tasks and new network structures (less steep learning curve)
 \item Easy for debugging (with good \alert{documentation}, \alert{support}, and active community)
 \item Good flexibility
+	\begin{itemize}\scriptsize
+	\item[-] Easy to add new tasks
+	\item[-] Easy to build new network structures
+	\end{itemize}
 \item Good performance and scalability
 	\begin{itemize}\scriptsize
 	\item[-] Multicore CPU
@@ -211,7 +214,8 @@ https://www.slideshare.net/0xdata/transform-your-business-with-ai-deep-learning-
 \begin{tabular}{|c|c|c|c|c|c|} \hline
 \rowcolor{GreenYellow}
 Viewpoint &Torch       &Caffe   & TensorFlow  & MXNet \\ \hline
-First \\Released      & 2002      &2013               &2015                & 2015                    \\ \hline
+\multirow{2}{4em}{First \\Released} & \multirow{2}{3em}{2002} & \multirow{2}{3em}{2013} & \multirow{2}{3em}{2015} & \multirow{2}{3em}{2015} \\
+&   &    & &      \\ \hline
  \multirow{3}{4em}{Main \\Developers}
  & Facebook,        &\multirow{3}{5em}{BAIR \\ BVLC}  &\multirow{3}{3em}{Google} &\multirow{3}{*}{DMLC}   \\ 
  &Twitter,            & & &    \\
@@ -269,7 +273,7 @@ http://blog.revolutionanalytics.com/2016/08/deep-learning-part-1.html
 \begin{tabular}{|c|c|c|c|c|c|} \hline
 \rowcolor{GreenYellow}
 Viewpoint &Torch7       &Caffe  & TensorFlow & MXNet  \\ \hline
-  \multirow{2}{4em}{Pretrained \\ Models}      
+  \multirow{2}{4.5em}{Pretrained \\ Models}      
   &  \multirow{2}{4em} {Yes}      
   &  \multirow{2}{4em}{Yes}                             
   &  \multirow{2}{4em}{No}                   

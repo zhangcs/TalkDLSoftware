@@ -153,9 +153,9 @@ for i in range(10):
 # loop over the list named by oldlist
 newlist = [s.upper() for s in oldlist]
 
-a = range(5)  # create a new list a
-b = a         # b points to the list a
-c = [item for item in a]   # copy list a to a new list
+a = range(5)              # create a new list a = [0,1,2,3,4]
+b = a                     # b points to the list a
+c = [item for item in a]  # copy list a to a new list
 \end{lstlisting}	
 	
 \structure{While loop}
@@ -193,7 +193,7 @@ from math import sin
 sin(3.14)
 \end{lstlisting}
 
-\item Make it as local as possible to avoid import overhead; But avoid calling it repeatedly; If possible, avoid it!
+\item Make it as local as possible to avoid import overhead; But avoid calling it repeatedly; \alert{If possible, avoid it!}
 \end{itemize}
 
 \end{frame}

@@ -115,14 +115,16 @@ with tf.Session(graph=graph):
 \begin{lstlisting}[language=python]
 import tensorflow as tf
 
-# Import training and test data
+# Import training and test data from MNIST
 import tensorflow.examples.tutorials.mnist.input_data as input_data
 mnist = input_data.read_data_sets("MNIST_data/", one_hot=True)
 
 # Create a new TensorFlow graph
 graph = tf.Graph()
+
 with graph.as_default():
-	# Nodes or entire subgraphs can be grouped into one visual block for tensorboard
+
+	# Nodes can be grouped into visual blocks for TensorBoard
 	with tf.name_scope('input_features'):
 		# Placeholder for input variables (None = variable dimension)
 		x = tf.placeholder(tf.float32, shape=[None, 784], name='input_x')
@@ -133,13 +135,14 @@ with graph.as_default():
 							
 	with tf.name_scope('parameters'):
 		W = tf.Variable(tf.zeros([784, 10]), name='weights')
-		# Track tensor distributions over time for tensorboard
-		tf.summary.histogram('WEIGHTS', W)
 		b = tf.Variable(tf.zeros([10]), name='biases')
+		
+		# Track tensor distributions over time for TensorBoard
+		tf.summary.histogram('WEIGHTS', W)
 		tf.summary.histogram('BIASES', b)
 			
 	with tf.name_scope('use_softmax'):
-		# Apply softmax regression model to the input data and get prediction y
+		# Apply softmax to the input data and get prediction y
 		y = tf.nn.softmax(tf.matmul(x, W) + b)
 \end{lstlisting}
 
@@ -152,7 +155,7 @@ with graph.as_default():
 \ContinueLineNumber
 \begin{lstlisting}[language=python]
 	with tf.name_scope('train'):
-		# Compute the cross entropy of real label y_ and prediction labe y
+		# Compute the cross entropy of real label y_ and prediction label y
 		cross_entropy = -tf.reduce_sum(y_*tf.log(y))
 		# Create a gradient-descent optimizer with learning rate = 0.01
 		train_step = tf.train.GradientDescentOptimizer(0.01).minimize(cross_entropy)
@@ -160,7 +163,7 @@ with graph.as_default():
 	with tf.name_scope('test'):
 		correct_prediction = tf.equal(tf.argmax(y,1), tf.argmax(y_,1))
 		accuracy = tf.reduce_mean(tf.cast(correct_prediction, "float"))
-		# Track tensor values over time for tensorboard
+		# Track tensor values over time for TensorBoard
 		tf.summary.scalar('Accuracy', accuracy)
 	
 	merged = tf.summary.merge_all()   # Merge all the summaries
