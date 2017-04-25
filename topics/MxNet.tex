@@ -32,12 +32,14 @@
 
 \begin{enumerate}
 %
+\item Used to power Amazon Web Services (AWS)
+%
 \item Support many different applications (e.g. computer vision, natural language processing,  speech recognition, unsupervised machine learning, support embedded APIs, visualization)
 %
 \item Mixed programming style: imperative and declarative
 \begin{itemize}
 \item Light-weighted (around 50K lines of core code)
-\item Data parallelism with multi-devices: better scalability
+\item Data parallelism with multi-devices: 88\% scalability with 256 GPUs
 \item Support many front-ends, including JavaScript (run on web browsers)
 \item Provide intermediate-level and high-level interface modules
 \item Provide abundant IO functions 
@@ -66,9 +68,10 @@
   \frametitle{Example: SoftMax in MXNet}  
 
 \begin{lstlisting}[language=python]
-# Fetch the MNIST dataset
-import numpy as np
 import os, urllib, gzip, struct
+import numpy as np
+
+# Fetch the MNIST dataset
 def download_data(url, force_download=True): 
 	fname = url.split("/")[-1]
 	if force_download or not os.path.exists(fname):
@@ -79,15 +82,16 @@ def read_data(label_url, image_url):
 		magic, num = struct.unpack(">II", flbl.read(8))
 		label = np.fromstring(flbl.read(), dtype=np.int8)
 	with gzip.open(download_data(image_url), 'rb') as fimg:
-		magic, num, rows, cols = struct.unpack(">IIII", fimg.read(16))
-		image = np.fromstring(fimg.read(), dtype=np.uint8).reshape(len(label), rows, cols)
+		magic, num, row, col = struct.unpack(">IIII", fimg.read(16))
+		image = np.fromstring(fimg.read(),dtype=np.uint8).reshape(len(label),row,col)
 	return (label, image)
 path='http://yann.lecun.com/exdb/mnist/'
 train_lbl, train_img = read_data(path+'train-labels-idx1-ubyte.gz',
-								path+'train-images-idx3-ubyte.gz')
+								 path+'train-images-idx3-ubyte.gz')
 test_lbl, test_img = read_data(path+'t10k-labels-idx1-ubyte.gz',
-								path+'t10k-images-idx3-ubyte.gz')
-# create data iterators for MXNet
+							   path+'t10k-images-idx3-ubyte.gz')
+
+# Create data iterators for MXNet
 import mxnet as mx
 def to4d(img):
 	return img.reshape(img.shape[0], 1, 28, 28).astype(np.float32)/255
@@ -153,10 +157,11 @@ https://github.com/dmlc/mxnet/blob/master/example/svm\_mnist/svm\_mnist.py
 
 \begin{frame}
 	\MyLogo
-	\frametitle{Graph for example of SoftMax in MXNet}  
+	\frametitle{Visualization of the SoftMax Example}  
 	
-	\begin{figure}[htbp] 
-		\includegraphics[width=\linewidth]{figures/mxnet_graph.pdf} 
-	\end{figure}
+\vskip -15pt
+\begin{figure}[htbp] 
+	\includegraphics[height=0.72\linewidth]{figures/mxnet_graph.pdf} 
+\end{figure}
 	
 \end{frame}
