@@ -78,9 +78,9 @@ with graph.as_default():
 	# Define two constants(two nodes)
 	a = tf.constant(1.0)
 	b = tf.constant(2.0)
-
 	# Define an operation node: c = a * b
 	c = tf.multiply(a, b)
+	
 	# Add scalar summary to operation node
 	tf.summary.scalar('c', c)
 	
@@ -88,7 +88,10 @@ with graph.as_default():
 	merged = tf.summary.merge_all()
 	writer = tf.summary.FileWriter('./board', graph)
 
-with tf.Session(graph=graph):
+with tf.Session(graph=graph) as sess:
+	# Output the result(c=a*b)
+	result = sess.run(c)
+	print(result)
 	# Write data to ./board
 	writer.add_summary(merged.eval())
 	
