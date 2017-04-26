@@ -63,40 +63,43 @@
 \begin{frame}[fragile]
   \MyLogo
   \frametitle{Computational Graph}  
-%  
+%
+\vskip -5pt
 \begin{columns}
 \column{.75\textwidth}
-\tiny{
 \begin{lstlisting}[language=python]
 import tensorflow as tf
 
-# Define a computational graph
+# Define a computational graph for TensorFlow
 graph = tf.Graph()
 
-# Define operation nodes in the above graph
+# Define operation nodes in the graph
 with graph.as_default():
-	# Define two constants(two nodes)
-	a = tf.constant(1.0)
-	b = tf.constant(2.0)
-	# Define an operation node: c = a * b
-	c = tf.multiply(a, b)
-	
-	# Add scalar summary to operation node
-	tf.summary.scalar('c', c)
-	
-	# Merge all the summaries and write to ./board
-	merged = tf.summary.merge_all()
-	writer = tf.summary.FileWriter('./board', graph)
+
+    with tf.name_scope('input'):
+        # Define two constant symbols (two nodes)
+        a = tf.constant(1, name='a')
+        b = tf.constant(2, name='b')
+
+    with tf.name_scope('output'):
+        # Define an operation node: c = a * b
+        c = tf.multiply(a, b)
+        tf.summary.histogram('c', c)
+    
+    # Merge all summaries and write to logdir
+    logdir = '/tmp/tensorboard'
+    merged = tf.summary.merge_all()
+    writer = tf.summary.FileWriter(logdir, graph)
 
 with tf.Session(graph=graph) as sess:
-	# Output the result(c=a*b)
-	result = sess.run(c)
-	print(result)
-	# Write data to ./board
-	writer.add_summary(merged.eval())
-	
+    # Compute and output the result (c=a*b)
+    result = sess.run(c)
+    print result
+    # Write TensorBoard data to logdir
+    writer.add_summary(merged.eval())
+
+writer.close()
 \end{lstlisting}
-}
 
 \pause
 
@@ -125,31 +128,31 @@ import tensorflow as tf
 import tensorflow.examples.tutorials.mnist.input_data as input_data
 mnist = input_data.read_data_sets("MNIST_data/", one_hot=True)
 
-# Create a new TensorFlow graph
 graph = tf.Graph()
 
 with graph.as_default():
 
-	# Nodes can be grouped into visual blocks for TensorBoard
-	with tf.name_scope('input_features'):
-		# Placeholder for input variables (None = variable dimension)
-		x = tf.placeholder(tf.float32, shape=[None, 784], name='input_x')
-							
-	with tf.name_scope('input_labels'):
-		# Placeholder for labels
-		y_ = tf.placeholder(tf.float32, shape=[None, 10], name='labels')
-							
-	with tf.name_scope('parameters'):
-		W = tf.Variable(tf.zeros([784, 10]), name='weights')
-		b = tf.Variable(tf.zeros([10]), name='biases')
-		
-		# Track tensor distributions over time for TensorBoard
-		tf.summary.histogram('WEIGHTS', W)
-		tf.summary.histogram('BIASES', b)
-			
-	with tf.name_scope('use_softmax'):
-		# Apply softmax to the input data and get prediction y
-		y = tf.nn.softmax(tf.matmul(x, W) + b)
+    # Nodes can be grouped into visual blocks for TensorBoard
+    with tf.name_scope('input_features'):
+        x = tf.placeholder(tf.float32, shape=[None, 784], name='input_x')
+
+    with tf.name_scope('input_labels'):
+        y_ = tf.placeholder(tf.float32, shape=[None, 10], name='labels')
+
+    with tf.name_scope('parameters'):
+        W = tf.Variable(tf.zeros([784, 10]), name='weights')
+        b = tf.Variable(tf.zeros([10]), name='biases')
+        tf.summary.histogram('WEIGHTS', W)
+        tf.summary.histogram('BIASES', b)
+    
+    with tf.name_scope('use_softmax'):
+        y = tf.nn.softmax(tf.matmul(x, W) + b)
+
+    with tf.name_scope('train'):
+        # Compute the cross entropy of real label y_ and prediction label y
+        cross_entropy = -tf.reduce_sum(y_*tf.log(y))
+        # Create a gradient-descent optimizer with learning rate = 0.01
+        train_step = tf.train.GradientDescentOptimizer(0.01).minimize(cross_entropy)
 \end{lstlisting}
 
 \end{frame}
@@ -160,37 +163,36 @@ with graph.as_default():
 
 \ContinueLineNumber
 \begin{lstlisting}[language=python]
-	with tf.name_scope('train'):
-		# Compute the cross entropy of real label y_ and prediction label y
-		cross_entropy = -tf.reduce_sum(y_*tf.log(y))
-		# Create a gradient-descent optimizer with learning rate = 0.01
-		train_step = tf.train.GradientDescentOptimizer(0.01).minimize(cross_entropy)
+    with tf.name_scope('test'):
+        correct_prediction = tf.equal(tf.argmax(y,1), tf.argmax(y_,1))
+        accuracy = tf.reduce_mean(tf.cast(correct_prediction, "float"))
+        # Track accuracy over time for TensorBoard
+        tf.summary.scalar('Accuracy', accuracy)
 
-	with tf.name_scope('test'):
-		correct_prediction = tf.equal(tf.argmax(y,1), tf.argmax(y_,1))
-		accuracy = tf.reduce_mean(tf.cast(correct_prediction, "float"))
-		# Track tensor values over time for TensorBoard
-		tf.summary.scalar('Accuracy', accuracy)
-	
-	merged = tf.summary.merge_all()   # Merge all the summaries
-	writer = tf.summary.FileWriter('./board', graph)  # Write summary file to ./board
-	
+    logpath = '/tmp/tensorboard'  # temporary path for storing TB summaries
+    merged = tf.summary.merge_all()  # Merge all the summaries
+    writer = tf.summary.FileWriter(logpath, graph)  # Write summaries
+
 with tf.Session(graph=graph) as sess:
-	# Initialize all variables
-	tf.global_variables_initializer().run()
-	
-	for step in range(1000):
-		if (step%10) == 0:
-			# Feed test data to compute accuarcy
-			feed = {x: mnist.test.images, y_: mnist.test.labels}
-			_, acc = sess.run([merged, accuracy], feed_dict=feed)
-			print('Accuracy at %s step: %s' %(step, acc))
-		else:
-			# Feed training data to train the model
-			batch_x, batch_y = mnist.train.next_batch(100)
-			sess.run(train_step, feed_dict={x: batch_x, y_: batch_y})
-			writer.add_summary(merged.eval(feed_dict={x:batch_x, y_:batch}),
-							   global_step=step)
+    # Initialize all variables
+    tf.global_variables_initializer().run()
+    
+    for step in range(1,501):
+        if (step%10) == 0:
+            feed = {x: mnist.test.images, y_: mnist.test.labels}
+            _, acc = sess.run([merged, accuracy], feed_dict=feed)
+            print('Accuracy at %s step: %s' % (step, acc))
+        else:
+            batch_x, batch_y = mnist.train.next_batch(100)
+            sess.run(train_step, feed_dict={x: batch_x, y_: batch_y})
+            writer.add_summary(merged.eval(feed_dict={x: batch_x, y_: batch_y}), 
+                               global_step=step)
+
+    writer.close()
+
+print("Run the command line to start TensorBoard:\n" \
+      "(TensorFlow) $ tensorboard --logdir=/tmp/tensorboard" \
+      "\nThen open http://0.0.0.0:6006/ into your web browser")
 \end{lstlisting}
 
 \end{frame}
@@ -230,6 +232,8 @@ with tf.Session(graph=graph) as sess:
    \includegraphics[height=2.2in]{figures/graphvisualization.png} 
 \end{figure}
 \end{columns}
+
+\pause 
 
 To run TensorBoard, use the following command: 
 \begin{lstlisting}[language=c,numbers=none] 
