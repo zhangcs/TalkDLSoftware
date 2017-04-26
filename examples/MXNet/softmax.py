@@ -30,7 +30,7 @@ test_iter  = mx.io.NDArrayIter(to4d(test_img), test_lbl, batch_size)
 
 # Define the network
 data = mx.sym.Variable('data') # Create a place holder variable for the input data
-data = mx.sym.Flatten(data=data)# Flatten the data from 4-D shape into 2-D
+data = mx.sym.Flatten(data=data) # Flatten the data from 4-D shape into 2-D
 fc1  = mx.sym.FullyConnected(data=data, name='fc1', num_hidden=64) 
 act1 = mx.sym.Activation(data=fc1, name='relu1', act_type="relu")
 fc2  = mx.sym.FullyConnected(data=act1, name='fc2', num_hidden = 32)
